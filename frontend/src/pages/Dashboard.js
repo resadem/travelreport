@@ -265,7 +265,7 @@ const Dashboard = () => {
                 <SelectValue placeholder={t('dashboard.serviceType')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">{t('serviceTypes.all')}</SelectItem>
+                <SelectItem value="all">{t('serviceTypes.all')}</SelectItem>
                 {SERVICE_TYPES.map(type => (
                   <SelectItem key={type} value={type}>{t(`serviceTypes.${type}`)}</SelectItem>
                 ))}
@@ -276,7 +276,7 @@ const Dashboard = () => {
                 <SelectValue placeholder={t('dashboard.paymentStatus')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">{t('paymentStatus.all')}</SelectItem>
+                <SelectItem value="all">{t('paymentStatus.all')}</SelectItem>
                 <SelectItem value="paid">{t('paymentStatus.paid')}</SelectItem>
                 <SelectItem value="prepaid">{t('paymentStatus.prepaid')}</SelectItem>
                 <SelectItem value="overdue">{t('paymentStatus.overdue')}</SelectItem>
