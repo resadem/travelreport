@@ -1,0 +1,234 @@
+export const translations = {
+  ru: {
+    login: {
+      title: 'Вход в систему',
+      email: 'Email',
+      password: 'Пароль',
+      submit: 'Войти',
+      error: 'Неверный email или пароль'
+    },
+    nav: {
+      reservations: 'Бронирования',
+      subAgencies: 'Суб-агентства',
+      settings: 'Настройки',
+      logout: 'Выйти',
+      changePassword: 'Изменить пароль'
+    },
+    dashboard: {
+      title: 'Бронирования',
+      search: 'Поиск...',
+      export: 'Экспорт',
+      addReservation: 'Добавить бронирование',
+      filters: 'Фильтры',
+      serviceType: 'Тип услуги',
+      paymentStatus: 'Статус оплаты',
+      dateFrom: 'Дата с',
+      dateTo: 'Дата до',
+      showing: 'Показано',
+      of: 'из',
+      statistics: 'Статистика',
+      totalReservations: 'Всего бронирований',
+      totalPrice: 'Общая цена',
+      totalPrepayment: 'Общая предоплата',
+      totalRest: 'Общий остаток',
+      totalRevenue: 'Общая прибыль'
+    },
+    columns: {
+      id: '№',
+      agency: 'Агентство',
+      dateOfIssue: 'Дата брони',
+      serviceType: 'Тип Услуги',
+      dateOfService: 'Дата Услуги',
+      description: 'Описание',
+      touristNames: 'Имена туристов',
+      price: 'Цена',
+      actualDateFullPayment: 'Дата полной оплаты',
+      actualDatePrepayment: 'Дата предоплаты',
+      prepaymentAmount: 'Предоплата',
+      restAmount: 'Остаток оплаты',
+      lastDatePayment: 'Полная оплата до',
+      supplier: 'Поставщик',
+      supplierPrice: 'Цена поставщика',
+      supplierPrepayment: 'Предоплата поставщику',
+      revenue: 'Прибыль',
+      revenuePercentage: 'Процент прибыли',
+      actions: 'Действия'
+    },
+    paymentStatus: {
+      paid: 'Оплачено полностью',
+      prepaid: 'Предоплата внесена',
+      overdue: 'Просрочено',
+      upcoming: 'До полной оплаты',
+      unpaid: 'Не оплачено',
+      days: 'дней',
+      all: 'Все'
+    },
+    serviceTypes: {
+      all: 'Все типы',
+      Flight: 'Авиабилет',
+      Hotel: 'Отель',
+      Transfer: 'Трансфер',
+      'Train ticket': 'Ж/Д билет',
+      'Additional flight service': 'Доп. авиа услуга',
+      'Airport VIP Services': 'VIP сервис в аэропорту',
+      eSIM: 'eSIM'
+    },
+    reservation: {
+      details: 'Детали бронирования',
+      edit: 'Редактировать',
+      save: 'Сохранить',
+      cancel: 'Отмена',
+      delete: 'Удалить',
+      back: 'Назад'
+    },
+    subAgencies: {
+      title: 'Суб-агентства',
+      add: 'Добавить агентство',
+      name: 'Название',
+      email: 'Email',
+      status: 'Статус',
+      active: 'Активно',
+      inactive: 'Неактивно',
+      edit: 'Редактировать',
+      delete: 'Удалить',
+      agencyName: 'Название агентства',
+      password: 'Пароль',
+      locale: 'Язык'
+    },
+    settings: {
+      title: 'Настройки',
+      thresholdDays: 'Порог предупреждения (дни)',
+      thresholdDescription: 'Количество дней до полной оплаты для отображения предупреждения',
+      save: 'Сохранить'
+    },
+    common: {
+      save: 'Сохранить',
+      cancel: 'Отмена',
+      delete: 'Удалить',
+      edit: 'Редактировать',
+      add: 'Добавить',
+      close: 'Закрыть',
+      confirm: 'Подтвердить',
+      success: 'Успешно',
+      error: 'Ошибка',
+      loading: 'Загрузка...',
+      noData: 'Нет данных'
+    }
+  },
+  en: {
+    login: {
+      title: 'Login',
+      email: 'Email',
+      password: 'Password',
+      submit: 'Sign In',
+      error: 'Invalid email or password'
+    },
+    nav: {
+      reservations: 'Reservations',
+      subAgencies: 'Sub-Agencies',
+      settings: 'Settings',
+      logout: 'Logout',
+      changePassword: 'Change Password'
+    },
+    dashboard: {
+      title: 'Reservations',
+      search: 'Search...',
+      export: 'Export',
+      addReservation: 'Add Reservation',
+      filters: 'Filters',
+      serviceType: 'Service Type',
+      paymentStatus: 'Payment Status',
+      dateFrom: 'Date From',
+      dateTo: 'Date To',
+      showing: 'Showing',
+      of: 'of',
+      statistics: 'Statistics',
+      totalReservations: 'Total Reservations',
+      totalPrice: 'Total Price',
+      totalPrepayment: 'Total Prepayment',
+      totalRest: 'Total Rest',
+      totalRevenue: 'Total Revenue'
+    },
+    columns: {
+      id: 'ID',
+      agency: 'Agency',
+      dateOfIssue: 'Date of Issue',
+      serviceType: 'Service Type',
+      dateOfService: 'Date of Service',
+      description: 'Description',
+      touristNames: 'Tourist Names',
+      price: 'Price',
+      actualDateFullPayment: 'Actual Date of Full Payment',
+      actualDatePrepayment: 'Actual Date of Prepayment',
+      prepaymentAmount: 'Prepayment Amount',
+      restAmount: 'Rest Amount of Payment',
+      lastDatePayment: 'Last Date of Payment',
+      supplier: 'Supplier',
+      supplierPrice: 'Supplier Price',
+      supplierPrepayment: 'Supplier Prepayment Amount',
+      revenue: 'Revenue',
+      revenuePercentage: 'Revenue Percentage',
+      actions: 'Actions'
+    },
+    paymentStatus: {
+      paid: 'Paid in Full',
+      prepaid: 'Prepayment Made',
+      overdue: 'Overdue',
+      upcoming: 'Payment Due',
+      unpaid: 'Unpaid',
+      days: 'days',
+      all: 'All'
+    },
+    serviceTypes: {
+      all: 'All Types',
+      Flight: 'Flight',
+      Hotel: 'Hotel',
+      Transfer: 'Transfer',
+      'Train ticket': 'Train Ticket',
+      'Additional flight service': 'Additional Flight Service',
+      'Airport VIP Services': 'Airport VIP Services',
+      eSIM: 'eSIM'
+    },
+    reservation: {
+      details: 'Reservation Details',
+      edit: 'Edit',
+      save: 'Save',
+      cancel: 'Cancel',
+      delete: 'Delete',
+      back: 'Back'
+    },
+    subAgencies: {
+      title: 'Sub-Agencies',
+      add: 'Add Agency',
+      name: 'Name',
+      email: 'Email',
+      status: 'Status',
+      active: 'Active',
+      inactive: 'Inactive',
+      edit: 'Edit',
+      delete: 'Delete',
+      agencyName: 'Agency Name',
+      password: 'Password',
+      locale: 'Language'
+    },
+    settings: {
+      title: 'Settings',
+      thresholdDays: 'Warning Threshold (days)',
+      thresholdDescription: 'Number of days before full payment to show warning',
+      save: 'Save'
+    },
+    common: {
+      save: 'Save',
+      cancel: 'Cancel',
+      delete: 'Delete',
+      edit: 'Edit',
+      add: 'Add',
+      close: 'Close',
+      confirm: 'Confirm',
+      success: 'Success',
+      error: 'Error',
+      loading: 'Loading...',
+      noData: 'No Data'
+    }
+  }
+};
