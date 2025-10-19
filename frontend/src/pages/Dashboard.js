@@ -25,8 +25,8 @@ const Dashboard = () => {
   const [statistics, setStatistics] = useState({});
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [serviceType, setServiceType] = useState('');
-  const [paymentStatus, setPaymentStatus] = useState('');
+  const [serviceType, setServiceType] = useState('all');
+  const [paymentStatus, setPaymentStatus] = useState('all');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [total, setTotal] = useState(0);
