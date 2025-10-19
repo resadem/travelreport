@@ -67,8 +67,8 @@ const Dashboard = () => {
       setLoading(true);
       const params = { page, limit: 25 };
       if (search) params.search = search;
-      if (serviceType) params.service_type = serviceType;
-      if (paymentStatus) params.payment_status = paymentStatus;
+      if (serviceType && serviceType !== 'all') params.service_type = serviceType;
+      if (paymentStatus && paymentStatus !== 'all') params.payment_status = paymentStatus;
 
       const response = await axios.get(`${API}/reservations`, { params });
       setReservations(response.data.reservations);
