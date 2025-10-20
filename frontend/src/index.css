@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Stabilize scrollbar to prevent layout shifts and ResizeObserver loops */
+html {
+    overflow-y: scroll;
+}
+
 body {
     margin: 0;
     font-family:
