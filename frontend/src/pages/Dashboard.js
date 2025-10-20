@@ -316,15 +316,15 @@ const Dashboard = () => {
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <div className="text-sm text-gray-600 mb-1">{t('dashboard.totalPrice')}</div>
-            <div className="text-3xl font-bold text-picton-blue">{statistics.total_price?.toFixed(2) || '0.00'} ₽</div>
+            <div className="text-3xl font-bold text-picton-blue">{formatPrice(statistics.total_price)} ₽</div>
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <div className="text-sm text-gray-600 mb-1">{t('dashboard.totalPrepayment')}</div>
-            <div className="text-3xl font-bold text-green-600">{statistics.total_prepayment?.toFixed(2) || '0.00'} ₽</div>
+            <div className="text-3xl font-bold text-green-600">{formatPrice(statistics.total_prepayment)} ₽</div>
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <div className="text-sm text-gray-600 mb-1">{t('dashboard.totalRest')}</div>
-            <div className="text-3xl font-bold text-safety-orange">{statistics.total_rest?.toFixed(2) || '0.00'} ₽</div>
+            <div className="text-3xl font-bold text-safety-orange">{formatPrice(statistics.total_rest)} ₽</div>
           </div>
         </div>
 
