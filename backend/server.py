@@ -290,7 +290,9 @@ async def register_user(user_data: UserCreate, admin: dict = Depends(require_adm
         role=user_dict["role"],
         is_active=user_dict["is_active"],
         locale=user_dict["locale"],
-        created_at=user_dict["created_at"]
+        created_at=user_dict["created_at"],
+        balance=user_dict["balance"],
+        last_balance_topup=user_dict["last_balance_topup"]
     )
 
 @api_router.post("/auth/login", response_model=TokenResponse)
