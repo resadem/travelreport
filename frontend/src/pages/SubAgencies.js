@@ -279,6 +279,7 @@ const SubAgencies = () => {
               )}
             </TableBody>
           </Table>
+          </div>
         </div>
       </div>
     </Layout>
