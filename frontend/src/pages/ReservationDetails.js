@@ -179,8 +179,8 @@ const ReservationDetails = () => {
                   <div>
                     <Label className="text-gray-600">{t('columns.agency')}</Label>
                     {canEdit ? (
-                      <Select value={formData.agency_id || 'none'} onValueChange={(value) => {
-                        if (value === 'none') {
+                      <Select value={formData.agency_id || undefined} onValueChange={(value) => {
+                        if (!value) {
                           setFormData({...formData, agency_id: '', agency_name: ''});
                         } else {
                           const agency = agencies.find(a => a.id === value);
@@ -190,10 +190,9 @@ const ReservationDetails = () => {
                         }
                       }}>
                         <SelectTrigger className="mt-1">
-                          <SelectValue />
+                          <SelectValue placeholder="Выберите агентство" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="none">Не выбрано</SelectItem>
                           {agencies.map(agency => (
                             <SelectItem key={agency.id} value={agency.id}>{agency.agency_name}</SelectItem>
                           ))}
