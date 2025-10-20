@@ -385,6 +385,31 @@ async def delete_user(user_id: str, admin: dict = Depends(require_admin)):
         raise HTTPException(status_code=404, detail="User not found")
     return {"message": "User deleted successfully"}
 
+@api_router.post("/users/{user_id}/topup-balance")
+async def topup_balance(user_id: str, topup: BalanceTopUp, admin: dict = Depends(require_admin)):
+    if topup.amount <= 0:
+        raise HTTPException(status_code=400, detail="Amount must be positive")
+    
+    user = await db.users.find_one({"id": user_id}, {"_id": 0})
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    new_balance = user.get("balance", 0.0) + topup.amount
+    
+    await db.users.update_one(
+        {"id": user_id},
+        {"$set": {
+            "balance": new_balance,
+            "last_balance_topup": topup.amount
+        }}
+    )
+    
+    return {
+        "message": "Balance topped up successfully",
+        "new_balance": new_balance,
+        "topup_amount": topup.amount
+    }
+
 # Supplier routes
 @api_router.post("/suppliers", response_model=SupplierResponse)
 async def create_supplier(supplier: SupplierCreate, admin: dict = Depends(require_admin)):
