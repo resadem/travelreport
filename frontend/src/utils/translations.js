@@ -158,7 +158,9 @@ export const translations = {
       totalPrice: 'Total Price',
       totalPrepayment: 'Total Prepayment',
       totalRest: 'Total Rest',
-      totalRevenue: 'Total Revenue'
+      totalRevenue: 'Total Revenue',
+      balance: 'Balance',
+      lastTopUp: 'Last Top Up'
     },
     columns: {
       id: 'ID',
