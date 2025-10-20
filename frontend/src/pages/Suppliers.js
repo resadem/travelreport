@@ -141,6 +141,7 @@ const Suppliers = () => {
               )}
             </TableBody>
           </Table>
+          </div>
         </div>
       </div>
     </Layout>
