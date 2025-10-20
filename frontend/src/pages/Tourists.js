@@ -323,6 +323,7 @@ const Tourists = () => {
               )}
             </TableBody>
           </Table>
+          </div>
         </div>
       </div>
     </Layout>
