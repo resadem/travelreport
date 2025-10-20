@@ -40,8 +40,8 @@ const Layout = ({ children }) => {
   const navItems = [
     { path: '/', icon: FileText, label: t('nav.reservations'), show: true },
     { path: '/sub-agencies', icon: Users, label: t('nav.subAgencies'), show: user?.role === 'admin' },
-    { path: '/suppliers', icon: Truck, label: 'Поставщики', show: user?.role === 'admin' },
-    { path: '/tourists', icon: UserCircle, label: 'Туристы', show: user?.role === 'admin' },
+    { path: '/suppliers', icon: Truck, label: t('nav.suppliers'), show: user?.role === 'admin' },
+    { path: '/tourists', icon: UserCircle, label: t('nav.tourists'), show: user?.role === 'admin' },
     { path: '/settings', icon: Settings, label: t('nav.settings'), show: user?.role === 'admin' },
   ].filter(item => item.show);
 
