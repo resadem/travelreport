@@ -383,7 +383,7 @@ const Dashboard = () => {
               {user.role === 'admin' && (
                 <Dialog open={showAddDialog} onOpenChange={setShowAddDialog}>
                   <DialogTrigger asChild>
-                    <Button className="bg-safety-orange hover:bg-safety-orange/90" data-testid="add-reservation-button">
+                    <Button className="bg-safety-orange hover:bg-safety-orange/90 w-full sm:w-auto" data-testid="add-reservation-button">
                       <Plus className="h-4 w-4 mr-2" />
                       {t('dashboard.addReservation')}
                     </Button>
