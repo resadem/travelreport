@@ -130,7 +130,7 @@ const ReservationDetails = () => {
     <Layout>
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div className="flex items-center space-x-4">
             <Button variant="ghost" onClick={() => navigate('/')} data-testid="back-button">
               <ArrowLeft className="h-4 w-4 mr-2" />
