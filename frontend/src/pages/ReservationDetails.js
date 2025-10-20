@@ -284,7 +284,26 @@ const ReservationDetails = () => {
                     <div>
                       <Label className="text-gray-600">{t('columns.supplier')}</Label>
                       {canEdit ? (
-                        <Input value={formData.supplier_name || ''} onChange={(e) => setFormData({...formData, supplier_name: e.target.value})} className="mt-1" />
+                        <Select value={formData.supplier_id || 'none'} onValueChange={(value) => {
+                          if (value === 'none') {
+                            setFormData({...formData, supplier_id: '', supplier_name: ''});
+                          } else {
+                            const supplier = suppliers.find(s => s.id === value);
+                            if (supplier) {
+                              setFormData({...formData, supplier_id: supplier.id, supplier_name: supplier.name});
+                            }
+                          }
+                        }}>
+                          <SelectTrigger className="mt-1">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="none">Не выбрано</SelectItem>
+                            {suppliers.map(supplier => (
+                              <SelectItem key={supplier.id} value={supplier.id}>{supplier.name}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       ) : (
                         <div className="mt-1 text-lg font-medium">{reservation.supplier_name || '—'}</div>
                       )}
