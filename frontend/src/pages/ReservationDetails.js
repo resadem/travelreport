@@ -139,7 +139,7 @@ const ReservationDetails = () => {
             <h1 className="text-3xl font-bold text-oxford-blue">{t('reservation.details')}</h1>
           </div>
           {isAdmin && (
-            <div className="flex space-x-2">
+            <div className="flex flex-wrap gap-2">
               {!editing ? (
                 <>
                   <Button onClick={() => setEditing(true)} className="bg-picton-blue hover:bg-picton-blue/90" data-testid="edit-button">
