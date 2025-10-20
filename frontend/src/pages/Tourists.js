@@ -293,7 +293,7 @@ const Tourists = () => {
                     <TableCell className="font-medium">{idx + 1}</TableCell>
                     <TableCell>{tourist.first_name}</TableCell>
                     <TableCell>{tourist.last_name}</TableCell>
-                    <TableCell>{tourist.date_of_birth ? new Date(tourist.date_of_birth).toLocaleDateString('ru-RU') : '—'}</TableCell>
+                    <TableCell>{formatDate(tourist.date_of_birth)}</TableCell>
                     <TableCell>{tourist.document_number || '—'}</TableCell>
                     <TableCell>{tourist.phone || '—'}</TableCell>
                     <TableCell>
