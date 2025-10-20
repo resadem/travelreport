@@ -58,6 +58,8 @@ const SelectContent = React.forwardRef(({ className, children, position = "poppe
         className
       )}
       position={position}
+      sideOffset={4}
+      avoidCollisions={true}
       {...props}>
       <SelectScrollUpButton />
       <SelectPrimitive.Viewport
