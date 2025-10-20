@@ -7,6 +7,8 @@ import Dashboard from './pages/Dashboard';
 import ReservationDetails from './pages/ReservationDetails';
 import SubAgencies from './pages/SubAgencies';
 import Settings from './pages/Settings';
+import Suppliers from './pages/Suppliers';
+import Tourists from './pages/Tourists';
 import { Toaster } from './components/ui/sonner';
 import './App.css';
 
@@ -60,6 +62,22 @@ function App() {
               element={
                 <ProtectedRoute adminOnly>
                   <SubAgencies />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/suppliers"
+              element={
+                <ProtectedRoute adminOnly>
+                  <Suppliers />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/tourists"
+              element={
+                <ProtectedRoute adminOnly>
+                  <Tourists />
                 </ProtectedRoute>
               }
             />
