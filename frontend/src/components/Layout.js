@@ -73,6 +73,30 @@ const Layout = ({ children }) => {
                       {t('nav.subAgencies')}
                     </Link>
                     <Link
+                      to="/suppliers"
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                        location.pathname === '/suppliers'
+                          ? 'bg-picton-blue text-white'
+                          : 'text-gray-300 hover:text-white hover:bg-oxford-blue/50'
+                      }`}
+                      data-testid="nav-suppliers"
+                    >
+                      <Truck className="inline h-4 w-4 mr-2" />
+                      Поставщики
+                    </Link>
+                    <Link
+                      to="/tourists"
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                        location.pathname === '/tourists'
+                          ? 'bg-picton-blue text-white'
+                          : 'text-gray-300 hover:text-white hover:bg-oxford-blue/50'
+                      }`}
+                      data-testid="nav-tourists"
+                    >
+                      <UserCircle className="inline h-4 w-4 mr-2" />
+                      Туристы
+                    </Link>
+                    <Link
                       to="/settings"
                       className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                         location.pathname === '/settings'
