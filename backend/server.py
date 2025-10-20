@@ -288,16 +288,6 @@ async def register_user(user_data: UserCreate, admin: dict = Depends(require_adm
 async def login(credentials: UserLogin):
     user = await db.users.find_one({"email": credentials.email}, {"_id": 0})
     
-    print(f"Login attempt: {credentials.email}")
-    print(f"User found: {user is not None}")
-    if user:
-        print(f"Has password_hash: {'password_hash' in user}")
-        try:
-            pwd_check = verify_password(credentials.password, user["password_hash"])
-            print(f"Password check: {pwd_check}")
-        except Exception as e:
-            print(f"Password verification error: {e}")
-    
     if not user or not verify_password(credentials.password, user["password_hash"]):
         raise HTTPException(status_code=401, detail="Invalid email or password")
     
