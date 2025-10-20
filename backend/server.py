@@ -9,7 +9,7 @@ from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict, EmailStr
 from typing import List, Optional, Dict, Any
 import uuid
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, date
 import bcrypt
 import jwt
 from decimal import Decimal
@@ -61,6 +61,53 @@ class PasswordChange(BaseModel):
     old_password: str
     new_password: str
 
+class SupplierCreate(BaseModel):
+    name: str
+
+class SupplierResponse(BaseModel):
+    id: str
+    name: str
+    created_at: str
+
+class TouristCreate(BaseModel):
+    first_name: str
+    last_name: str
+    date_of_birth: Optional[str] = None
+    gender: Optional[str] = None
+    citizenship: Optional[str] = None
+    document_type: Optional[str] = None
+    document_number: Optional[str] = None
+    document_expiration: Optional[str] = None
+    phone: Optional[str] = None
+    email: Optional[str] = None
+
+class TouristUpdate(BaseModel):
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    date_of_birth: Optional[str] = None
+    gender: Optional[str] = None
+    citizenship: Optional[str] = None
+    document_type: Optional[str] = None
+    document_number: Optional[str] = None
+    document_expiration: Optional[str] = None
+    phone: Optional[str] = None
+    email: Optional[str] = None
+
+class TouristResponse(BaseModel):
+    id: str
+    first_name: str
+    last_name: str
+    date_of_birth: Optional[str] = None
+    gender: Optional[str] = None
+    citizenship: Optional[str] = None
+    document_type: Optional[str] = None
+    document_number: Optional[str] = None
+    document_expiration: Optional[str] = None
+    phone: Optional[str] = None
+    email: Optional[str] = None
+    created_at: str
+    updated_at: str
+
 class ReservationCreate(BaseModel):
     agency_id: str
     agency_name: str
@@ -75,7 +122,8 @@ class ReservationCreate(BaseModel):
     prepayment_amount: Optional[float] = 0
     rest_amount_of_payment: Optional[float] = 0
     last_date_of_payment: str
-    supplier: Optional[str] = ""
+    supplier_id: Optional[str] = None
+    supplier_name: Optional[str] = ""
     supplier_price: Optional[float] = 0
     supplier_prepayment_amount: Optional[float] = 0
     revenue: Optional[float] = 0
@@ -95,7 +143,8 @@ class ReservationUpdate(BaseModel):
     prepayment_amount: Optional[float] = None
     rest_amount_of_payment: Optional[float] = None
     last_date_of_payment: Optional[str] = None
-    supplier: Optional[str] = None
+    supplier_id: Optional[str] = None
+    supplier_name: Optional[str] = None
     supplier_price: Optional[float] = None
     supplier_prepayment_amount: Optional[float] = None
     revenue: Optional[float] = None
@@ -116,13 +165,17 @@ class ReservationResponse(BaseModel):
     prepayment_amount: float
     rest_amount_of_payment: float
     last_date_of_payment: str
-    supplier: Optional[str] = None
+    supplier_id: Optional[str] = None
+    supplier_name: Optional[str] = None
     supplier_price: Optional[float] = None
     supplier_prepayment_amount: Optional[float] = None
     revenue: Optional[float] = None
     revenue_percentage: Optional[float] = None
     created_at: str
     updated_at: str
+
+class MarkAsPaid(BaseModel):
+    pass
 
 class SettingsResponse(BaseModel):
     upcoming_due_threshold_days: int
@@ -200,7 +253,6 @@ async def startup_event():
 # Auth routes
 @api_router.post("/auth/register", response_model=UserResponse)
 async def register_user(user_data: UserCreate, admin: dict = Depends(require_admin)):
-    # Check if user already exists
     existing_user = await db.users.find_one({"email": user_data.email})
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
@@ -270,11 +322,9 @@ async def get_current_user_info(user: dict = Depends(get_current_user)):
 
 @api_router.post("/auth/change-password")
 async def change_password(password_data: PasswordChange, user: dict = Depends(get_current_user)):
-    # Verify old password
     if not verify_password(password_data.old_password, user["password_hash"]):
         raise HTTPException(status_code=400, detail="Incorrect old password")
     
-    # Update password
     new_hash = hash_password(password_data.new_password)
     await db.users.update_one(
         {"id": user["id"]},
@@ -283,7 +333,7 @@ async def change_password(password_data: PasswordChange, user: dict = Depends(ge
     
     return {"message": "Password changed successfully"}
 
-# User management routes (Admin only)
+# User management routes
 @api_router.get("/users", response_model=List[UserResponse])
 async def get_users(admin: dict = Depends(require_admin)):
     users = await db.users.find({}, {"_id": 0, "password_hash": 0}).to_list(1000)
@@ -314,6 +364,74 @@ async def delete_user(user_id: str, admin: dict = Depends(require_admin)):
         raise HTTPException(status_code=404, detail="User not found")
     return {"message": "User deleted successfully"}
 
+# Supplier routes
+@api_router.post("/suppliers", response_model=SupplierResponse)
+async def create_supplier(supplier: SupplierCreate, admin: dict = Depends(require_admin)):
+    supplier_dict = {
+        "id": str(uuid.uuid4()),
+        "name": supplier.name,
+        "created_at": datetime.now(timezone.utc).isoformat()
+    }
+    await db.suppliers.insert_one(supplier_dict)
+    return SupplierResponse(**supplier_dict)
+
+@api_router.get("/suppliers", response_model=List[SupplierResponse])
+async def get_suppliers(user: dict = Depends(get_current_user)):
+    suppliers = await db.suppliers.find({}, {"_id": 0}).to_list(1000)
+    return [SupplierResponse(**s) for s in suppliers]
+
+@api_router.delete("/suppliers/{supplier_id}")
+async def delete_supplier(supplier_id: str, admin: dict = Depends(require_admin)):
+    result = await db.suppliers.delete_one({"id": supplier_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Supplier not found")
+    return {"message": "Supplier deleted successfully"}
+
+# Tourist routes
+@api_router.post("/tourists", response_model=TouristResponse)
+async def create_tourist(tourist: TouristCreate, admin: dict = Depends(require_admin)):
+    tourist_dict = tourist.model_dump()
+    tourist_dict["id"] = str(uuid.uuid4())
+    tourist_dict["created_at"] = datetime.now(timezone.utc).isoformat()
+    tourist_dict["updated_at"] = datetime.now(timezone.utc).isoformat()
+    await db.tourists.insert_one(tourist_dict)
+    return TouristResponse(**tourist_dict)
+
+@api_router.get("/tourists", response_model=List[TouristResponse])
+async def get_tourists(user: dict = Depends(get_current_user)):
+    tourists = await db.tourists.find({}, {"_id": 0}).to_list(1000)
+    return [TouristResponse(**t) for t in tourists]
+
+@api_router.get("/tourists/{tourist_id}", response_model=TouristResponse)
+async def get_tourist(tourist_id: str, user: dict = Depends(get_current_user)):
+    tourist = await db.tourists.find_one({"id": tourist_id}, {"_id": 0})
+    if not tourist:
+        raise HTTPException(status_code=404, detail="Tourist not found")
+    return TouristResponse(**tourist)
+
+@api_router.put("/tourists/{tourist_id}", response_model=TouristResponse)
+async def update_tourist(tourist_id: str, tourist_data: TouristUpdate, admin: dict = Depends(require_admin)):
+    update_dict = {k: v for k, v in tourist_data.model_dump().items() if v is not None}
+    update_dict["updated_at"] = datetime.now(timezone.utc).isoformat()
+    
+    result = await db.tourists.update_one(
+        {"id": tourist_id},
+        {"$set": update_dict}
+    )
+    
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Tourist not found")
+    
+    tourist = await db.tourists.find_one({"id": tourist_id}, {"_id": 0})
+    return TouristResponse(**tourist)
+
+@api_router.delete("/tourists/{tourist_id}")
+async def delete_tourist(tourist_id: str, admin: dict = Depends(require_admin)):
+    result = await db.tourists.delete_one({"id": tourist_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Tourist not found")
+    return {"message": "Tourist deleted successfully"}
+
 # Reservation routes
 @api_router.post("/reservations", response_model=ReservationResponse)
 async def create_reservation(reservation: ReservationCreate, admin: dict = Depends(require_admin)):
@@ -321,6 +439,11 @@ async def create_reservation(reservation: ReservationCreate, admin: dict = Depen
     reservation_dict["id"] = str(uuid.uuid4())
     reservation_dict["created_at"] = datetime.now(timezone.utc).isoformat()
     reservation_dict["updated_at"] = datetime.now(timezone.utc).isoformat()
+    
+    # Auto-fill actual_date_of_prepayment if full payment made
+    if reservation_dict.get("actual_date_of_full_payment"):
+        if not reservation_dict.get("actual_date_of_prepayment"):
+            reservation_dict["actual_date_of_prepayment"] = reservation_dict["date_of_issue"]
     
     await db.reservations.insert_one(reservation_dict)
     
@@ -339,11 +462,9 @@ async def get_reservations(
 ):
     query = {}
     
-    # Filter by agency for sub-agencies
     if user["role"] == "sub_agency":
         query["agency_id"] = user["id"]
     
-    # Search filter
     if search:
         query["$or"] = [
             {"agency_name": {"$regex": search, "$options": "i"}},
@@ -351,11 +472,9 @@ async def get_reservations(
             {"tourist_names": {"$regex": search, "$options": "i"}}
         ]
     
-    # Service type filter
     if service_type:
         query["service_type"] = service_type
     
-    # Date filters
     if date_from or date_to:
         date_query = {}
         if date_from:
@@ -364,16 +483,14 @@ async def get_reservations(
             date_query["$lte"] = date_to
         query["date_of_service"] = date_query
     
-    # Get total count
     total = await db.reservations.count_documents(query)
     
-    # Pagination
     skip = (page - 1) * limit
     
-    # Fields to exclude based on role
     projection = {"_id": 0}
     if user["role"] == "sub_agency":
-        projection["supplier"] = 0
+        projection["supplier_id"] = 0
+        projection["supplier_name"] = 0
         projection["supplier_price"] = 0
         projection["supplier_prepayment_amount"] = 0
         projection["revenue"] = 0
@@ -381,7 +498,6 @@ async def get_reservations(
     
     reservations = await db.reservations.find(query, projection).skip(skip).limit(limit).to_list(limit)
     
-    # Apply payment status filter after fetch (since it's computed)
     if payment_status:
         filtered_reservations = []
         for res in reservations:
@@ -441,7 +557,8 @@ def compute_payment_status(reservation: dict) -> str:
 async def get_reservation(reservation_id: str, user: dict = Depends(get_current_user)):
     projection = {"_id": 0}
     if user["role"] == "sub_agency":
-        projection["supplier"] = 0
+        projection["supplier_id"] = 0
+        projection["supplier_name"] = 0
         projection["supplier_price"] = 0
         projection["supplier_prepayment_amount"] = 0
         projection["revenue"] = 0
@@ -452,7 +569,6 @@ async def get_reservation(reservation_id: str, user: dict = Depends(get_current_
     if not reservation:
         raise HTTPException(status_code=404, detail="Reservation not found")
     
-    # Check access for sub-agencies
     if user["role"] == "sub_agency" and reservation["agency_id"] != user["id"]:
         raise HTTPException(status_code=403, detail="Access denied")
     
@@ -476,6 +592,31 @@ async def update_reservation(
         raise HTTPException(status_code=404, detail="Reservation not found")
     
     return {"message": "Reservation updated successfully"}
+
+@api_router.post("/reservations/{reservation_id}/mark-paid")
+async def mark_reservation_paid(reservation_id: str, admin: dict = Depends(require_admin)):
+    reservation = await db.reservations.find_one({"id": reservation_id})
+    if not reservation:
+        raise HTTPException(status_code=404, detail="Reservation not found")
+    
+    today = datetime.now(timezone.utc).isoformat()
+    
+    update_data = {
+        "actual_date_of_full_payment": today,
+        "rest_amount_of_payment": 0,
+        "updated_at": today
+    }
+    
+    # Set actual_date_of_prepayment if not set
+    if not reservation.get("actual_date_of_prepayment"):
+        update_data["actual_date_of_prepayment"] = reservation.get("date_of_issue", today)
+    
+    await db.reservations.update_one(
+        {"id": reservation_id},
+        {"$set": update_data}
+    )
+    
+    return {"message": "Reservation marked as paid"}
 
 @api_router.delete("/reservations/{reservation_id}")
 async def delete_reservation(reservation_id: str, admin: dict = Depends(require_admin)):
@@ -510,7 +651,8 @@ async def get_statistics(user: dict = Depends(get_current_user)):
     
     projection = {"_id": 0}
     if user["role"] == "sub_agency":
-        projection["supplier"] = 0
+        projection["supplier_id"] = 0
+        projection["supplier_name"] = 0
         projection["supplier_price"] = 0
         projection["supplier_prepayment_amount"] = 0
         projection["revenue"] = 0
@@ -534,6 +676,22 @@ async def get_statistics(user: dict = Depends(get_current_user)):
         stats["total_revenue"] = round(total_revenue, 2)
     
     return stats
+
+# Get unique tourist names for autocomplete
+@api_router.get("/tourist-names")
+async def get_tourist_names(user: dict = Depends(get_current_user)):
+    # Get distinct tourist names from reservations
+    reservations = await db.reservations.find({}, {"_id": 0, "tourist_names": 1}).to_list(10000)
+    names_set = set()
+    for res in reservations:
+        names = res.get("tourist_names", "")
+        if names:
+            # Split by comma and add each name
+            for name in names.split(","):
+                name = name.strip()
+                if name:
+                    names_set.add(name)
+    return {"names": sorted(list(names_set))}
 
 app.include_router(api_router)
 
