@@ -185,7 +185,7 @@ const Tourists = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Label>Гражданство</Label>
-                      <Select value={formData.citizenship} onValueChange={(value) => setFormData({...formData, citizenship: value})}>
+                      <Select value={formData.citizenship || ''} onValueChange={(value) => setFormData({...formData, citizenship: value})}>
                         <SelectTrigger>
                           <SelectValue placeholder="Выберите страну" />
                         </SelectTrigger>
@@ -198,7 +198,7 @@ const Tourists = () => {
                     </div>
                     <div>
                       <Label>Тип документа</Label>
-                      <Select value={formData.document_type} onValueChange={(value) => setFormData({...formData, document_type: value})}>
+                      <Select value={formData.document_type || ''} onValueChange={(value) => setFormData({...formData, document_type: value})}>
                         <SelectTrigger>
                           <SelectValue placeholder="Тип документа" />
                         </SelectTrigger>
