@@ -185,7 +185,7 @@ const Tourists = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Label>Гражданство</Label>
-                      <Select value={formData.citizenship} onValueChange={(value) => setFormData({...formData, citizenship: value})}>
+                      <Select value={formData.citizenship || undefined} onValueChange={(value) => setFormData({...formData, citizenship: value})}>
                         <SelectTrigger>
                           <SelectValue placeholder="Выберите страну" />
                         </SelectTrigger>
