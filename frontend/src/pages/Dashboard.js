@@ -353,7 +353,7 @@ const Dashboard = () => {
               />
             </div>
             <Select value={serviceType} onValueChange={setServiceType}>
-              <SelectTrigger className="w-full lg:w-48" data-testid="service-type-filter">
+              <SelectTrigger className="w-full md:w-48" data-testid="service-type-filter">
                 <SelectValue placeholder={t('dashboard.serviceType')} />
               </SelectTrigger>
               <SelectContent>
@@ -364,7 +364,7 @@ const Dashboard = () => {
               </SelectContent>
             </Select>
             <Select value={paymentStatus} onValueChange={setPaymentStatus}>
-              <SelectTrigger className="w-full lg:w-48" data-testid="payment-status-filter">
+              <SelectTrigger className="w-full md:w-48" data-testid="payment-status-filter">
                 <SelectValue placeholder={t('dashboard.paymentStatus')} />
               </SelectTrigger>
               <SelectContent>
