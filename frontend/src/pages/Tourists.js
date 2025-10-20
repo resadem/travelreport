@@ -185,11 +185,16 @@ const Tourists = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Label>Гражданство</Label>
-                      <Input
-                        value={formData.citizenship}
-                        onChange={(e) => setFormData({...formData, citizenship: e.target.value})}
-                        placeholder="Citizenship"
-                      />
+                      <Select value={formData.citizenship} onValueChange={(value) => setFormData({...formData, citizenship: value})}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Выберите страну" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {COUNTRIES.map(country => (
+                            <SelectItem key={country} value={country}>{country}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
                     <div>
                       <Label>Тип документа</Label>
