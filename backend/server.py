@@ -275,7 +275,9 @@ async def register_user(user_data: UserCreate, admin: dict = Depends(require_adm
         "role": user_data.role,
         "is_active": True,
         "locale": user_data.locale,
-        "created_at": datetime.now(timezone.utc).isoformat()
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "balance": 0.0,
+        "last_balance_topup": 0.0
     }
     
     await db.users.insert_one(user_dict)
