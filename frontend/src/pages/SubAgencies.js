@@ -182,7 +182,7 @@ const SubAgencies = () => {
                 </div>
                 <div>
                   <Label>{t('subAgencies.locale')}</Label>
-                  <Select value={formData.locale} onValueChange={(value) => setFormData({...formData, locale: value})}>
+                  <Select value={formData.locale || undefined} onValueChange={(value) => setFormData({...formData, locale: value})}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
