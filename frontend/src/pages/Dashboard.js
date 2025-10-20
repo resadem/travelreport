@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 import { Search, Download, Plus, Eye } from 'lucide-react';
 import Layout from '../components/Layout';
 
-const API = \`\${process.env.REACT_APP_BACKEND_URL}/api\`;
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const SERVICE_TYPES = ['Flight', 'Hotel', 'Transfer', 'Train ticket', 'Additional flight service', 'Airport VIP Services', 'eSIM'];
 
