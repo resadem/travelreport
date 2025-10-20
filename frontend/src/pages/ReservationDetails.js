@@ -313,7 +313,7 @@ const ReservationDetails = () => {
                       {canEdit ? (
                         <Input type="number" step="0.01" value={formData.supplier_price || ''} onChange={(e) => setFormData({...formData, supplier_price: e.target.value})} className="mt-1" />
                       ) : (
-                        <div className="mt-1 text-xl font-bold text-picton-blue">{reservation.supplier_price?.toFixed(2) || '0.00'} ₽</div>
+                        <div className="mt-1 text-xl font-bold text-picton-blue">{formatPrice(reservation.supplier_price)} ₽</div>
                       )}
                     </div>
 
@@ -322,7 +322,7 @@ const ReservationDetails = () => {
                       {canEdit ? (
                         <Input type="number" step="0.01" value={formData.supplier_prepayment_amount || ''} onChange={(e) => setFormData({...formData, supplier_prepayment_amount: e.target.value})} className="mt-1" />
                       ) : (
-                        <div className="mt-1 text-lg font-medium">{reservation.supplier_prepayment_amount?.toFixed(2) || '0.00'} ₽</div>
+                        <div className="mt-1 text-lg font-medium">{formatPrice(reservation.supplier_prepayment_amount)} ₽</div>
                       )}
                     </div>
 
@@ -331,7 +331,7 @@ const ReservationDetails = () => {
                       {canEdit ? (
                         <Input type="number" step="0.01" value={formData.revenue || ''} onChange={(e) => setFormData({...formData, revenue: e.target.value})} className="mt-1" />
                       ) : (
-                        <div className="mt-1 text-xl font-bold text-green-600">{reservation.revenue?.toFixed(2) || '0.00'} ₽</div>
+                        <div className="mt-1 text-xl font-bold text-green-600">{formatPrice(reservation.revenue)} ₽</div>
                       )}
                     </div>
                   </div>
