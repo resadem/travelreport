@@ -26,9 +26,34 @@ const ReservationDetails = () => {
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({});
   const [marking, setMarking] = useState(false);
+  const [agencies, setAgencies] = useState([]);
+  const [suppliers, setSuppliers] = useState([]);
 
   useEffect(() => {
     fetchReservation();
+    if (user?.role === 'admin') {
+      fetchAgencies();
+      fetchSuppliers();
+    }
+  }, [id]);
+
+  const fetchAgencies = async () => {
+    try {
+      const response = await axios.get(`${API}/users`);
+      setAgencies(response.data.filter(u => u.role === 'sub_agency'));
+    } catch (error) {
+      console.error('Failed to fetch agencies:', error);
+    }
+  };
+
+  const fetchSuppliers = async () => {
+    try {
+      const response = await axios.get(`${API}/suppliers`);
+      setSuppliers(response.data);
+    } catch (error) {
+      console.error('Failed to fetch suppliers:', error);
+    }
+  };
   }, [id]);
 
   const fetchReservation = async () => {
