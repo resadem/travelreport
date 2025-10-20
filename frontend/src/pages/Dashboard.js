@@ -301,7 +301,7 @@ const Dashboard = () => {
     if (!supplierId) {
       setFormData({
         ...formData,
-        supplier_id: '',
+        supplier_id: null,
         supplier_name: ''
       });
       return;
