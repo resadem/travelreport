@@ -186,7 +186,7 @@ const ReservationDetails = () => {
                     {canEdit ? (
                       <Input type="date" value={formData.date_of_issue?.split('T')[0] || ''} onChange={(e) => setFormData({...formData, date_of_issue: e.target.value})} className="mt-1" />
                     ) : (
-                      <div className="mt-1 text-lg font-medium">{new Date(reservation.date_of_issue).toLocaleDateString('ru-RU')}</div>
+                      <div className="mt-1 text-lg font-medium">{formatDate(reservation.date_of_issue)}</div>
                     )}
                   </div>
 
@@ -195,7 +195,7 @@ const ReservationDetails = () => {
                     {canEdit ? (
                       <Input type="date" value={formData.date_of_service?.split('T')[0] || ''} onChange={(e) => setFormData({...formData, date_of_service: e.target.value})} className="mt-1" />
                     ) : (
-                      <div className="mt-1 text-lg font-medium">{new Date(reservation.date_of_service).toLocaleDateString('ru-RU')}</div>
+                      <div className="mt-1 text-lg font-medium">{formatDate(reservation.date_of_service)}</div>
                     )}
                   </div>
 
@@ -204,7 +204,7 @@ const ReservationDetails = () => {
                     {canEdit ? (
                       <Input type="date" value={formData.last_date_of_payment?.split('T')[0] || ''} onChange={(e) => setFormData({...formData, last_date_of_payment: e.target.value})} className="mt-1" />
                     ) : (
-                      <div className="mt-1 text-lg font-medium">{new Date(reservation.last_date_of_payment).toLocaleDateString('ru-RU')}</div>
+                      <div className="mt-1 text-lg font-medium">{formatDate(reservation.last_date_of_payment)}</div>
                     )}
                   </div>
                 </div>
@@ -333,14 +333,14 @@ const ReservationDetails = () => {
                   <div>
                     <Label className="text-gray-600 text-sm">{t('columns.actualDatePrepayment')}</Label>
                     <div className="mt-1 text-base font-medium">
-                      {reservation.actual_date_of_prepayment ? new Date(reservation.actual_date_of_prepayment).toLocaleDateString('ru-RU') : '—'}
+                      {reservation.actual_date_of_prepayment ? formatDate(reservation.actual_date_of_prepayment) : '—'}
                     </div>
                   </div>
 
                   <div>
                     <Label className="text-gray-600 text-sm">{t('columns.actualDateFullPayment')}</Label>
                     <div className="mt-1 text-base font-medium">
-                      {reservation.actual_date_of_full_payment ? new Date(reservation.actual_date_of_full_payment).toLocaleDateString('ru-RU') : '—'}
+                      {reservation.actual_date_of_full_payment ? formatDate(reservation.actual_date_of_full_payment) : '—'}
                     </div>
                   </div>
                 </div>
