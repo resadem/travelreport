@@ -20,6 +20,9 @@ const SubAgencies = () => {
   const [loading, setLoading] = useState(true);
   const [showDialog, setShowDialog] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
+  const [showTopUpDialog, setShowTopUpDialog] = useState(false);
+  const [topUpUser, setTopUpUser] = useState(null);
+  const [topUpAmount, setTopUpAmount] = useState('');
   const [formData, setFormData] = useState({
     agency_name: '',
     email: '',
