@@ -33,7 +33,9 @@ export const translations = {
       totalPrice: 'Общая цена',
       totalPrepayment: 'Общая предоплата',
       totalRest: 'Общий остаток',
-      totalRevenue: 'Общая прибыль'
+      totalRevenue: 'Общая прибыль',
+      balance: 'Баланс',
+      lastTopUp: 'Посл. пополнение'
     },
     columns: {
       id: '№',
