@@ -283,11 +283,6 @@ const Dashboard = () => {
     return <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-800">{t('paymentStatus.unpaid')}</span>;
   };
 
-  const formatDate = (dateStr) => {
-    if (!dateStr) return '—';
-    return formatDate(dateStr);
-  };
-
   const handleAgencyChange = (agencyId) => {
     const agency = agencies.find(a => a.id === agencyId);
     if (agency) {
