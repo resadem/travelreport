@@ -242,7 +242,9 @@ async def startup_event():
             "role": "admin",
             "is_active": True,
             "locale": "ru",
-            "created_at": datetime.now(timezone.utc).isoformat()
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "balance": 0.0,
+            "last_balance_topup": 0.0
         }
         await db.users.insert_one(admin_user)
         logger.info(f"Admin user created: {admin_email}")
