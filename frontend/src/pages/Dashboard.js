@@ -298,7 +298,7 @@ const Dashboard = () => {
   };
 
   const handleSupplierChange = (supplierId) => {
-    if (supplierId === 'none') {
+    if (!supplierId) {
       setFormData({
         ...formData,
         supplier_id: '',
