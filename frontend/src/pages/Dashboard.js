@@ -285,7 +285,7 @@ const Dashboard = () => {
 
   const formatDate = (dateStr) => {
     if (!dateStr) return '—';
-    return new Date(dateStr).toLocaleDateString(locale === 'ru' ? 'ru-RU' : 'en-US');
+    return formatDate(dateStr);
   };
 
   const handleAgencyChange = (agencyId) => {
