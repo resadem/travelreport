@@ -220,7 +220,12 @@ export const translations = {
       delete: 'Delete',
       agencyName: 'Agency Name',
       password: 'Password',
-      locale: 'Language'
+      locale: 'Language',
+      balance: 'Balance',
+      topUp: 'Top Up',
+      topUpBalance: 'Top Up Balance',
+      amount: 'Amount',
+      topUpAmount: 'Top Up Amount'
     },
     settings: {
       title: 'Settings',
