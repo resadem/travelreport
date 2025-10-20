@@ -375,8 +375,8 @@ const Dashboard = () => {
                 <SelectItem value="upcoming">{t('paymentStatus.upcoming')}</SelectItem>
               </SelectContent>
             </Select>
-            <div className="flex gap-2">
-              <Button onClick={exportToCSV} variant="outline" data-testid="export-button">
+            <div className="flex flex-col sm:flex-row gap-2">
+              <Button onClick={exportToCSV} variant="outline" data-testid="export-button" className="w-full sm:w-auto">
                 <Download className="h-4 w-4 mr-2" />
                 {t('dashboard.export')}
               </Button>
