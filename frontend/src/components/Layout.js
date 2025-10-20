@@ -40,11 +40,10 @@ const Layout = ({ children }) => {
             <div className="flex items-center space-x-8">
               <Link to="/" className="flex items-center">
                 <img
-                  src="https://customer-assets.emergentagent.com/job_reservflow/artifacts/j8p0qpce_logo-icon.png"
+                  src="/logo-full.png"
                   alt="4Travels"
-                  className="h-10 w-10"
+                  className="h-12"
                 />
-                <span className="ml-3 text-white text-xl font-bold">4Travels</span>
               </Link>
               <nav className="hidden md:flex space-x-4">
                 <Link
