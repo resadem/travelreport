@@ -70,7 +70,7 @@ const Dashboard = () => {
 
   const fetchSettings = async () => {
     try {
-      const response = await axios.get(`\${API}/settings`);
+      const response = await axios.get(`${API}/settings`);
       setThresholdDays(response.data.upcoming_due_threshold_days || 7);
     } catch (error) {
       console.error('Failed to fetch settings:', error);
@@ -79,7 +79,7 @@ const Dashboard = () => {
 
   const fetchAgencies = async () => {
     try {
-      const response = await axios.get(`\${API}/users`);
+      const response = await axios.get(`${API}/users`);
       setAgencies(response.data.filter(u => u.role === 'sub_agency'));
     } catch (error) {
       console.error('Failed to fetch agencies:', error);
@@ -88,7 +88,7 @@ const Dashboard = () => {
 
   const fetchSuppliers = async () => {
     try {
-      const response = await axios.get(`\${API}/suppliers`);
+      const response = await axios.get(`${API}/suppliers`);
       setSuppliers(response.data);
     } catch (error) {
       console.error('Failed to fetch suppliers:', error);
@@ -97,7 +97,7 @@ const Dashboard = () => {
 
   const fetchTouristNames = async () => {
     try {
-      const response = await axios.get(`\${API}/tourist-names`);
+      const response = await axios.get(`${API}/tourist-names`);
       setTouristNames(response.data.names || []);
     } catch (error) {
       console.error('Failed to fetch tourist names:', error);
@@ -112,7 +112,7 @@ const Dashboard = () => {
       if (serviceType && serviceType !== 'all') params.service_type = serviceType;
       if (paymentStatus && paymentStatus !== 'all') params.payment_status = paymentStatus;
 
-      const response = await axios.get(`\${API}/reservations`, { params });
+      const response = await axios.get(`${API}/reservations`, { params });
       setReservations(response.data.reservations);
       setTotal(response.data.total);
       setTotalPages(response.data.pages);
@@ -125,7 +125,7 @@ const Dashboard = () => {
 
   const fetchStatistics = async () => {
     try {
-      const response = await axios.get(`\${API}/statistics`);
+      const response = await axios.get(`${API}/statistics`);
       setStatistics(response.data);
     } catch (error) {
       console.error('Failed to fetch statistics:', error);
@@ -135,7 +135,7 @@ const Dashboard = () => {
   const handleAddSupplier = async () => {
     if (!newSupplierName.trim()) return;
     try {
-      const response = await axios.post(`\${API}/suppliers`, { name: newSupplierName });
+      const response = await axios.post(`${API}/suppliers`, { name: newSupplierName });
       setSuppliers([...suppliers, response.data]);
       setFormData({ ...formData, supplier_id: response.data.id, supplier_name: response.data.name });
       setNewSupplierName('');
@@ -159,7 +159,7 @@ const Dashboard = () => {
         supplier_prepayment_amount: parseFloat(formData.supplier_prepayment_amount || 0)
       };
 
-      await axios.post(`\${API}/reservations`, data);
+      await axios.post(`${API}/reservations`, data);
       toast.success(t('common.success'));
       setShowAddDialog(false);
       fetchReservations();
@@ -248,7 +248,7 @@ const Dashboard = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `reservations_\${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `reservations_${new Date().toISOString().split('T')[0]}.csv`;
     a.click();
   };
 
@@ -352,7 +352,7 @@ const Dashboard = () => {
               <SelectContent>
                 <SelectItem value="all">{t('serviceTypes.all')}</SelectItem>
                 {SERVICE_TYPES.map(type => (
-                  <SelectItem key={type} value={type}>{t(`serviceTypes.\${type}`)}</SelectItem>
+                  <SelectItem key={type} value={type}>{t(`serviceTypes.${type}`)}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -408,7 +408,7 @@ const Dashboard = () => {
                             </SelectTrigger>
                             <SelectContent>
                               {SERVICE_TYPES.map(type => (
-                                <SelectItem key={type} value={type}>{t(`serviceTypes.\${type}`)}</SelectItem>
+                                <SelectItem key={type} value={type}>{t(`serviceTypes.${type}`)}</SelectItem>
                               ))}
                             </SelectContent>
                           </Select>
@@ -523,7 +523,7 @@ const Dashboard = () => {
                       <TableCell className="font-medium">{idx + 1 + (page - 1) * 25}</TableCell>
                       <TableCell>{reservation.agency_name}</TableCell>
                       <TableCell>{formatDate(reservation.date_of_issue)}</TableCell>
-                      <TableCell>{t(`serviceTypes.\${reservation.service_type}`)}</TableCell>
+                      <TableCell>{t(`serviceTypes.${reservation.service_type}`)}</TableCell>
                       <TableCell>{formatDate(reservation.date_of_service)}</TableCell>
                       <TableCell>{reservation.tourist_names}</TableCell>
                       <TableCell className="font-semibold">{reservation.price?.toFixed(2)} ₽</TableCell>
@@ -534,8 +534,8 @@ const Dashboard = () => {
                         <Button
                           size="sm"
                           variant="ghost"
-                          onClick={() => navigate(`/reservations/\${reservation.id}`)}
-                          data-testid={`view-reservation-\${idx}`}
+                          onClick={() => navigate(`/reservations/${reservation.id}`)}
+                          data-testid={`view-reservation-${idx}`}
                         >
                           <Eye className="h-4 w-4" />
                         </Button>
