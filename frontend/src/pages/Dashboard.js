@@ -352,7 +352,7 @@ const Dashboard = () => {
                 data-testid="search-input"
               />
             </div>
-            <Select value={serviceType || undefined} onValueChange={setServiceType}>
+            <Select value={serviceType} onValueChange={setServiceType}>
               <SelectTrigger className="w-full lg:w-48" data-testid="service-type-filter">
                 <SelectValue placeholder={t('dashboard.serviceType')} />
               </SelectTrigger>
