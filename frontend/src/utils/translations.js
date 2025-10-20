@@ -95,7 +95,12 @@ export const translations = {
       delete: 'Удалить',
       agencyName: 'Название агентства',
       password: 'Пароль',
-      locale: 'Язык'
+      locale: 'Язык',
+      balance: 'Баланс',
+      topUp: 'Пополнить',
+      topUpBalance: 'Пополнить баланс',
+      amount: 'Сумма',
+      topUpAmount: 'Сумма пополнения'
     },
     settings: {
       title: 'Настройки',
