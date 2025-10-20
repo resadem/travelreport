@@ -130,6 +130,28 @@ const SubAgencies = () => {
     });
   };
 
+  const handleTopUp = (user) => {
+    setTopUpUser(user);
+    setTopUpAmount('');
+    setShowTopUpDialog(true);
+  };
+
+  const handleTopUpSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(`${API}/users/${topUpUser.id}/topup-balance`, {
+        amount: parseFloat(topUpAmount)
+      });
+      toast.success(t('common.success'));
+      setShowTopUpDialog(false);
+      setTopUpUser(null);
+      setTopUpAmount('');
+      fetchUsers();
+    } catch (error) {
+      toast.error(error.response?.data?.detail || t('common.error'));
+    }
+  };
+
   return (
     <Layout>
       <div className="space-y-6">
