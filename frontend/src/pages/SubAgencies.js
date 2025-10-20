@@ -134,7 +134,7 @@ const SubAgencies = () => {
           <h1 className="text-3xl font-bold text-oxford-blue">Агентства</h1>
           <Dialog open={showDialog} onOpenChange={setShowDialog}>
             <DialogTrigger asChild>
-              <Button className="bg-safety-orange hover:bg-safety-orange/90" data-testid="add-sub-agency-button">
+              <Button className="bg-safety-orange hover:bg-safety-orange/90 w-full sm:w-auto" data-testid="add-sub-agency-button">
                 <Plus className="h-4 w-4 mr-2" />
                 {t('subAgencies.add')}
               </Button>
