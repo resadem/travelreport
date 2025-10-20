@@ -65,6 +65,9 @@ class PasswordChange(BaseModel):
     old_password: str
     new_password: str
 
+class BalanceTopUp(BaseModel):
+    amount: float
+
 class SupplierCreate(BaseModel):
     name: str
 
