@@ -282,8 +282,8 @@ const ReservationDetails = () => {
                     <div>
                       <Label className="text-gray-600">{t('columns.supplier')}</Label>
                       {canEdit ? (
-                        <Select value={formData.supplier_id || 'none'} onValueChange={(value) => {
-                          if (value === 'none') {
+                        <Select value={formData.supplier_id || undefined} onValueChange={(value) => {
+                          if (!value) {
                             setFormData({...formData, supplier_id: '', supplier_name: ''});
                           } else {
                             const supplier = suppliers.find(s => s.id === value);
@@ -293,10 +293,9 @@ const ReservationDetails = () => {
                           }
                         }}>
                           <SelectTrigger className="mt-1">
-                            <SelectValue />
+                            <SelectValue placeholder="Выберите поставщика" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="none">Не выбрано</SelectItem>
                             {suppliers.map(supplier => (
                               <SelectItem key={supplier.id} value={supplier.id}>{supplier.name}</SelectItem>
                             ))}
