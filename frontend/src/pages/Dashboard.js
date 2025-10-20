@@ -295,6 +295,14 @@ const Dashboard = () => {
   };
 
   const handleSupplierChange = (supplierId) => {
+    if (supplierId === 'none') {
+      setFormData({
+        ...formData,
+        supplier_id: '',
+        supplier_name: ''
+      });
+      return;
+    }
     const supplier = suppliers.find(s => s.id === supplierId);
     if (supplier) {
       setFormData({
