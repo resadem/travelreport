@@ -54,7 +54,6 @@ const ReservationDetails = () => {
       console.error('Failed to fetch suppliers:', error);
     }
   };
-  }, [id]);
 
   const fetchReservation = async () => {
     try {
