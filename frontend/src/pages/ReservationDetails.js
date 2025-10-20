@@ -179,9 +179,9 @@ const ReservationDetails = () => {
                   <div>
                     <Label className="text-gray-600">{t('columns.agency')}</Label>
                     {canEdit ? (
-                      <Select value={formData.agency_id || undefined} onValueChange={(value) => {
+                      <Select value={formData.agency_id} onValueChange={(value) => {
                         if (!value) {
-                          setFormData({...formData, agency_id: '', agency_name: ''});
+                          setFormData({...formData, agency_id: null, agency_name: ''});
                         } else {
                           const agency = agencies.find(a => a.id === value);
                           if (agency) {
