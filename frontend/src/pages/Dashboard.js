@@ -321,6 +321,18 @@ const Dashboard = () => {
       <div className="space-y-6">
         {/* Statistics Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {user.role === 'sub_agency' && (
+            <>
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-green-100">
+                <div className="text-sm text-gray-600 mb-1">{t('dashboard.balance')}</div>
+                <div className="text-3xl font-bold text-green-600">{formatPrice(user.balance || 0)} ₽</div>
+              </div>
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-blue-100">
+                <div className="text-sm text-gray-600 mb-1">{t('dashboard.lastTopUp')}</div>
+                <div className="text-3xl font-bold text-blue-600">{formatPrice(user.last_balance_topup || 0)} ₽</div>
+              </div>
+            </>
+          )}
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <div className="text-sm text-gray-600 mb-1">{t('dashboard.totalReservations')}</div>
             <div className="text-3xl font-bold text-oxford-blue">{statistics.total_reservations || 0}</div>
