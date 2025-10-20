@@ -282,9 +282,9 @@ const ReservationDetails = () => {
                     <div>
                       <Label className="text-gray-600">{t('columns.supplier')}</Label>
                       {canEdit ? (
-                        <Select value={formData.supplier_id} onValueChange={(value) => {
+                        <Select value={formData.supplier_id || ''} onValueChange={(value) => {
                           if (!value) {
-                            setFormData({...formData, supplier_id: null, supplier_name: ''});
+                            setFormData({...formData, supplier_id: '', supplier_name: ''});
                           } else {
                             const supplier = suppliers.find(s => s.id === value);
                             if (supplier) {
