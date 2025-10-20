@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
 
 class B2BTravelPortalTester:
-    def __init__(self, base_url="https://reservflow.preview.emergentagent.com/api"):
+    def __init__(self, base_url="https://traveladmin-hub.preview.emergentagent.com/api"):
         self.base_url = base_url
         self.admin_token = None
         self.sub_agency_token = None
