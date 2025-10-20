@@ -36,6 +36,7 @@ class UserCreate(BaseModel):
     agency_name: str
     email: EmailStr
     password: str
+    phone: Optional[str] = None
     role: str = "sub_agency"
     locale: str = "ru"
 
@@ -47,6 +48,7 @@ class UserResponse(BaseModel):
     id: str
     agency_name: str
     email: str
+    phone: Optional[str] = None
     role: str
     is_active: bool
     locale: str
