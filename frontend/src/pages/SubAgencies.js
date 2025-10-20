@@ -254,11 +254,11 @@ const SubAgencies = () => {
             <TableBody>
               {loading ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-8">{t('common.loading')}</TableCell>
+                  <TableCell colSpan={7} className="text-center py-8">{t('common.loading')}</TableCell>
                 </TableRow>
               ) : users.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-8">{t('common.noData')}</TableCell>
+                  <TableCell colSpan={7} className="text-center py-8">{t('common.noData')}</TableCell>
                 </TableRow>
               ) : (
                 users.map((user, idx) => (
@@ -266,6 +266,7 @@ const SubAgencies = () => {
                     <TableCell className="font-medium">{user.agency_name}</TableCell>
                     <TableCell>{user.email}</TableCell>
                     <TableCell>{user.phone || '—'}</TableCell>
+                    <TableCell className="font-semibold text-green-600">{user.balance?.toFixed(0)} ₽</TableCell>
                     <TableCell>{user.locale === 'ru' ? 'Русский' : 'English'}</TableCell>
                     <TableCell>
                       <div className="flex items-center space-x-2">
@@ -281,6 +282,15 @@ const SubAgencies = () => {
                     </TableCell>
                     <TableCell>
                       <div className="flex space-x-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleTopUp(user)}
+                          className="text-green-600 hover:text-green-700"
+                          data-testid={`topup-user-${user.id}`}
+                        >
+                          {t('subAgencies.topUp')}
+                        </Button>
                         <Button
                           size="sm"
                           variant="ghost"
