@@ -462,7 +462,7 @@ const Dashboard = () => {
                         <div>
                           <Label>{t('columns.supplier')}</Label>
                           <div className="flex gap-2">
-                            <Select value={formData.supplier_id || undefined} onValueChange={handleSupplierChange}>
+                            <Select value={formData.supplier_id} onValueChange={handleSupplierChange}>
                               <SelectTrigger className="flex-1">
                                 <SelectValue placeholder="Выберите поставщика" />
                               </SelectTrigger>
