@@ -352,7 +352,7 @@ const ReservationDetails = () => {
                   {canEdit ? (
                     <Input type="number" step="0.01" value={formData.price || ''} onChange={(e) => setFormData({...formData, price: e.target.value})} className="mt-1" />
                   ) : (
-                    <div className="mt-1 text-3xl font-bold text-picton-blue">{reservation.price?.toFixed(2)} ₽</div>
+                    <div className="mt-1 text-3xl font-bold text-picton-blue">{formatPrice(reservation.price)} ₽</div>
                   )}
                 </div>
 
@@ -361,7 +361,7 @@ const ReservationDetails = () => {
                   {canEdit ? (
                     <Input type="number" step="0.01" value={formData.prepayment_amount || ''} onChange={(e) => setFormData({...formData, prepayment_amount: e.target.value})} className="mt-1" />
                   ) : (
-                    <div className="mt-1 text-2xl font-bold text-green-600">{reservation.prepayment_amount?.toFixed(2)} ₽</div>
+                    <div className="mt-1 text-2xl font-bold text-green-600">{formatPrice(reservation.prepayment_amount)} ₽</div>
                   )}
                 </div>
 
@@ -382,7 +382,7 @@ const ReservationDetails = () => {
                     )}
                   </div>
                   <div className={`text-3xl font-bold ${isPaid ? 'text-green-600' : 'text-safety-orange'}`}>
-                    {reservation.rest_amount_of_payment?.toFixed(2)} ₽
+                    {formatPrice(reservation.rest_amount_of_payment)} ₽
                   </div>
                   {isPaid && (
                     <div className="mt-2 px-3 py-2 bg-green-100 rounded-lg">
