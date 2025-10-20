@@ -198,7 +198,7 @@ const Tourists = () => {
                     </div>
                     <div>
                       <Label>Тип документа</Label>
-                      <Select value={formData.document_type} onValueChange={(value) => setFormData({...formData, document_type: value})}>
+                      <Select value={formData.document_type || undefined} onValueChange={(value) => setFormData({...formData, document_type: value})}>
                         <SelectTrigger>
                           <SelectValue placeholder="Тип документа" />
                         </SelectTrigger>
