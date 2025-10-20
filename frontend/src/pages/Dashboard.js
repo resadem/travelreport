@@ -168,7 +168,7 @@ const Dashboard = () => {
       fetchStatistics();
       fetchTouristNames();
       setFormData({
-        agency_id: '',
+        agency_id: null,
         agency_name: '',
         date_of_issue: today,
         service_type: 'Flight',
@@ -178,7 +178,7 @@ const Dashboard = () => {
         price: '',
         prepayment_amount: '',
         last_date_of_payment: today,
-        supplier_id: '',
+        supplier_id: null,
         supplier_name: '',
         supplier_price: '',
         supplier_prepayment_amount: ''
