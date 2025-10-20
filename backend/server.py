@@ -53,6 +53,8 @@ class UserResponse(BaseModel):
     is_active: bool
     locale: str
     created_at: str
+    balance: float = 0.0
+    last_balance_topup: float = 0.0
 
 class TokenResponse(BaseModel):
     access_token: str
