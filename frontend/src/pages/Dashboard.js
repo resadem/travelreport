@@ -393,7 +393,7 @@ const Dashboard = () => {
                       <DialogTitle>{t('dashboard.addReservation')}</DialogTitle>
                     </DialogHeader>
                     <form onSubmit={handleAddReservation} className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                           <Label>{t('columns.agency')} *</Label>
                           <Select value={formData.agency_id || ''} onValueChange={handleAgencyChange} required>
