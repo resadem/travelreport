@@ -215,29 +215,29 @@ const Dashboard = () => {
       );
     }
 
-    const rows = reservations.map(r => {
+    const rows = reservations.map((r, idx) => {
       const row = [
-        r.id,
+        idx + 1,
         r.agency_name,
         formatDate(r.date_of_issue),
         r.service_type,
         formatDate(r.date_of_service),
         r.description,
         r.tourist_names,
-        r.price,
-        r.actual_date_of_full_payment || '—',
-        r.actual_date_of_prepayment || '—',
-        r.prepayment_amount,
-        r.rest_amount_of_payment,
+        formatPrice(r.price),
+        r.actual_date_of_full_payment ? formatDate(r.actual_date_of_full_payment) : '—',
+        r.actual_date_of_prepayment ? formatDate(r.actual_date_of_prepayment) : '—',
+        formatPrice(r.prepayment_amount),
+        formatPrice(r.rest_amount_of_payment),
         formatDate(r.last_date_of_payment)
       ];
 
       if (user.role === 'admin') {
         row.push(
           r.supplier_name || '',
-          r.supplier_price || 0,
-          r.supplier_prepayment_amount || 0,
-          r.revenue || 0,
+          formatPrice(r.supplier_price),
+          formatPrice(r.supplier_prepayment_amount),
+          formatPrice(r.revenue),
           r.revenue_percentage || 0
         );
       }
@@ -245,13 +245,15 @@ const Dashboard = () => {
       return row;
     });
 
-    const csv = [headers, ...rows].map(row => row.join(',')).join('\\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `reservations_${new Date().toISOString().split('T')[0]}.csv`;
-    a.click();
+    // Create worksheet
+    const ws = XLSX.utils.aoa_to_sheet([headers, ...rows]);
+    
+    // Create workbook
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Reservations');
+    
+    // Save file
+    XLSX.writeFile(wb, `reservations_${new Date().toISOString().split('T')[0]}.xlsx`);
   };
 
   const getPaymentBadge = (reservation) => {
