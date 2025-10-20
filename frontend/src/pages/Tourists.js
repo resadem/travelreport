@@ -182,7 +182,7 @@ const Tourists = () => {
                 {/* Document Information */}
                 <div>
                   <h3 className="text-lg font-semibold text-oxford-blue mb-4">Паспортные данные</h3>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <Label>Гражданство</Label>
                       <Select value={formData.citizenship || ''} onValueChange={(value) => setFormData({...formData, citizenship: value})}>
