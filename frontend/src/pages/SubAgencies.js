@@ -245,6 +245,7 @@ const SubAgencies = () => {
                 <TableHead>{t('subAgencies.name')}</TableHead>
                 <TableHead>{t('subAgencies.email')}</TableHead>
                 <TableHead>Телефон</TableHead>
+                <TableHead>{t('subAgencies.balance')}</TableHead>
                 <TableHead>{t('subAgencies.locale')}</TableHead>
                 <TableHead>{t('subAgencies.status')}</TableHead>
                 <TableHead>{t('columns.actions')}</TableHead>
