@@ -409,7 +409,7 @@ const Dashboard = () => {
                         </div>
                         <div>
                           <Label>{t('columns.serviceType')} *</Label>
-                          <Select value={formData.service_type} onValueChange={(value) => setFormData({...formData, service_type: value})}>
+                          <Select value={formData.service_type || undefined} onValueChange={(value) => setFormData({...formData, service_type: value})}>
                             <SelectTrigger>
                               <SelectValue />
                             </SelectTrigger>
