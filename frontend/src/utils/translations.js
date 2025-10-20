@@ -128,6 +128,8 @@ export const translations = {
     nav: {
       reservations: 'Reservations',
       subAgencies: 'Sub-Agencies',
+      suppliers: 'Suppliers',
+      tourists: 'Tourists',
       settings: 'Settings',
       logout: 'Logout',
       changePassword: 'Change Password'
