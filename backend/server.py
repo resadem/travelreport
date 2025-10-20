@@ -601,8 +601,14 @@ async def mark_reservation_paid(reservation_id: str, admin: dict = Depends(requi
     
     today = datetime.now(timezone.utc).isoformat()
     
+    # Add rest amount to prepayment amount to make total = price
+    current_prepayment = reservation.get("prepayment_amount", 0)
+    rest_amount = reservation.get("rest_amount_of_payment", 0)
+    new_prepayment = current_prepayment + rest_amount
+    
     update_data = {
         "actual_date_of_full_payment": today,
+        "prepayment_amount": new_prepayment,
         "rest_amount_of_payment": 0,
         "updated_at": today
     }
