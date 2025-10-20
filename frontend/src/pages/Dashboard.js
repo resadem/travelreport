@@ -462,12 +462,11 @@ const Dashboard = () => {
                         <div>
                           <Label>{t('columns.supplier')}</Label>
                           <div className="flex gap-2">
-                            <Select value={formData.supplier_id || 'none'} onValueChange={handleSupplierChange}>
+                            <Select value={formData.supplier_id || undefined} onValueChange={handleSupplierChange}>
                               <SelectTrigger className="flex-1">
                                 <SelectValue placeholder="Выберите поставщика" />
                               </SelectTrigger>
                               <SelectContent>
-                                <SelectItem value="none">Не выбрано</SelectItem>
                                 {suppliers.map(supplier => (
                                   <SelectItem key={supplier.id} value={supplier.id}>{supplier.name}</SelectItem>
                                 ))}
