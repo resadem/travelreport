@@ -318,6 +318,45 @@ const SubAgencies = () => {
           </div>
         </div>
       </div>
+
+      {/* Top Up Balance Dialog */}
+      <Dialog open={showTopUpDialog} onOpenChange={setShowTopUpDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t('subAgencies.topUpBalance')}</DialogTitle>
+          </DialogHeader>
+          <form onSubmit={handleTopUpSubmit} className="space-y-4">
+            <div>
+              <Label>{t('subAgencies.agencyName')}</Label>
+              <div className="mt-1 text-lg font-semibold text-oxford-blue">{topUpUser?.agency_name}</div>
+            </div>
+            <div>
+              <Label>{t('subAgencies.balance')}</Label>
+              <div className="mt-1 text-2xl font-bold text-green-600">{topUpUser?.balance?.toFixed(0)} ₽</div>
+            </div>
+            <div>
+              <Label>{t('subAgencies.topUpAmount')} (₽) *</Label>
+              <Input
+                type="number"
+                step="0.01"
+                min="0.01"
+                value={topUpAmount}
+                onChange={(e) => setTopUpAmount(e.target.value)}
+                required
+                placeholder="0"
+              />
+            </div>
+            <div className="flex justify-end gap-2">
+              <Button type="button" variant="outline" onClick={() => setShowTopUpDialog(false)}>
+                {t('common.cancel')}
+              </Button>
+              <Button type="submit" className="bg-green-600 hover:bg-green-700">
+                {t('subAgencies.topUp')}
+              </Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 };
