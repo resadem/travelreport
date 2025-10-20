@@ -40,7 +40,7 @@ const Layout = ({ children }) => {
             <div className="flex items-center space-x-8">
               <Link to="/" className="flex items-center">
                 <img
-                  src="/logo-full.png"
+                  src="/logo-white.png"
                   alt="4Travels"
                   className="h-12"
                 />
