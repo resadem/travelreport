@@ -10,6 +10,8 @@ export const translations = {
     nav: {
       reservations: 'Бронирования',
       subAgencies: 'Суб-агентства',
+      suppliers: 'Поставщики',
+      tourists: 'Туристы',
       settings: 'Настройки',
       logout: 'Выйти',
       changePassword: 'Изменить пароль'
