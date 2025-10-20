@@ -315,7 +315,9 @@ async def login(credentials: UserLogin):
         role=user["role"],
         is_active=user["is_active"],
         locale=user.get("locale", "ru"),
-        created_at=user["created_at"]
+        created_at=user["created_at"],
+        balance=user.get("balance", 0.0),
+        last_balance_topup=user.get("last_balance_topup", 0.0)
     )
     
     return TokenResponse(
