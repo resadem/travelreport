@@ -523,9 +523,9 @@ const Dashboard = () => {
                       <TableCell>{t(`serviceTypes.${reservation.service_type}`)}</TableCell>
                       <TableCell>{formatDate(reservation.date_of_service)}</TableCell>
                       <TableCell>{reservation.tourist_names}</TableCell>
-                      <TableCell className="font-semibold">{reservation.price?.toFixed(2)} ₽</TableCell>
-                      <TableCell>{reservation.prepayment_amount?.toFixed(2)} ₽</TableCell>
-                      <TableCell className="font-semibold text-safety-orange">{reservation.rest_amount_of_payment?.toFixed(2)} ₽</TableCell>
+                      <TableCell className="font-semibold">{formatPrice(reservation.price)} ₽</TableCell>
+                      <TableCell>{formatPrice(reservation.prepayment_amount)} ₽</TableCell>
+                      <TableCell className="font-semibold text-safety-orange">{formatPrice(reservation.rest_amount_of_payment)} ₽</TableCell>
                       <TableCell>{getPaymentBadge(reservation)}</TableCell>
                       <TableCell>
                         <Button
