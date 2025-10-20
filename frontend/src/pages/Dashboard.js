@@ -352,7 +352,7 @@ const Dashboard = () => {
                 data-testid="search-input"
               />
             </div>
-            <Select value={serviceType} onValueChange={setServiceType}>
+            <Select value={serviceType || undefined} onValueChange={setServiceType}>
               <SelectTrigger className="w-full lg:w-48" data-testid="service-type-filter">
                 <SelectValue placeholder={t('dashboard.serviceType')} />
               </SelectTrigger>
@@ -363,7 +363,7 @@ const Dashboard = () => {
                 ))}
               </SelectContent>
             </Select>
-            <Select value={paymentStatus} onValueChange={setPaymentStatus}>
+            <Select value={paymentStatus || undefined} onValueChange={setPaymentStatus}>
               <SelectTrigger className="w-full lg:w-48" data-testid="payment-status-filter">
                 <SelectValue placeholder={t('dashboard.paymentStatus')} />
               </SelectTrigger>
