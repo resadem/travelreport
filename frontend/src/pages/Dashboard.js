@@ -396,7 +396,7 @@ const Dashboard = () => {
                       <div className="grid grid-cols-2 gap-4">
                         <div>
                           <Label>{t('columns.agency')} *</Label>
-                          <Select value={formData.agency_id || undefined} onValueChange={handleAgencyChange} required>
+                          <Select value={formData.agency_id} onValueChange={handleAgencyChange} required>
                             <SelectTrigger>
                               <SelectValue placeholder="Выберите агентство" />
                             </SelectTrigger>
