@@ -166,7 +166,7 @@ const Tourists = () => {
                     </div>
                     <div>
                       <Label>Пол</Label>
-                      <Select value={formData.gender} onValueChange={(value) => setFormData({...formData, gender: value})}>
+                      <Select value={formData.gender || undefined} onValueChange={(value) => setFormData({...formData, gender: value})}>
                         <SelectTrigger>
                           <SelectValue placeholder="Выберите пол" />
                         </SelectTrigger>
