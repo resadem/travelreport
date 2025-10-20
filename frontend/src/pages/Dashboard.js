@@ -363,7 +363,7 @@ const Dashboard = () => {
                 ))}
               </SelectContent>
             </Select>
-            <Select value={paymentStatus || undefined} onValueChange={setPaymentStatus}>
+            <Select value={paymentStatus} onValueChange={setPaymentStatus}>
               <SelectTrigger className="w-full lg:w-48" data-testid="payment-status-filter">
                 <SelectValue placeholder={t('dashboard.paymentStatus')} />
               </SelectTrigger>
