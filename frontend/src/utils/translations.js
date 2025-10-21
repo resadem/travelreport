@@ -74,6 +74,11 @@ export const translations = {
       Transfer: 'Трансфер',
       'Train ticket': 'Ж/Д билет',
       'Additional flight service': 'Доп. авиа услуга',
+      Excursion: 'Экскурсия',
+      Insurance: 'Страховка',
+      MICE: 'MICE',
+      Event: 'Мероприятие',
+      Other: 'Другое',
       'Airport VIP Services': 'VIP сервис в аэропорту',
       eSIM: 'eSIM'
     },
