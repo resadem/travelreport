@@ -144,6 +144,8 @@ export const translations = {
       subAgencies: 'Sub-Agencies',
       suppliers: 'Suppliers',
       tourists: 'Tourists',
+      expenses: 'Expenses',
+      requests: 'Requests',
       settings: 'Settings',
       logout: 'Logout',
       changePassword: 'Change Password'
