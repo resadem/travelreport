@@ -581,6 +581,16 @@ async def create_reservation(reservation: ReservationCreate, admin: dict = Depen
     
     await db.reservations.insert_one(reservation_dict)
     
+    # Deduct reservation price from agency balance
+    if reservation_dict.get("agency_id") and reservation_dict.get("price"):
+        agency = await db.users.find_one({"id": reservation_dict["agency_id"]}, {"_id": 0})
+        if agency:
+            new_balance = agency.get("balance", 0.0) - reservation_dict["price"]
+            await db.users.update_one(
+                {"id": reservation_dict["agency_id"]},
+                {"$set": {"balance": new_balance}}
+            )
+    
     return ReservationResponse(**reservation_dict)
 
 @api_router.get("/reservations")
