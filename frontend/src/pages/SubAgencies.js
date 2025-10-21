@@ -262,7 +262,7 @@ const SubAgencies = () => {
                 </TableRow>
               ) : (
                 users.map((user, idx) => (
-                  <TableRow key={user.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                  <TableRow key={user.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-blue-50/50 hover:bg-blue-100/50'}>
                     <TableCell className="font-medium">{user.agency_name}</TableCell>
                     <TableCell>{user.email}</TableCell>
                     <TableCell>{user.phone || '—'}</TableCell>
