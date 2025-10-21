@@ -538,7 +538,7 @@ const Dashboard = () => {
                   </TableRow>
                 ) : (
                   reservations.map((reservation, idx) => (
-                    <TableRow key={reservation.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                    <TableRow key={reservation.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-blue-50/50 hover:bg-blue-100/50'}>
                       <TableCell className="font-medium">{idx + 1 + (page - 1) * 25}</TableCell>
                       <TableCell>{reservation.agency_name}</TableCell>
                       <TableCell>{formatDate(reservation.date_of_issue)}</TableCell>
