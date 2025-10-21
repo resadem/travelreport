@@ -12,6 +12,8 @@ export const translations = {
       subAgencies: 'Суб-агентства',
       suppliers: 'Поставщики',
       tourists: 'Туристы',
+      expenses: 'Расходы',
+      requests: 'Запросы',
       settings: 'Настройки',
       logout: 'Выйти',
       changePassword: 'Изменить пароль'
