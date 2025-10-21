@@ -111,6 +111,16 @@ export const translations = {
       amount: 'Сумма',
       topUpAmount: 'Сумма пополнения'
     },
+    expenses: {
+      title: 'Расходы',
+      add: 'Добавить расход',
+      agency: 'Агентство',
+      amount: 'Сумма',
+      date: 'Дата',
+      description: 'Описание',
+      totalExpenses: 'Всего расходов',
+      myExpenses: 'Мои расходы'
+    },
     settings: {
       title: 'Настройки',
       thresholdDays: 'Порог предупреждения (дни)',
