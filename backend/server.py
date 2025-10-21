@@ -190,6 +190,92 @@ class SettingsResponse(BaseModel):
 class SettingsUpdate(BaseModel):
     upcoming_due_threshold_days: int
 
+# Expense Models
+class ExpenseCreate(BaseModel):
+    agency_id: str
+    amount: float
+    date: str
+    description: str
+
+class ExpenseResponse(BaseModel):
+    id: str
+    agency_id: str
+    agency_name: str
+    amount: float
+    date: str
+    description: str
+    created_at: str
+
+# Request Models
+class RequestCreate(BaseModel):
+    check_in: str
+    check_out: str
+    adults: int
+    children: int = 0
+    child_ages: List[int] = []
+    infants: int = 0
+    flight_needed: bool = False
+    flight_class: Optional[str] = None
+    transfer_needed: bool = False
+    country: str
+    location: str
+    hotel: Optional[str] = None
+    hotel_category: Optional[int] = None
+    meal: Optional[str] = None
+    description: str
+    target_price: Optional[float] = None
+
+class RequestUpdate(BaseModel):
+    reservation_status: Optional[str] = None
+    payment_status: Optional[str] = None
+    document_status: Optional[str] = None
+
+class CommentCreate(BaseModel):
+    text: str
+
+class CommentResponse(BaseModel):
+    id: str
+    request_id: str
+    user_id: str
+    user_name: str
+    user_role: str
+    text: str
+    created_at: str
+
+class DocumentResponse(BaseModel):
+    id: str
+    request_id: str
+    filename: str
+    file_path: str
+    uploaded_by: str
+    uploaded_at: str
+
+class RequestResponse(BaseModel):
+    id: str
+    agency_id: str
+    agency_name: str
+    check_in: str
+    check_out: str
+    adults: int
+    children: int
+    child_ages: List[int]
+    infants: int
+    flight_needed: bool
+    flight_class: Optional[str]
+    transfer_needed: bool
+    country: str
+    location: str
+    hotel: Optional[str]
+    hotel_category: Optional[int]
+    meal: Optional[str]
+    description: str
+    target_price: Optional[float]
+    reservation_status: str = "not_confirmed"
+    payment_status: str = "not_paid"
+    document_status: str = "not_ready"
+    created_at: str
+    updated_at: str
+
 # Helper functions
 def hash_password(password: str) -> str:
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
