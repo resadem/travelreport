@@ -64,6 +64,7 @@ const Dashboard = () => {
     fetchReservations();
     fetchStatistics();
     fetchSettings();
+    fetchTotalExpenses();
     if (user?.role === 'admin') {
       fetchAgencies();
       fetchSuppliers();
