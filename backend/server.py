@@ -831,6 +831,219 @@ async def get_tourist_names(user: dict = Depends(get_current_user)):
                     names_set.add(name)
     return {"names": sorted(list(names_set))}
 
+# Expense Endpoints
+@api_router.post("/expenses", response_model=ExpenseResponse)
+async def create_expense(expense: ExpenseCreate, admin: dict = Depends(require_admin)):
+    # Get agency name
+    agency = await db.users.find_one({"id": expense.agency_id}, {"_id": 0})
+    if not agency:
+        raise HTTPException(status_code=404, detail="Agency not found")
+    
+    expense_dict = {
+        "id": str(uuid.uuid4()),
+        "agency_id": expense.agency_id,
+        "agency_name": agency["agency_name"],
+        "amount": expense.amount,
+        "date": expense.date,
+        "description": expense.description,
+        "created_at": datetime.now(timezone.utc).isoformat()
+    }
+    
+    await db.expenses.insert_one(expense_dict)
+    return ExpenseResponse(**expense_dict)
+
+@api_router.get("/expenses", response_model=List[ExpenseResponse])
+async def get_expenses(current_user: dict = Depends(get_current_user)):
+    query = {}
+    if current_user["role"] == "sub_agency":
+        query["agency_id"] = current_user["id"]
+    
+    expenses = await db.expenses.find(query, {"_id": 0}).to_list(length=None)
+    return [ExpenseResponse(**expense) for expense in expenses]
+
+@api_router.get("/expenses/total")
+async def get_total_expenses(current_user: dict = Depends(get_current_user)):
+    query = {}
+    if current_user["role"] == "sub_agency":
+        query["agency_id"] = current_user["id"]
+    
+    expenses = await db.expenses.find(query, {"_id": 0}).to_list(length=None)
+    total = sum(expense["amount"] for expense in expenses)
+    return {"total": total}
+
+@api_router.delete("/expenses/{expense_id}")
+async def delete_expense(expense_id: str, admin: dict = Depends(require_admin)):
+    result = await db.expenses.delete_one({"id": expense_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Expense not found")
+    return {"message": "Expense deleted successfully"}
+
+# Request Endpoints
+@api_router.post("/requests", response_model=RequestResponse)
+async def create_request(request: RequestCreate, current_user: dict = Depends(get_current_user)):
+    request_dict = {
+        "id": str(uuid.uuid4()),
+        "agency_id": current_user["id"],
+        "agency_name": current_user["agency_name"],
+        **request.dict(),
+        "reservation_status": "not_confirmed",
+        "payment_status": "not_paid",
+        "document_status": "not_ready",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "updated_at": datetime.now(timezone.utc).isoformat()
+    }
+    
+    await db.requests.insert_one(request_dict)
+    return RequestResponse(**request_dict)
+
+@api_router.get("/requests", response_model=List[RequestResponse])
+async def get_requests(current_user: dict = Depends(get_current_user)):
+    query = {}
+    if current_user["role"] == "sub_agency":
+        query["agency_id"] = current_user["id"]
+    
+    requests = await db.requests.find(query, {"_id": 0}).to_list(length=None)
+    return [RequestResponse(**req) for req in requests]
+
+@api_router.get("/requests/{request_id}", response_model=RequestResponse)
+async def get_request(request_id: str, current_user: dict = Depends(get_current_user)):
+    request = await db.requests.find_one({"id": request_id}, {"_id": 0})
+    if not request:
+        raise HTTPException(status_code=404, detail="Request not found")
+    
+    # Check permission
+    if current_user["role"] == "sub_agency" and request["agency_id"] != current_user["id"]:
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    return RequestResponse(**request)
+
+@api_router.put("/requests/{request_id}")
+async def update_request(request_id: str, update: RequestUpdate, admin: dict = Depends(require_admin)):
+    update_data = {k: v for k, v in update.dict().items() if v is not None}
+    if not update_data:
+        raise HTTPException(status_code=400, detail="No update data provided")
+    
+    update_data["updated_at"] = datetime.now(timezone.utc).isoformat()
+    
+    result = await db.requests.update_one(
+        {"id": request_id},
+        {"$set": update_data}
+    )
+    
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Request not found")
+    
+    request = await db.requests.find_one({"id": request_id}, {"_id": 0})
+    return RequestResponse(**request)
+
+# Comment Endpoints
+@api_router.post("/requests/{request_id}/comments", response_model=CommentResponse)
+async def add_comment(request_id: str, comment: CommentCreate, current_user: dict = Depends(get_current_user)):
+    # Check if request exists and user has access
+    request = await db.requests.find_one({"id": request_id}, {"_id": 0})
+    if not request:
+        raise HTTPException(status_code=404, detail="Request not found")
+    
+    if current_user["role"] == "sub_agency" and request["agency_id"] != current_user["id"]:
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    comment_dict = {
+        "id": str(uuid.uuid4()),
+        "request_id": request_id,
+        "user_id": current_user["id"],
+        "user_name": current_user["agency_name"],
+        "user_role": current_user["role"],
+        "text": comment.text,
+        "created_at": datetime.now(timezone.utc).isoformat()
+    }
+    
+    await db.comments.insert_one(comment_dict)
+    return CommentResponse(**comment_dict)
+
+@api_router.get("/requests/{request_id}/comments", response_model=List[CommentResponse])
+async def get_comments(request_id: str, current_user: dict = Depends(get_current_user)):
+    # Check if request exists and user has access
+    request = await db.requests.find_one({"id": request_id}, {"_id": 0})
+    if not request:
+        raise HTTPException(status_code=404, detail="Request not found")
+    
+    if current_user["role"] == "sub_agency" and request["agency_id"] != current_user["id"]:
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    comments = await db.comments.find({"request_id": request_id}, {"_id": 0}).sort("created_at", 1).to_list(length=None)
+    return [CommentResponse(**comment) for comment in comments]
+
+# Document Upload/Download
+from fastapi import UploadFile, File
+from fastapi.responses import FileResponse
+import shutil
+
+UPLOAD_DIR = Path("/app/uploads")
+UPLOAD_DIR.mkdir(exist_ok=True)
+
+@api_router.post("/requests/{request_id}/documents")
+async def upload_document(request_id: str, file: UploadFile = File(...), admin: dict = Depends(require_admin)):
+    # Check if request exists
+    request = await db.requests.find_one({"id": request_id}, {"_id": 0})
+    if not request:
+        raise HTTPException(status_code=404, detail="Request not found")
+    
+    # Save file
+    file_id = str(uuid.uuid4())
+    file_extension = Path(file.filename).suffix
+    file_name = f"{file_id}{file_extension}"
+    file_path = UPLOAD_DIR / file_name
+    
+    with file_path.open("wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+    
+    # Save document info to database
+    document_dict = {
+        "id": file_id,
+        "request_id": request_id,
+        "filename": file.filename,
+        "file_path": str(file_path),
+        "uploaded_by": admin["agency_name"],
+        "uploaded_at": datetime.now(timezone.utc).isoformat()
+    }
+    
+    await db.documents.insert_one(document_dict)
+    return {"message": "File uploaded successfully", "document_id": file_id, "filename": file.filename}
+
+@api_router.get("/requests/{request_id}/documents", response_model=List[DocumentResponse])
+async def get_documents(request_id: str, current_user: dict = Depends(get_current_user)):
+    # Check if request exists and user has access
+    request = await db.requests.find_one({"id": request_id}, {"_id": 0})
+    if not request:
+        raise HTTPException(status_code=404, detail="Request not found")
+    
+    if current_user["role"] == "sub_agency" and request["agency_id"] != current_user["id"]:
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    documents = await db.documents.find({"request_id": request_id}, {"_id": 0}).to_list(length=None)
+    return [DocumentResponse(**doc) for doc in documents]
+
+@api_router.get("/documents/{document_id}/download")
+async def download_document(document_id: str, current_user: dict = Depends(get_current_user)):
+    document = await db.documents.find_one({"id": document_id}, {"_id": 0})
+    if not document:
+        raise HTTPException(status_code=404, detail="Document not found")
+    
+    # Check access
+    request = await db.requests.find_one({"id": document["request_id"]}, {"_id": 0})
+    if current_user["role"] == "sub_agency" and request["agency_id"] != current_user["id"]:
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    file_path = Path(document["file_path"])
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="File not found")
+    
+    return FileResponse(
+        path=file_path,
+        filename=document["filename"],
+        media_type='application/octet-stream'
+    )
+
 app.include_router(api_router)
 
 app.add_middleware(
