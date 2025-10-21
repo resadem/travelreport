@@ -39,6 +39,7 @@ const Dashboard = () => {
   const [touristNames, setTouristNames] = useState([]);
   const [showSupplierDialog, setShowSupplierDialog] = useState(false);
   const [newSupplierName, setNewSupplierName] = useState('');
+  const [totalExpenses, setTotalExpenses] = useState(0);
 
   const today = new Date().toISOString().split('T')[0];
   
