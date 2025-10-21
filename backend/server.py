@@ -724,8 +724,27 @@ async def update_reservation(
     reservation_data: ReservationUpdate,
     admin: dict = Depends(require_admin)
 ):
+    # Get old reservation to check if price changed
+    old_reservation = await db.reservations.find_one({"id": reservation_id}, {"_id": 0})
+    if not old_reservation:
+        raise HTTPException(status_code=404, detail="Reservation not found")
+    
     update_dict = {k: v for k, v in reservation_data.model_dump().items() if v is not None}
     update_dict["updated_at"] = datetime.now(timezone.utc).isoformat()
+    
+    # If price changed, adjust agency balance
+    if "price" in update_dict and old_reservation.get("agency_id"):
+        old_price = old_reservation.get("price", 0)
+        new_price = update_dict["price"]
+        price_diff = new_price - old_price
+        
+        agency = await db.users.find_one({"id": old_reservation["agency_id"]}, {"_id": 0})
+        if agency:
+            new_balance = agency.get("balance", 0.0) - price_diff
+            await db.users.update_one(
+                {"id": old_reservation["agency_id"]},
+                {"$set": {"balance": new_balance}}
+            )
     
     result = await db.reservations.update_one(
         {"id": reservation_id},
