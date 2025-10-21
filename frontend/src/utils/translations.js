@@ -180,7 +180,8 @@ export const translations = {
       totalRest: 'Total Rest',
       totalRevenue: 'Total Revenue',
       balance: 'Balance',
-      lastTopUp: 'Last Top Up'
+      lastTopUp: 'Last Top Up',
+      totalExpenses: 'Total Expenses'
     },
     columns: {
       id: 'ID',
