@@ -770,9 +770,22 @@ async def mark_reservation_paid(reservation_id: str, admin: dict = Depends(requi
 
 @api_router.delete("/reservations/{reservation_id}")
 async def delete_reservation(reservation_id: str, admin: dict = Depends(require_admin)):
-    result = await db.reservations.delete_one({"id": reservation_id})
-    if result.deleted_count == 0:
+    # Get reservation first to restore balance
+    reservation = await db.reservations.find_one({"id": reservation_id}, {"_id": 0})
+    if not reservation:
         raise HTTPException(status_code=404, detail="Reservation not found")
+    
+    # Restore balance to agency
+    if reservation.get("agency_id") and reservation.get("price"):
+        agency = await db.users.find_one({"id": reservation["agency_id"]}, {"_id": 0})
+        if agency:
+            new_balance = agency.get("balance", 0.0) + reservation["price"]
+            await db.users.update_one(
+                {"id": reservation["agency_id"]},
+                {"$set": {"balance": new_balance}}
+            )
+    
+    result = await db.reservations.delete_one({"id": reservation_id})
     return {"message": "Reservation deleted successfully"}
 
 # Settings routes
