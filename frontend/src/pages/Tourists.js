@@ -290,7 +290,7 @@ const Tourists = () => {
                 </TableRow>
               ) : (
                 tourists.map((tourist, idx) => (
-                  <TableRow key={tourist.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                  <TableRow key={tourist.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-blue-50/50 hover:bg-blue-100/50'}>
                     <TableCell className="font-medium">{idx + 1}</TableCell>
                     <TableCell>{tourist.first_name}</TableCell>
                     <TableCell>{tourist.last_name}</TableCell>
