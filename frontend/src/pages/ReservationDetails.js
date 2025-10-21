@@ -14,7 +14,7 @@ import Layout from '../components/Layout';
 import { formatDate, formatPrice } from '../utils/helpers';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
-const SERVICE_TYPES = ['Flight', 'Hotel', 'Transfer', 'Train ticket', 'Additional flight service', 'Airport VIP Services', 'eSIM'];
+const SERVICE_TYPES = ['Flight', 'Hotel', 'Transfer', 'Train ticket', 'Additional flight service', 'Airport VIP Services', 'eSIM', 'Excursion', 'Insurance', 'MICE', 'Event', 'Other'];
 
 const ReservationDetails = () => {
   const { id } = useParams();
