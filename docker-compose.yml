@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: travel_mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: 4travels_db
+    networks:
+      - travel_network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: travel_backend
+    restart: always
+    ports:
+      - "8001:8001"
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017
+      - DB_NAME=4travels_db
+      - JWT_SECRET_KEY=4travels-b2b-secret-key-change-in-production-2025
+      - CORS_ORIGINS=https://rs.4travels.net,http://rs.4travels.net
+    depends_on:
+      - mongodb
+    networks:
+      - travel_network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: travel_frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - travel_network
+
+volumes:
+  mongodb_data:
+
+networks:
+  travel_network:
+    driver: bridge
