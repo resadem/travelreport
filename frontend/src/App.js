@@ -92,6 +92,30 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/expenses"
+              element={
+                <ProtectedRoute>
+                  <Expenses />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/requests"
+              element={
+                <ProtectedRoute>
+                  <Requests />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/requests/:id"
+              element={
+                <ProtectedRoute>
+                  <RequestDetails />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
           <Toaster position="top-right" />
         </BrowserRouter>
