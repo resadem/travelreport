@@ -121,7 +121,7 @@ const Suppliers = () => {
                 </TableRow>
               ) : (
                 suppliers.map((supplier, idx) => (
-                  <TableRow key={supplier.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                  <TableRow key={supplier.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-blue-50/50 hover:bg-blue-100/50'}>
                     <TableCell className="font-medium">{idx + 1}</TableCell>
                     <TableCell>{supplier.name}</TableCell>
                     <TableCell>{new Date(supplier.created_at).toLocaleDateString('ru-RU')}</TableCell>
