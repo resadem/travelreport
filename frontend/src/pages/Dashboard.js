@@ -342,6 +342,10 @@ const Dashboard = () => {
                 <div className="text-sm text-gray-600 mb-1">{t('dashboard.lastTopUp')}</div>
                 <div className="text-3xl font-bold text-blue-600">{formatPrice(user.last_balance_topup || 0)} ₽</div>
               </div>
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-red-100">
+                <div className="text-sm text-gray-600 mb-1">{t('dashboard.totalExpenses')}</div>
+                <div className="text-3xl font-bold text-red-600">{formatPrice(totalExpenses)} ₽</div>
+              </div>
             </>
           )}
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
