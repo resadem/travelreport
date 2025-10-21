@@ -80,6 +80,15 @@ const Dashboard = () => {
     }
   };
 
+  const fetchTotalExpenses = async () => {
+    try {
+      const response = await axios.get(`${API}/expenses/total`);
+      setTotalExpenses(response.data.total || 0);
+    } catch (error) {
+      console.error('Failed to fetch expenses:', error);
+    }
+  };
+
   const fetchAgencies = async () => {
     try {
       const response = await axios.get(`${API}/users`);
