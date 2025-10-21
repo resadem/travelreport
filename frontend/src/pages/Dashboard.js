@@ -17,7 +17,7 @@ import * as XLSX from 'xlsx';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
-const SERVICE_TYPES = ['Flight', 'Hotel', 'Transfer', 'Train ticket', 'Additional flight service', 'Airport VIP Services', 'eSIM'];
+const SERVICE_TYPES = ['Flight', 'Hotel', 'Transfer', 'Train ticket', 'Additional flight service', 'Airport VIP Services', 'eSIM', 'Excursion', 'Insurance', 'MICE', 'Event', 'Other'];
 
 const Dashboard = () => {
   const { user } = useAuth();
