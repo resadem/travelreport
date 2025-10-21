@@ -9,6 +9,9 @@ import SubAgencies from './pages/SubAgencies';
 import Settings from './pages/Settings';
 import Suppliers from './pages/Suppliers';
 import Tourists from './pages/Tourists';
+import Expenses from './pages/Expenses';
+import Requests from './pages/Requests';
+import RequestDetails from './pages/RequestDetails';
 import { Toaster } from './components/ui/sonner';
 import './App.css';
 
