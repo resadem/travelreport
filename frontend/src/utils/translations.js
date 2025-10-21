@@ -253,6 +253,16 @@ export const translations = {
       amount: 'Amount',
       topUpAmount: 'Top Up Amount'
     },
+    expenses: {
+      title: 'Expenses',
+      add: 'Add Expense',
+      agency: 'Agency',
+      amount: 'Amount',
+      date: 'Date',
+      description: 'Description',
+      totalExpenses: 'Total Expenses',
+      myExpenses: 'My Expenses'
+    },
     settings: {
       title: 'Settings',
       thresholdDays: 'Warning Threshold (days)',
