@@ -976,10 +976,6 @@ async def get_comments(request_id: str, current_user: dict = Depends(get_current
     return [CommentResponse(**comment) for comment in comments]
 
 # Document Upload/Download
-from fastapi import UploadFile, File
-from fastapi.responses import FileResponse
-import shutil
-
 UPLOAD_DIR = Path("/app/uploads")
 UPLOAD_DIR.mkdir(exist_ok=True)
 
