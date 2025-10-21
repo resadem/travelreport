@@ -883,9 +883,21 @@ async def get_total_expenses(current_user: dict = Depends(get_current_user)):
 
 @api_router.delete("/expenses/{expense_id}")
 async def delete_expense(expense_id: str, admin: dict = Depends(require_admin)):
-    result = await db.expenses.delete_one({"id": expense_id})
-    if result.deleted_count == 0:
+    # Get expense first to restore balance
+    expense = await db.expenses.find_one({"id": expense_id}, {"_id": 0})
+    if not expense:
         raise HTTPException(status_code=404, detail="Expense not found")
+    
+    # Restore balance to agency
+    agency = await db.users.find_one({"id": expense["agency_id"]}, {"_id": 0})
+    if agency:
+        new_balance = agency.get("balance", 0.0) + expense["amount"]
+        await db.users.update_one(
+            {"id": expense["agency_id"]},
+            {"$set": {"balance": new_balance}}
+        )
+    
+    result = await db.expenses.delete_one({"id": expense_id})
     return {"message": "Expense deleted successfully"}
 
 # Request Endpoints
