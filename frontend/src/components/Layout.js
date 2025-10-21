@@ -5,7 +5,7 @@ import { useI18n } from '../contexts/I18nContext';
 import { Button } from './ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
-import { LogOut, Users, Settings, FileText, Globe, Key, Truck, UserCircle, Menu, X } from 'lucide-react';
+import { LogOut, Users, Settings, FileText, Globe, Key, Truck, UserCircle, Menu, X, DollarSign, Send } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
