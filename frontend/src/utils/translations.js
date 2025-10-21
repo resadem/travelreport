@@ -37,7 +37,8 @@ export const translations = {
       totalRest: 'Общий остаток',
       totalRevenue: 'Общая прибыль',
       balance: 'Баланс',
-      lastTopUp: 'Посл. пополнение'
+      lastTopUp: 'Посл. пополнение',
+      totalExpenses: 'Всего расходов'
     },
     columns: {
       id: '№',
