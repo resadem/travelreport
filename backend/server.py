@@ -852,6 +852,14 @@ async def create_expense(expense: ExpenseCreate, admin: dict = Depends(require_a
     }
     
     await db.expenses.insert_one(expense_dict)
+    
+    # Deduct expense from agency balance
+    new_balance = agency.get("balance", 0.0) - expense.amount
+    await db.users.update_one(
+        {"id": expense.agency_id},
+        {"$set": {"balance": new_balance}}
+    )
+    
     return ExpenseResponse(**expense_dict)
 
 @api_router.get("/expenses", response_model=List[ExpenseResponse])
