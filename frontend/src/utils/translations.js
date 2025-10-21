@@ -204,6 +204,11 @@ export const translations = {
       Transfer: 'Transfer',
       'Train ticket': 'Train Ticket',
       'Additional flight service': 'Additional Flight Service',
+      Excursion: 'Excursion',
+      Insurance: 'Insurance',
+      MICE: 'MICE',
+      Event: 'Event',
+      Other: 'Other',
       'Airport VIP Services': 'Airport VIP Services',
       eSIM: 'eSIM'
     },
