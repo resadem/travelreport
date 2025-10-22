@@ -83,7 +83,7 @@ class B2BTravelPortalTester:
         
         if success:
             role_correct = response.get('role') == 'admin'
-            email_correct = response.get('email') == 'b2b@4travels.net'
+            email_correct = response.get('email') == 'admin@4travels.com'
             self.log_test("Admin Get Current User", role_correct and email_correct,
                          f"Role: {response.get('role')}, Email: {response.get('email')}")
         else:
