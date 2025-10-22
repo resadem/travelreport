@@ -23,15 +23,15 @@ const StatusIcon = ({ status, label }) => {
   const getTooltipText = () => {
     const statusMap = {
       // Reservation statuses
-      'in_progress': 'В работе / In Progress',
+      'in_progress': 'В работе / Working on',
       'booked': 'Забронирована / Booked',
       'confirmed': 'Подтверждено / Confirmed',
-      'cancelled': 'Аннулировано / Cancelled',
+      'cancelled': 'Аннулировано / Canceled',
       // Payment statuses
-      'awaiting_payment': 'Ожидание оплаты / Awaiting Payment',
+      'awaiting_payment': 'Ожидание оплаты / Waiting payment',
       'paid': 'Оплачено / Paid',
-      'partially_paid': 'Частично оплачено / Partially Paid',
-      'not_paid': 'Не оплачено / Not Paid',
+      'partially_paid': 'Частично оплачено / Partly paid',
+      'not_paid': 'Не оплачено / Not paid',
       // Document statuses
       'documents_ready': 'Документы готовы / Documents Ready',
       'documents_not_ready': 'Документы не готовы / Documents Not Ready'
