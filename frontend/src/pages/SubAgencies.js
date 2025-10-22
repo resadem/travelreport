@@ -354,8 +354,8 @@ const SubAgencies = () => {
             <ButtonSelector
               label={t('topUps.type')}
               options={[
-                { value: 'cash', label: t.locale === 'ru' ? 'Наличные' : 'Cash' },
-                { value: 'other', label: t.locale === 'ru' ? 'Другое' : 'Other' }
+                { value: 'cash', label: locale === 'ru' ? 'Наличные' : 'Cash' },
+                { value: 'other', label: locale === 'ru' ? 'Другое' : 'Other' }
               ]}
               value={topUpType}
               onChange={setTopUpType}
