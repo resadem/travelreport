@@ -272,9 +272,9 @@ class RequestResponse(BaseModel):
     meal: Optional[str]
     description: str
     target_price: Optional[float]
-    reservation_status: str = "not_confirmed"
-    payment_status: str = "not_paid"
-    document_status: str = "not_ready"
+    reservation_status: str = "in_progress"
+    payment_status: str = "awaiting_payment"
+    document_status: str = "documents_not_ready"
     created_at: str
     updated_at: str
 
