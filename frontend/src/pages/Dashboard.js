@@ -40,6 +40,13 @@ const Dashboard = () => {
   const [showSupplierDialog, setShowSupplierDialog] = useState(false);
   const [newSupplierName, setNewSupplierName] = useState('');
   const [totalExpenses, setTotalExpenses] = useState(0);
+  const [thisMonthStats, setThisMonthStats] = useState({
+    reservations: 0,
+    price: 0,
+    prepayment: 0,
+    rest: 0,
+    expenses: 0
+  });
 
   const today = new Date().toISOString().split('T')[0];
   
