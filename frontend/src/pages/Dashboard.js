@@ -395,24 +395,39 @@ const Dashboard = () => {
               <div className="bg-white rounded-xl p-6 shadow-sm border border-red-100">
                 <div className="text-sm text-gray-600 mb-1">{t('dashboard.totalExpenses')}</div>
                 <div className="text-3xl font-bold text-red-600">{formatPrice(totalExpenses)} ₽</div>
+                <div className="text-xs text-gray-500 mt-2">
+                  {t('dashboard.thisMonth')}: {formatPrice(thisMonthStats.expenses)} ₽
+                </div>
               </div>
             </>
           )}
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <div className="text-sm text-gray-600 mb-1">{t('dashboard.totalReservations')}</div>
             <div className="text-3xl font-bold text-oxford-blue">{statistics.total_reservations || 0}</div>
+            <div className="text-xs text-gray-500 mt-2">
+              {t('dashboard.thisMonth')}: {thisMonthStats.reservations}
+            </div>
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <div className="text-sm text-gray-600 mb-1">{t('dashboard.totalPrice')}</div>
             <div className="text-3xl font-bold text-picton-blue">{formatPrice(statistics.total_price)} ₽</div>
+            <div className="text-xs text-gray-500 mt-2">
+              {t('dashboard.thisMonth')}: {formatPrice(thisMonthStats.price)} ₽
+            </div>
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <div className="text-sm text-gray-600 mb-1">{t('dashboard.totalPrepayment')}</div>
             <div className="text-3xl font-bold text-green-600">{formatPrice(statistics.total_prepayment)} ₽</div>
+            <div className="text-xs text-gray-500 mt-2">
+              {t('dashboard.thisMonth')}: {formatPrice(thisMonthStats.prepayment)} ₽
+            </div>
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <div className="text-sm text-gray-600 mb-1">{t('dashboard.totalRest')}</div>
             <div className="text-3xl font-bold text-safety-orange">{formatPrice(statistics.total_rest)} ₽</div>
+            <div className="text-xs text-gray-500 mt-2">
+              {t('dashboard.thisMonth')}: {formatPrice(thisMonthStats.rest)} ₽
+            </div>
           </div>
         </div>
 
