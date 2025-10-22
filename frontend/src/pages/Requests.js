@@ -12,7 +12,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Checkbox } from '../components/ui/checkbox';
 import { Textarea } from '../components/ui/textarea';
-import { toast } from '../hooks/use-toast';
+import { toast } from 'sonner';
 import { formatDate } from '../utils/helpers';
 import StatusIcons from '../components/StatusIcons';
 
