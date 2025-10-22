@@ -462,14 +462,14 @@ const Requests = () => {
                       {t('common.loading')}
                     </TableCell>
                   </TableRow>
-                ) : requests.length === 0 ? (
+                ) : filteredRequests.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={user.role === 'admin' ? 7 : 6} className="text-center py-8">
                       {t('common.noData')}
                     </TableCell>
                   </TableRow>
                 ) : (
-                  requests.map((request, idx) => (
+                  filteredRequests.map((request, idx) => (
                     <TableRow
                       key={request.id}
                       className={`cursor-pointer ${idx % 2 === 0 ? 'bg-white' : 'bg-blue-50/50 hover:bg-blue-100/50'}`}
@@ -485,6 +485,7 @@ const Requests = () => {
                           reservationStatus={request.reservation_status}
                           paymentStatus={request.payment_status}
                           documentStatus={request.document_status}
+                          horizontal={true}
                         />
                       </TableCell>
                       <TableCell>
