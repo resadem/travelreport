@@ -279,15 +279,18 @@ frontend:
 
   - task: "TopUps Page Layout Fix"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/pages/TopUps.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Added Layout wrapper to TopUps page. Page now has proper navigation menu, logo, header, and matches styling of other pages like Expenses and Requests."
+      - working: true
+        agent: "testing"
+        comment: "✅ TopUps page layout fix PASSED: Page has proper Layout wrapper with all required elements (header, logo, navigation, main content). Layout matches styling of other admin pages. TopUps navigation item visible and functional in menu."
 
   - task: "Tourists Gender Field - ButtonSelector"
     implemented: true
