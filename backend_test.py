@@ -63,7 +63,7 @@ class B2BTravelPortalTester:
         """Test admin login with correct credentials"""
         success, response = self.make_request(
             'POST', 'auth/login',
-            data={"email": "b2b@4travels.net", "password": "Admin123!"}
+            data={"email": "admin@4travels.com", "password": "admin123"}
         )
         
         if success and 'access_token' in response:
