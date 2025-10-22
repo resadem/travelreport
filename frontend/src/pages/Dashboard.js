@@ -481,6 +481,7 @@ const Dashboard = () => {
                 <SelectItem value="all">{t('paymentStatus.all')}</SelectItem>
                 <SelectItem value="paid">{t('paymentStatus.paid')}</SelectItem>
                 <SelectItem value="prepaid">{t('paymentStatus.prepaid')}</SelectItem>
+                <SelectItem value="has_rest">{locale === 'ru' ? 'С остатком' : 'With Rest Payment'}</SelectItem>
                 <SelectItem value="overdue">{t('paymentStatus.overdue')}</SelectItem>
                 <SelectItem value="upcoming">{t('paymentStatus.upcoming')}</SelectItem>
               </SelectContent>
