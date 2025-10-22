@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Layout from '../components/Layout';
 import { useI18n } from '../contexts/I18nContext';
+import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
@@ -16,11 +17,11 @@ const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const Expenses = () => {
   const { t } = useI18n();
+  const { user } = useAuth();
   const [expenses, setExpenses] = useState([]);
   const [agencies, setAgencies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showDialog, setShowDialog] = useState(false);
-  const user = JSON.parse(localStorage.getItem('user'));
   
   const [formData, setFormData] = useState({
     agency_id: '',
