@@ -181,6 +181,78 @@ frontend:
         agent: "main"
         comment: "Added type selector (Cash/Other) to SubAgencies top-up dialog using ButtonSelector component. Updated handleTopUpSubmit to send type field to backend."
 
+  - task: "Logo After Login"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Layout.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added logo to header after login. Logo is now visible on all screens (mobile and desktop) in the top-left area, linked to home page."
+
+  - task: "Profile Menu Hover Color & Icon Only"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Layout.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Changed profile menu hover color from hover:bg-oxford-blue/50 to hover:bg-white/20 for better visibility. Removed agency name text next to avatar icon in header, keeping only the avatar icon visible."
+
+  - task: "Last Top Up Card - This Month"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/Dashboard.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added 'this month' top-ups calculation in fetchThisMonthStats function. Last Top Up card now shows top-ups for current month below the main amount for sub-agencies."
+
+  - task: "Filter for Reservations with Rest Payments"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/Dashboard.js, /app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added 'With Rest Payment' / 'С остатком' filter option to payment status filter. Backend updated to handle 'has_rest' payment_status filter, showing only reservations with rest_amount_of_payment > 0."
+
+  - task: "Navigation Menu Reordering"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Layout.js"
+    stuck_count: 0
+    priority: "low"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Moved Suppliers and Tourists menu items below Settings in navigation order, as requested."
+
+  - task: "Translation Fixes"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/utils/translations.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Fixed multiple translation issues: 1) Changed dateColumn from 'Дата / Date' to just 'Дата' (RU) and 'Date' (EN). 2) Changed Sub-Agencies to Agencies in both RU ('Агентства') and EN ('Agencies') for title and nav items. 3) Fixed TopUps.js to use proper t() function calls instead of t.property access."
+
   - task: "Mobile Hamburger Menu"
     implemented: true
     working: true
