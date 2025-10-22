@@ -127,20 +127,20 @@ const Tourists = () => {
             <DialogTrigger asChild>
               <Button className="bg-safety-orange hover:bg-safety-orange/90 w-full sm:w-auto" data-testid="add-tourist-button">
                 <Plus className="h-4 w-4 mr-2" />
-                Добавить туриста
+                {t('tourists.add')}
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
-                <DialogTitle>{editingTourist ? 'Редактировать туриста' : 'Добавить туриста'}</DialogTitle>
+                <DialogTitle>{editingTourist ? t('tourists.edit') : t('tourists.add')}</DialogTitle>
               </DialogHeader>
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Personal Information */}
                 <div>
-                  <h3 className="text-lg font-semibold text-oxford-blue mb-4">Личная информация</h3>
+                  <h3 className="text-lg font-semibold text-oxford-blue mb-4">{t('tourists.personalInfo')}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label>Имя *</Label>
+                      <Label>{t('tourists.firstName')} *</Label>
                       <Input
                         value={formData.first_name}
                         onChange={(e) => setFormData({...formData, first_name: e.target.value})}
@@ -149,7 +149,7 @@ const Tourists = () => {
                       />
                     </div>
                     <div>
-                      <Label>Фамилия *</Label>
+                      <Label>{t('tourists.lastName')} *</Label>
                       <Input
                         value={formData.last_name}
                         onChange={(e) => setFormData({...formData, last_name: e.target.value})}
@@ -158,25 +158,22 @@ const Tourists = () => {
                       />
                     </div>
                     <div>
-                      <Label>Дата рождения</Label>
+                      <Label>{t('tourists.dateOfBirth')}</Label>
                       <Input
                         type="date"
                         value={formData.date_of_birth}
                         onChange={(e) => setFormData({...formData, date_of_birth: e.target.value})}
                       />
                     </div>
-                    <div>
-                      <Label>Пол</Label>
-                      <Select value={formData.gender || ''} onValueChange={(value) => setFormData({...formData, gender: value})}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Выберите пол" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="M">Мужской</SelectItem>
-                          <SelectItem value="F">Женский</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+                    <ButtonSelector
+                      label={t('tourists.gender')}
+                      options={[
+                        { value: 'M', label: t('tourists.male') },
+                        { value: 'F', label: t('tourists.female') }
+                      ]}
+                      value={formData.gender || ''}
+                      onChange={(value) => setFormData({...formData, gender: value})}
+                    />
                   </div>
                 </div>
 
