@@ -142,6 +142,31 @@ export const translations = {
       totalExpenses: 'Всего расходов',
       myExpenses: 'Мои расходы'
     },
+    tourists: {
+      title: 'Туристы',
+      add: 'Добавить туриста',
+      edit: 'Редактировать туриста',
+      firstName: 'Имя',
+      lastName: 'Фамилия',
+      dateOfBirth: 'Дата рождения',
+      gender: 'Пол',
+      male: 'Мужской',
+      female: 'Женский',
+      citizenship: 'Гражданство',
+      documentType: 'Тип документа',
+      documentNumber: 'Номер документа',
+      documentExpiration: 'Срок действия',
+      phone: 'Телефон',
+      email: 'Email',
+      personalInfo: 'Личная информация',
+      documentInfo: 'Паспортные данные',
+      contactInfo: 'Контактная информация',
+      selectGender: 'Выберите пол',
+      selectCountry: 'Выберите страну',
+      nationalPassport: 'Национальный паспорт или ID',
+      internationalPassport: 'Международный паспорт'
+    },
+
     settings: {
       title: 'Настройки',
       thresholdDays: 'Порог предупреждения (дни)',
