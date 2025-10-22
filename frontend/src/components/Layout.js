@@ -54,7 +54,7 @@ const Layout = ({ children }) => {
       <header className="bg-oxford-blue shadow-lg sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-3 md:py-4">
-            {/* Mobile: Hamburger + Logo */}
+            {/* Left side: Hamburger + Logo + Navigation */}
             <div className="flex items-center space-x-3 md:space-x-8">
               {/* Mobile Hamburger */}
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
