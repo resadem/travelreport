@@ -271,9 +271,9 @@ const Tourists = () => {
                 <TableHead>№</TableHead>
                 <TableHead>{t('tourists.firstName')}</TableHead>
                 <TableHead>{t('tourists.lastName')}</TableHead>
-                <TableHead>Дата рождения</TableHead>
-                <TableHead>Документ</TableHead>
-                <TableHead>Телефон</TableHead>
+                <TableHead>{t('tourists.dateOfBirth')}</TableHead>
+                <TableHead>{t('tourists.documentNumber')}</TableHead>
+                <TableHead>{t('tourists.phone')}</TableHead>
                 <TableHead>{t('columns.actions')}</TableHead>
               </TableRow>
             </TableHeader>
