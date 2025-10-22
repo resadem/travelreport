@@ -9,7 +9,7 @@ export const translations = {
     },
     nav: {
       reservations: 'Бронирования',
-      subAgencies: 'Суб-агентства',
+      subAgencies: 'Агентства',
       suppliers: 'Поставщики',
       tourists: 'Туристы',
       expenses: 'Расходы',
