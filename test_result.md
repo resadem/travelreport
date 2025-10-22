@@ -107,15 +107,18 @@ user_problem_statement: "Implement new features: Top-ups page, custom button-sty
 backend:
   - task: "Top-ups History Backend"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Backend endpoints added: GET /topups to retrieve all top-up history, PUT /topups/{id} to edit top-ups, DELETE /topups/{id} to delete top-ups. Modified POST /users/{user_id}/topup-balance to store top-up records in MongoDB 'topups' collection. Balance adjustments implemented for edit/delete operations."
+      - working: true
+        agent: "testing"
+        comment: "✅ ALL BACKEND TESTS PASSED (8/8): Authentication with admin@4travels.com successful. Create top-up stores records in history with correct fields (id, agency_id, agency_name, amount, type, date, created_at). GET /topups returns sorted history (most recent first). Edit top-up correctly adjusts user balance (tested 3000→4000, balance +1000). Delete top-up removes from history and adjusts balance correctly (tested -2000). Edge cases handled: 404 for non-existent top-up edit/delete. All balance calculations accurate. Top-up history persistence verified."
 
 frontend:
   - task: "Top-ups Page (Admin)"
