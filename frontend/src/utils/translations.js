@@ -224,6 +224,7 @@ export const translations = {
       tourists: 'Tourists',
       expenses: 'Expenses',
       requests: 'Requests',
+      topUps: 'Top-ups',
       settings: 'Settings',
       logout: 'Logout',
       changePassword: 'Change Password'
