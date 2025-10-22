@@ -135,6 +135,7 @@ const SubAgencies = () => {
   const handleTopUp = (user) => {
     setTopUpUser(user);
     setTopUpAmount('');
+    setTopUpType('cash');
     setShowTopUpDialog(true);
   };
 
@@ -142,12 +143,14 @@ const SubAgencies = () => {
     e.preventDefault();
     try {
       await axios.post(`${API}/users/${topUpUser.id}/topup-balance`, {
-        amount: parseFloat(topUpAmount)
+        amount: parseFloat(topUpAmount),
+        type: topUpType
       });
       toast.success(t('common.success'));
       setShowTopUpDialog(false);
       setTopUpUser(null);
       setTopUpAmount('');
+      setTopUpType('cash');
       fetchUsers();
     } catch (error) {
       toast.error(error.response?.data?.detail || t('common.error'));
