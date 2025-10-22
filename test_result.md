@@ -237,15 +237,18 @@ frontend:
 
   - task: "Navigation Menu Reordering"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/components/Layout.js"
     stuck_count: 0
     priority: "low"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Moved Suppliers and Tourists menu items below Settings in navigation order, as requested."
+      - working: true
+        agent: "testing"
+        comment: "✅ Navigation menu order test PASSED: Navigation shows correct order with Suppliers ('Поставщики') and Tourists ('Туристы') appearing after Settings ('Настройки') in the menu. TopUps ('Пополнения') menu item is visible and functional for admin users."
 
   - task: "Translation Fixes - Phase 1"
     implemented: true
