@@ -950,9 +950,9 @@ async def create_request(request: RequestCreate, current_user: dict = Depends(ge
         "agency_id": current_user["id"],
         "agency_name": current_user["agency_name"],
         **request.dict(),
-        "reservation_status": "not_confirmed",
-        "payment_status": "not_paid",
-        "document_status": "not_ready",
+        "reservation_status": "in_progress",
+        "payment_status": "awaiting_payment",
+        "document_status": "documents_not_ready",
         "created_at": datetime.now(timezone.utc).isoformat(),
         "updated_at": datetime.now(timezone.utc).isoformat()
     }
