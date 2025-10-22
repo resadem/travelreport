@@ -241,17 +241,53 @@ frontend:
         agent: "main"
         comment: "Moved Suppliers and Tourists menu items below Settings in navigation order, as requested."
 
-  - task: "Translation Fixes"
+  - task: "Translation Fixes - Phase 1"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/utils/translations.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Fixed multiple translation issues: 1) Changed dateColumn from 'Дата / Date' to just 'Дата' (RU) and 'Date' (EN). 2) Changed Sub-Agencies to Agencies in both RU ('Агентства') and EN ('Agencies') for title and nav items. 3) Fixed TopUps.js to use proper t() function calls instead of t.property access."
+
+  - task: "Translation Fixes - Phase 2 (Comprehensive)"
     implemented: true
     working: "NA"
-    file: "/app/frontend/src/utils/translations.js"
+    file: "/app/frontend/src/pages/ReservationDetails.js, /app/frontend/src/pages/Tourists.js, /app/frontend/src/pages/Suppliers.js, /app/frontend/src/utils/translations.js"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
-        comment: "Fixed multiple translation issues: 1) Changed dateColumn from 'Дата / Date' to just 'Дата' (RU) and 'Date' (EN). 2) Changed Sub-Agencies to Agencies in both RU ('Агентства') and EN ('Agencies') for title and nav items. 3) Fixed TopUps.js to use proper t() function calls instead of t.property access."
+        comment: "Comprehensive translation fixes: 1) ReservationDetails: Fixed section headers 'Основная информация', 'Финансовая информация', 'Информация о поставщике' to use translation keys. 2) Tourists: Fixed page title, table headers (Date of Birth, Document, Phone), form labels, and all dialog text. Added complete tourists translation section. 3) Suppliers: Fixed page title, add button, name label, and Date Created column. Added suppliers translation section. 4) Added common.createdAt and common.actions to translations."
+
+  - task: "TopUps Page Layout Fix"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/TopUps.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added Layout wrapper to TopUps page. Page now has proper navigation menu, logo, header, and matches styling of other pages like Expenses and Requests."
+
+  - task: "Tourists Gender Field - ButtonSelector"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/Tourists.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Replaced Gender select dropdown with ButtonSelector component showing Male/Female as button-style options with colored indicator when selected."
 
   - task: "Mobile Hamburger Menu"
     implemented: true
