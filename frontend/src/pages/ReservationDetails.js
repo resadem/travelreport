@@ -342,7 +342,7 @@ const ReservationDetails = () => {
           <div className="space-y-6">
             <Card className="border-2 border-picton-blue">
               <CardHeader className="bg-gradient-to-r from-picton-blue/10 to-oxford-blue/10">
-                <CardTitle className="text-xl text-oxford-blue">Финансовая информация</CardTitle>
+                <CardTitle className="text-xl text-oxford-blue">{t('reservation.financialInfo')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 pt-6">
                 <div>
