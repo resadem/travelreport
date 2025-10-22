@@ -36,10 +36,12 @@ const RequestDetails = () => {
   });
 
   useEffect(() => {
-    fetchRequest();
-    fetchComments();
-    fetchDocuments();
-  }, [id]);
+    if (user && id) {
+      fetchRequest();
+      fetchComments();
+      fetchDocuments();
+    }
+  }, [id, user]);
 
   const fetchRequest = async () => {
     try {
