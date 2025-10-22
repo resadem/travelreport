@@ -64,26 +64,26 @@ const Suppliers = () => {
     <Layout>
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-          <h1 className="text-3xl font-bold text-oxford-blue">Поставщики</h1>
+          <h1 className="text-3xl font-bold text-oxford-blue">{t('suppliers.title')}</h1>
           <Dialog open={showDialog} onOpenChange={setShowDialog}>
             <DialogTrigger asChild>
               <Button className="bg-safety-orange hover:bg-safety-orange/90 w-full sm:w-auto" data-testid="add-supplier-button">
                 <Plus className="h-4 w-4 mr-2" />
-                Добавить поставщика
+                {t('suppliers.add')}
               </Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Добавить поставщика</DialogTitle>
+                <DialogTitle>{t('suppliers.add')}</DialogTitle>
               </DialogHeader>
               <form onSubmit={handleAddSupplier} className="space-y-4">
                 <div>
-                  <Label>Название</Label>
+                  <Label>{t('suppliers.name')}</Label>
                   <Input
                     value={supplierName}
                     onChange={(e) => setSupplierName(e.target.value)}
                     required
-                    placeholder="Введите название поставщика"
+                    placeholder={t('suppliers.enterName')}
                   />
                 </div>
                 <div className="flex justify-end gap-2">
