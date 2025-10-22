@@ -269,8 +269,8 @@ const Tourists = () => {
             <TableHeader>
               <TableRow>
                 <TableHead>№</TableHead>
-                <TableHead>Имя</TableHead>
-                <TableHead>Фамилия</TableHead>
+                <TableHead>{t('tourists.firstName')}</TableHead>
+                <TableHead>{t('tourists.lastName')}</TableHead>
                 <TableHead>Дата рождения</TableHead>
                 <TableHead>Документ</TableHead>
                 <TableHead>Телефон</TableHead>
