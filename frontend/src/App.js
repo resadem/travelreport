@@ -117,6 +117,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/topups"
+              element={
+                <ProtectedRoute adminOnly>
+                  <TopUps />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
           <Toaster position="top-right" />
         </BrowserRouter>
