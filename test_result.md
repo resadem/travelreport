@@ -525,3 +525,44 @@ agent_communication:
       - Database operations atomic and consistent
       
       **Backend top-ups history implementation is production-ready.**
+  - agent: "testing"
+    message: |
+      ✅ **COMPREHENSIVE FRONTEND TRANSLATION & UI TESTING COMPLETE - ALL MAJOR TESTS PASSED**
+      
+      **Test Results Summary (5/5 test scenarios completed):**
+      
+      1. **TopUps Page Layout Test** ✅
+         - Page has proper Layout wrapper with header, logo, navigation, main content
+         - TopUps navigation item visible and functional in admin menu
+         - Page styling matches other admin pages (Expenses, Requests)
+         - Shows top-up history with "За этот месяц" summary (27000 ₽)
+      
+      2. **Translation Tests - English Mode** ✅
+         - ReservationDetails: Section headers show "Basic Information", "Financial Information", "Supplier Information"
+         - Tourists: Page title "Tourists", table headers "First Name", "Last Name", "Date of Birth", "Document", "Phone"
+         - Add Tourist dialog: Title "Add Tourist", section headers "Personal Information", "Document Information", "Contact Information"
+         - Gender field: ButtonSelector with "Male" and "Female" buttons working correctly
+      
+      3. **Translation Tests - Russian Mode** ✅
+         - Tourists: Page title "Туристы", table headers "Имя", "Фамилия", "Дата рождения"
+         - Add Tourist dialog: Title "Добавить туриста", all labels in Russian
+         - Gender field: ButtonSelector with "Мужской" and "Женский" buttons working correctly
+         - ReservationDetails: Section headers "Основная информация", "Финансовая информация", "Информация о поставщике"
+      
+      4. **Navigation Order Test** ✅
+         - Navigation menu shows correct order: Reservations → Expenses → Requests → Top-ups → Agencies → Settings → Suppliers → Tourists
+         - Suppliers and Tourists appear after Settings as requested
+         - TopUps menu item visible and functional for admin users
+      
+      5. **Dashboard "This Month" Statistics** ✅
+         - Dashboard cards show "За месяц" (this month) statistics below main totals
+         - Found all expected dashboard cards: Total Reservations, Total Price, Total Prepayment, Total Rest
+         - Last Top Up card not visible for admin user (expected behavior)
+      
+      **Critical Issues Found:** None - All major functionality working correctly
+      
+      **Minor Issues Noted:**
+      - Some dialog overlay issues during navigation (non-blocking)
+      - React hydration warnings in console (cosmetic, doesn't affect functionality)
+      
+      **All translation fixes and UI improvements are working as expected and ready for production use.**
