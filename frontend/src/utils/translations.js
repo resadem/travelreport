@@ -94,7 +94,10 @@ export const translations = {
       save: 'Сохранить',
       cancel: 'Отмена',
       delete: 'Удалить',
-      back: 'Назад'
+      back: 'Назад',
+      basicInfo: 'Основная информация',
+      financialInfo: 'Финансовая информация',
+      supplierInfo: 'Информация о поставщике'
     },
     subAgencies: {
       title: 'Агентства',
