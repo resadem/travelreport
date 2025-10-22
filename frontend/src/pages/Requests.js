@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { useI18n } from '../contexts/I18nContext';
+import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
@@ -25,10 +26,10 @@ const MEAL_TYPES = ['BB', 'HB', 'FB', 'AI', 'UAI'];
 const Requests = () => {
   const { t } = useI18n();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showDialog, setShowDialog] = useState(false);
-  const user = JSON.parse(localStorage.getItem('user'));
   
   const [formData, setFormData] = useState({
     check_in: '',
