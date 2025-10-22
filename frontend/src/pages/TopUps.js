@@ -126,7 +126,7 @@ const TopUps = () => {
         </div>
         <div className="bg-blue-50 border border-blue-200 rounded-lg px-4 py-2">
           <p className="text-sm text-gray-600">{t.topUps.thisMonth}</p>
-          <p className="text-xl font-bold text-blue-600">{formatCurrency(thisMonthTotal)}</p>
+          <p className="text-xl font-bold text-blue-600">{formatPrice(thisMonthTotal)} ₽</p>
         </div>
       </div>
 
