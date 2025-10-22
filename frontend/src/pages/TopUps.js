@@ -201,11 +201,11 @@ const TopUps = () => {
       <Dialog open={editDialog} onOpenChange={setEditDialog}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{t.topUps.editTopUp}</DialogTitle>
+            <DialogTitle>{t('topUps.editTopUp')}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label>{t.topUps.amount}</Label>
+              <Label>{t('topUps.amount')}</Label>
               <Input
                 type="number"
                 value={editForm.amount}
