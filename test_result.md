@@ -287,30 +287,23 @@ frontend:
         comment: "Settings page already had responsive layout with max-width container. No changes needed."
 
 backend:
-  - task: "Admin User Setup"
-    implemented: true
-    working: true
-    file: "/app/backend/server.py"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-      - working: true
-        agent: "main"
-        comment: "Admin user created with correct password_hash field and credentials (admin@4travels.com / admin123). Database name updated in .env to match."
-
 metadata:
   created_by: "main_agent"
-  version: "1.0"
-  test_sequence: 1
+  version: "2.0"
+  test_sequence: 2
   run_ui: true
 
 test_plan:
   current_focus:
-    - "All responsive features tested and working"
+    - "Top-ups History Backend"
+    - "Top-ups Page (Admin)"
+    - "Custom Button-Style Selector Component"
+    - "Dashboard 'This Month' Statistics"
+    - "Profile Menu Balance Display"
+    - "SubAgencies Top-up Type Selection"
   stuck_tasks: []
-  test_all: false
-  test_priority: "NA"
+  test_all: true
+  test_priority: "high_first"
 
 agent_communication:
   - agent: "main"
