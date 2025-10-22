@@ -389,12 +389,64 @@ const Requests = () => {
           </Dialog>
         </div>
 
+        {/* Filters */}
+        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex-1">
+              <Label className="text-sm text-gray-600 mb-2">{t('requests.country')}</Label>
+              <Select value={filterCountry} onValueChange={setFilterCountry}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder={t('serviceTypes.all')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">{t('serviceTypes.all')}</SelectItem>
+                  {COUNTRIES.map(country => (
+                    <SelectItem key={country} value={country}>{country}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div className="flex-1">
+              <Label className="text-sm text-gray-600 mb-2">{t('requests.reservationStatus')}</Label>
+              <Select value={filterReservationStatus} onValueChange={setFilterReservationStatus}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder={t('serviceTypes.all')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">{t('serviceTypes.all')}</SelectItem>
+                  <SelectItem value="in_progress">{t('requests.inProgress')}</SelectItem>
+                  <SelectItem value="booked">{t('requests.booked')}</SelectItem>
+                  <SelectItem value="confirmed">{t('requests.confirmed')}</SelectItem>
+                  <SelectItem value="cancelled">{t('requests.cancelled')}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div className="flex-1">
+              <Label className="text-sm text-gray-600 mb-2">{t('requests.paymentStatus')}</Label>
+              <Select value={filterPaymentStatus} onValueChange={setFilterPaymentStatus}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder={t('serviceTypes.all')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">{t('serviceTypes.all')}</SelectItem>
+                  <SelectItem value="awaiting_payment">{t('requests.awaitingPayment')}</SelectItem>
+                  <SelectItem value="paid">{t('requests.paid')}</SelectItem>
+                  <SelectItem value="partially_paid">{t('requests.partiallyPaid')}</SelectItem>
+                  <SelectItem value="not_paid">{t('requests.notPaid')}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>{t('columns.date')}</TableHead>
+                  <TableHead>{t('requests.dateColumn')}</TableHead>
                   {user.role === 'admin' && <TableHead>{t('expenses.agency')}</TableHead>}
                   <TableHead>{t('requests.country')}</TableHead>
                   <TableHead>{t('requests.location')}</TableHead>
