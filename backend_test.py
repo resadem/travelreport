@@ -192,7 +192,7 @@ class B2BTravelPortalTester:
             if reservations:
                 # Check that admin columns are NOT present
                 first_reservation = reservations[0]
-                admin_columns = ['supplier', 'supplier_price', 'supplier_prepayment_amount', 
+                admin_columns = ['supplier_id', 'supplier_name', 'supplier_price', 'supplier_prepayment_amount', 
                                'revenue', 'revenue_percentage']
                 has_admin_columns = any(col in first_reservation for col in admin_columns)
                 self.log_test("Sub-Agency Get Reservations (RBAC)", not has_admin_columns,
