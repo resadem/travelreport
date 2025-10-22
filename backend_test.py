@@ -572,6 +572,15 @@ class B2BTravelPortalTester:
         self.test_create_sub_agency()
         self.test_get_users()
         
+        # Top-ups tests (NEW)
+        print("\n🔄 Testing Top-ups History Backend...")
+        self.test_topup_authentication()
+        self.test_topup_balance()
+        self.test_get_topups_history()
+        self.test_edit_topup()
+        self.test_delete_topup()
+        self.test_topup_edge_cases()
+        
         # Reservation tests
         self.test_create_reservation()
         self.test_admin_get_reservations()
