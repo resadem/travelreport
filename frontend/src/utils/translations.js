@@ -319,7 +319,21 @@ export const translations = {
       topUp: 'Top Up',
       topUpBalance: 'Top Up Balance',
       amount: 'Amount',
-      topUpAmount: 'Top Up Amount'
+      topUpAmount: 'Top Up Amount',
+      type: 'Type',
+      cash: 'Cash',
+      card: 'Card'
+    },
+    topUps: {
+      title: 'Top-ups',
+      allTopUps: 'All Top-ups',
+      agency: 'Agency',
+      amount: 'Amount',
+      type: 'Type',
+      date: 'Date',
+      edit: 'Edit',
+      editTopUp: 'Edit Top-up',
+      thisMonth: 'This Month'
     },
     expenses: {
       title: 'Expenses',
