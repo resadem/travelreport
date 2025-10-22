@@ -247,10 +247,10 @@ const TopUps = () => {
           </p>
           <DialogFooter>
             <Button variant="outline" onClick={() => setDeleteDialog(false)}>
-              {t.common.cancel}
+              {t('common.cancel')}
             </Button>
             <Button variant="destructive" onClick={submitDelete}>
-              {t.common.delete}
+              {t('common.delete')}
             </Button>
           </DialogFooter>
         </DialogContent>
