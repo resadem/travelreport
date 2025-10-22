@@ -106,7 +106,7 @@ const Suppliers = () => {
               <TableRow>
                 <TableHead>№</TableHead>
                 <TableHead>{t('suppliers.name')}</TableHead>
-                <TableHead>Дата создания</TableHead>
+                <TableHead>{t('common.createdAt')}</TableHead>
                 <TableHead>{t('columns.actions')}</TableHead>
               </TableRow>
             </TableHeader>
