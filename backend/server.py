@@ -1068,6 +1068,13 @@ async def upload_document(request_id: str, file: UploadFile = File(...), admin: 
     }
     
     await db.documents.insert_one(document_dict)
+    
+    # Automatically update document status to "documents_ready"
+    await db.requests.update_one(
+        {"id": request_id},
+        {"$set": {"document_status": "documents_ready"}}
+    )
+    
     return {"message": "File uploaded successfully", "document_id": file_id, "filename": file.filename}
 
 @api_router.get("/requests/{request_id}/documents", response_model=List[DocumentResponse])
