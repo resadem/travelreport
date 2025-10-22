@@ -307,7 +307,7 @@ export const translations = {
       back: 'Back'
     },
     subAgencies: {
-      title: 'Sub-Agencies',
+      title: 'Agencies',
       add: 'Add Agency',
       name: 'Name',
       email: 'Email',
