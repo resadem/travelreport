@@ -308,27 +308,43 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: |
-      Mobile and PC responsiveness implementation completed successfully.
+      Implemented all 4 requested features successfully:
       
-      Changes Made:
-      1. Layout.js already had hamburger menu, profile avatar, and bottom navigation
-      2. Updated all form grids to use responsive classes (grid-cols-1 md:grid-cols-2)
-      3. Added overflow-x-auto wrappers to all tables for horizontal scrolling
-      4. Made page headers responsive with flex-col sm:flex-row
-      5. Made action buttons full-width on mobile (w-full sm:w-auto)
-      6. Fixed database name in backend .env to match the user database
-      7. Created admin user with proper credentials
+      **Feature 1: Top-ups Page (Admin)**
+      - Backend: Modified POST /users/{user_id}/topup-balance to store top-up records in 'topups' collection
+      - Backend: Added GET /topups endpoint to retrieve all top-up history
+      - Backend: Added PUT /topups/{id} endpoint to edit top-ups (adjusts user balance)
+      - Backend: Added DELETE /topups/{id} endpoint to delete top-ups (adjusts user balance)
+      - Frontend: Created TopUps.js page with table showing all top-ups
+      - Frontend: Edit and delete functionality with dialogs
+      - Frontend: Shows "this month" total at the top
+      - Frontend: Added /topups route in App.js (admin only)
+      - Frontend: Added "Пополнения" / "Top-ups" navigation item in Layout.js
       
-      Tested on:
-      - Mobile (375px): ✅ All pages working perfectly
-      - Tablet (768px): ✅ Proper breakpoints working
-      - Desktop (1920px): ✅ Full layout displayed correctly
+      **Feature 2: Custom Button-Style Selector**
+      - Created ButtonSelector component in /app/frontend/src/components/ui/button-selector.jsx
+      - Features: button-style layout, colored bottom border when selected, hover effects
+      - Applied to: SubAgencies top-up type selector, TopUps edit dialog type selector
+      - Can be used for any field with <6 options
       
-      Features Verified:
-      - ✅ Hamburger menu with slide-out navigation
-      - ✅ Profile avatar with initials
-      - ✅ Bottom navigation bar with icons
-      - ✅ Responsive tables with horizontal scroll
-      - ✅ Stacking statistics cards
-      - ✅ Responsive forms and buttons
-      - ✅ All breakpoints (sm, md, lg) working correctly
+      **Feature 3: Dashboard "This Month" Statistics**
+      - Added fetchThisMonthStats function to calculate current month data
+      - Updated all dashboard cards to show "this month" below total
+      - Cards showing this month: Reservations, Price, Prepayment, Rest, Expenses (sub-agency)
+      - Uses existing translations: dashboard.thisMonth
+      
+      **Feature 4: Profile Menu Balance Display**
+      - Updated Layout.js profile dropdown
+      - Shows current balance for sub-agency users only
+      - Displayed with green formatting below user email
+      - Uses Intl.NumberFormat for Russian number formatting
+      
+      Additional Changes:
+      - SubAgencies top-up dialog now includes type selector (Cash/Other)
+      - Backend top-up endpoint now includes type in the response
+      - All translations already present in translations.js
+      
+      Services Status:
+      - Backend: ✅ Running on port 8001
+      - Frontend: ✅ Compiled successfully
+      - All new endpoints and pages ready for testing
