@@ -31,11 +31,13 @@ const Expenses = () => {
   });
 
   useEffect(() => {
-    fetchExpenses();
-    if (user.role === 'admin') {
-      fetchAgencies();
+    if (user) {
+      fetchExpenses();
+      if (user.role === 'admin') {
+        fetchAgencies();
+      }
     }
-  }, []);
+  }, [user]);
 
   const fetchExpenses = async () => {
     try {
