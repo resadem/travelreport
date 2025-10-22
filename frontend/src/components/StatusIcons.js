@@ -1,26 +1,43 @@
 import React from 'react';
-import { CheckCircle2, XCircle, Clock } from 'lucide-react';
+import { CheckCircle2, XCircle, Clock, AlertCircle } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
 const StatusIcon = ({ status, label }) => {
   const getIcon = () => {
-    if (status === 'confirmed' || status === 'paid' || status === 'ready') {
-      return <CheckCircle2 className="w-6 h-6 text-green-600" />;
-    } else if (status === 'cancelled' || status === 'not_confirmed' || status === 'not_paid' || status === 'not_ready') {
-      return <XCircle className="w-6 h-6 text-red-600" />;
-    } else {
+    // Reservation status
+    if (status === 'in_progress') {
       return <Clock className="w-6 h-6 text-yellow-600" />;
+    } else if (status === 'booked' || status === 'partially_paid') {
+      return <AlertCircle className="w-6 h-6 text-blue-600" />;
+    } else if (status === 'confirmed' || status === 'paid' || status === 'documents_ready') {
+      return <CheckCircle2 className="w-6 h-6 text-green-600" />;
+    } else if (status === 'cancelled' || status === 'not_paid') {
+      return <XCircle className="w-6 h-6 text-red-600" />;
+    } else if (status === 'awaiting_payment' || status === 'documents_not_ready') {
+      return <Clock className="w-6 h-6 text-gray-500" />;
+    } else {
+      return <Clock className="w-6 h-6 text-gray-400" />;
     }
   };
 
   const getTooltipText = () => {
-    if (status === 'confirmed') return label + ': Подтверждено / Confirmed';
-    if (status === 'not_confirmed') return label + ': Не подтверждено / Not Confirmed';
-    if (status === 'paid') return label + ': Оплачено / Paid';
-    if (status === 'not_paid') return label + ': Не оплачено / Not Paid';
-    if (status === 'ready') return label + ': Готов / Ready';
-    if (status === 'not_ready') return label + ': Не готов / Not Ready';
-    return label + ': ' + status;
+    const statusMap = {
+      // Reservation statuses
+      'in_progress': 'В работе / In Progress',
+      'booked': 'Забронирована / Booked',
+      'confirmed': 'Подтверждено / Confirmed',
+      'cancelled': 'Аннулировано / Cancelled',
+      // Payment statuses
+      'awaiting_payment': 'Ожидание оплаты / Awaiting Payment',
+      'paid': 'Оплачено / Paid',
+      'partially_paid': 'Частично оплачено / Partially Paid',
+      'not_paid': 'Не оплачено / Not Paid',
+      // Document statuses
+      'documents_ready': 'Документы готовы / Documents Ready',
+      'documents_not_ready': 'Документы не готовы / Documents Not Ready'
+    };
+    
+    return `${label}: ${statusMap[status] || status}`;
   };
 
   return (
