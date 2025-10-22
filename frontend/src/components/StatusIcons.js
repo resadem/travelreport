@@ -56,9 +56,9 @@ const StatusIcon = ({ status, label }) => {
   );
 };
 
-const StatusIcons = ({ reservationStatus, paymentStatus, documentStatus }) => {
+const StatusIcons = ({ reservationStatus, paymentStatus, documentStatus, horizontal = false }) => {
   return (
-    <div className="flex flex-col gap-2 items-center md:flex-col">
+    <div className={`flex ${horizontal ? 'flex-row' : 'flex-col'} gap-2 items-center`}>
       <StatusIcon status={reservationStatus} label="Бронь" />
       <StatusIcon status={paymentStatus} label="Оплата" />
       <StatusIcon status={documentStatus} label="Документ" />
