@@ -6,7 +6,7 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { ButtonSelector } from '../components/ui/button-selector';
 import { Pencil, Trash2 } from 'lucide-react';
-import { formatCurrency, formatDate } from '../utils/helpers';
+import { formatPrice, formatDate } from '../utils/helpers';
 
 const TopUps = () => {
   const { t, locale } = useI18n();
