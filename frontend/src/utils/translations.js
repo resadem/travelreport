@@ -307,7 +307,10 @@ export const translations = {
       save: 'Save',
       cancel: 'Cancel',
       delete: 'Delete',
-      back: 'Back'
+      back: 'Back',
+      basicInfo: 'Basic Information',
+      financialInfo: 'Financial Information',
+      supplierInfo: 'Supplier Information'
     },
     subAgencies: {
       title: 'Agencies',
