@@ -401,7 +401,7 @@ export const translations = {
       reservationStatus: 'Reservation Status',
       paymentStatus: 'Payment Status',
       documentStatus: 'Document Status',
-      dateColumn: 'Date / Дата',
+      dateColumn: 'Date',
       yes: 'Yes',
       no: 'No'
     },
