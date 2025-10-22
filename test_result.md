@@ -104,13 +104,86 @@
 
 user_problem_statement: "Implement new features: Top-ups page, custom button-style selector, dashboard 'this month' statistics, and profile menu balance display"
 
+backend:
+  - task: "Top-ups History Backend"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Backend endpoints added: GET /topups to retrieve all top-up history, PUT /topups/{id} to edit top-ups, DELETE /topups/{id} to delete top-ups. Modified POST /users/{user_id}/topup-balance to store top-up records in MongoDB 'topups' collection. Balance adjustments implemented for edit/delete operations."
+
 frontend:
+  - task: "Top-ups Page (Admin)"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/TopUps.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created TopUps.js admin page with full CRUD functionality. Displays all top-up transactions with agency name, amount, type (Cash/Other), and date. Includes edit and delete capabilities. Shows 'this month' total at the top. Added route in App.js and navigation in Layout.js."
+
+  - task: "Custom Button-Style Selector Component"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/ui/button-selector.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created reusable ButtonSelector component for options <6 items. Features: button-style layout, colored bottom border indicator when selected, hover effects. Applied to: SubAgencies top-up type selector (Cash/Other), TopUps edit dialog type selector."
+
+  - task: "Dashboard 'This Month' Statistics"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added fetchThisMonthStats function that calculates current month statistics. Updated all dashboard cards to show 'this month' data below total: Total Reservations, Total Price, Total Prepayment, Total Rest. For sub-agencies: also shows 'this month' Total Expenses."
+
+  - task: "Profile Menu Balance Display"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Layout.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Updated profile dropdown menu in header to display current balance for sub-agency users. Balance shown with green color formatting below user email in the dropdown."
+
+  - task: "SubAgencies Top-up Type Selection"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/SubAgencies.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added type selector (Cash/Other) to SubAgencies top-up dialog using ButtonSelector component. Updated handleTopUpSubmit to send type field to backend."
+
   - task: "Mobile Hamburger Menu"
     implemented: true
     working: true
     file: "/app/frontend/src/components/Layout.js"
     stuck_count: 0
-    priority: "high"
+    priority: "low"
     needs_retesting: false
     status_history:
       - working: true
