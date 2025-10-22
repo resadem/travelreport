@@ -123,7 +123,7 @@ const Dashboard = () => {
         rest: thisMonthReservations.reduce((sum, r) => sum + (r.rest_amount_of_payment || 0), 0)
       };
 
-      // Fetch this month's expenses
+      // Fetch this month's expenses and top-ups for sub-agency
       if (user?.role === 'sub_agency') {
         const expensesResponse = await axios.get(`${API}/expenses`);
         const thisMonthExpenses = expensesResponse.data.filter(e => {
@@ -131,6 +131,20 @@ const Dashboard = () => {
           return expenseDate.getMonth() === currentMonth && expenseDate.getFullYear() === currentYear;
         });
         stats.expenses = thisMonthExpenses.reduce((sum, e) => sum + (e.amount || 0), 0);
+        
+        // Fetch user's top-ups for this month
+        try {
+          const topupsResponse = await axios.get(`${API}/topups`);
+          const userTopups = topupsResponse.data.filter(t => 
+            t.agency_id === user.id &&
+            new Date(t.date).getMonth() === currentMonth &&
+            new Date(t.date).getFullYear() === currentYear
+          );
+          stats.topups = userTopups.reduce((sum, t) => sum + (t.amount || 0), 0);
+        } catch (error) {
+          console.error('Failed to fetch topups:', error);
+          stats.topups = 0;
+        }
       }
 
       setThisMonthStats(stats);
