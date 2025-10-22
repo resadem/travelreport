@@ -38,7 +38,9 @@ export const translations = {
       totalRevenue: 'Общая прибыль',
       balance: 'Баланс',
       lastTopUp: 'Посл. пополнение',
-      totalExpenses: 'Всего расходов'
+      totalExpenses: 'Всего расходов',
+      thisMonth: 'За месяц',
+      total: 'Всего'
     },
     columns: {
       id: '№',
