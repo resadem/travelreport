@@ -114,8 +114,7 @@ const RequestDetails = () => {
       });
       setFile(null);
       fetchDocuments();
-      // Update document status to ready
-      await axios.put(`${API}/requests/${id}`, { document_status: 'ready' });
+      // Document status is automatically updated on backend
       fetchRequest();
       toast.success(t('common.success'));
     } catch (error) {
