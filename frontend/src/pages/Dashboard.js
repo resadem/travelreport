@@ -45,7 +45,8 @@ const Dashboard = () => {
     price: 0,
     prepayment: 0,
     rest: 0,
-    expenses: 0
+    expenses: 0,
+    topups: 0
   });
 
   const today = new Date().toISOString().split('T')[0];
