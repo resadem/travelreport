@@ -735,6 +735,8 @@ async def get_reservations(
                 filtered_reservations.append(res)
             elif payment_status == "prepaid" and res_status == "prepaid":
                 filtered_reservations.append(res)
+            elif payment_status == "has_rest" and res.get("rest_amount_of_payment", 0) > 0:
+                filtered_reservations.append(res)
             elif payment_status == "overdue" and res_status == "overdue":
                 filtered_reservations.append(res)
             elif payment_status == "upcoming" and res_status == "upcoming":
