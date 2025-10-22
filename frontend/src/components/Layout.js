@@ -123,9 +123,9 @@ const Layout = ({ children }) => {
                 </SheetContent>
               </Sheet>
 
-              {/* Logo */}
-              <Link to="/" className="flex items-center">
-                <img src="/logo-white.png" alt="4Travels" className="h-8 md:h-12" />
+              {/* Logo - visible on all screens */}
+              <Link to="/">
+                <img src="/logo-white.png" alt="4Travels" className="h-8 md:h-10" />
               </Link>
 
               {/* Desktop Navigation */}
