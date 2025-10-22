@@ -214,7 +214,7 @@ const TopUps = () => {
               />
             </div>
             <ButtonSelector
-              label={t.topUps.type}
+              label={t('topUps.type')}
               options={typeOptions}
               value={editForm.type}
               onChange={(value) => setEditForm({ ...editForm, type: value })}
@@ -222,10 +222,10 @@ const TopUps = () => {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setEditDialog(false)}>
-              {t.common.cancel}
+              {t('common.cancel')}
             </Button>
             <Button onClick={submitEdit}>
-              {t.common.save}
+              {t('common.save')}
             </Button>
           </DialogFooter>
         </DialogContent>
