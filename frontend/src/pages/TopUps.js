@@ -119,13 +119,13 @@ const TopUps = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold">{t.topUps.title}</h1>
+          <h1 className="text-2xl font-bold">{t('topUps.title')}</h1>
           <p className="text-sm text-gray-500 mt-1">
-            {t.topUps.allTopUps}
+            {t('topUps.allTopUps')}
           </p>
         </div>
         <div className="bg-blue-50 border border-blue-200 rounded-lg px-4 py-2">
-          <p className="text-sm text-gray-600">{t.topUps.thisMonth}</p>
+          <p className="text-sm text-gray-600">{t('topUps.thisMonth')}</p>
           <p className="text-xl font-bold text-blue-600">{formatPrice(thisMonthTotal)} ₽</p>
         </div>
       </div>
