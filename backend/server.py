@@ -498,6 +498,20 @@ async def topup_balance(user_id: str, topup: BalanceTopUp, admin: dict = Depends
     
     new_balance = user.get("balance", 0.0) + topup.amount
     
+    # Create top-up record
+    topup_record = {
+        "id": str(uuid.uuid4()),
+        "agency_id": user_id,
+        "agency_name": user.get("agency_name", ""),
+        "amount": topup.amount,
+        "type": topup.type,
+        "date": datetime.now(timezone.utc).isoformat(),
+        "created_at": datetime.now(timezone.utc).isoformat()
+    }
+    
+    # Store top-up in history
+    await db.topups.insert_one(topup_record)
+    
     await db.users.update_one(
         {"id": user_id},
         {"$set": {
@@ -509,7 +523,8 @@ async def topup_balance(user_id: str, topup: BalanceTopUp, admin: dict = Depends
     return {
         "message": "Balance topped up successfully",
         "new_balance": new_balance,
-        "topup_amount": topup.amount
+        "topup_amount": topup.amount,
+        "topup_id": topup_record["id"]
     }
 
 # Supplier routes
