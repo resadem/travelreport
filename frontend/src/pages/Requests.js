@@ -51,8 +51,10 @@ const Requests = () => {
   });
 
   useEffect(() => {
-    fetchRequests();
-  }, []);
+    if (user) {
+      fetchRequests();
+    }
+  }, [user]);
 
   const fetchRequests = async () => {
     try {
