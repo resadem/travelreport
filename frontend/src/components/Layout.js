@@ -43,9 +43,9 @@ const Layout = ({ children }) => {
     { path: '/requests', icon: Send, label: t('nav.requests'), show: true },
     { path: '/topups', icon: Wallet, label: t('nav.topUps'), show: user?.role === 'admin' },
     { path: '/sub-agencies', icon: Users, label: t('nav.subAgencies'), show: user?.role === 'admin' },
+    { path: '/settings', icon: Settings, label: t('nav.settings'), show: user?.role === 'admin' },
     { path: '/suppliers', icon: Truck, label: t('nav.suppliers'), show: user?.role === 'admin' },
     { path: '/tourists', icon: UserCircle, label: t('nav.tourists'), show: user?.role === 'admin' },
-    { path: '/settings', icon: Settings, label: t('nav.settings'), show: user?.role === 'admin' },
   ].filter(item => item.show);
 
   return (
