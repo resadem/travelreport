@@ -487,7 +487,9 @@ export const translations = {
       success: 'Success',
       error: 'Error',
       loading: 'Loading...',
-      noData: 'No Data'
+      noData: 'No Data',
+      createdAt: 'Date Created',
+      actions: 'Actions'
     }
   }
 };
