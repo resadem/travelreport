@@ -16,7 +16,7 @@ import Layout from '../components/Layout';
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const SubAgencies = () => {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showDialog, setShowDialog] = useState(false);
