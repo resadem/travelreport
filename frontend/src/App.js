@@ -12,6 +12,7 @@ import Tourists from './pages/Tourists';
 import Expenses from './pages/Expenses';
 import Requests from './pages/Requests';
 import RequestDetails from './pages/RequestDetails';
+import TopUps from './pages/TopUps';
 import { Toaster } from './components/ui/sonner';
 import './App.css';
 
