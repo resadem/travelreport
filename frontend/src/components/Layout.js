@@ -161,12 +161,11 @@ const Layout = ({ children }) => {
               {/* Profile Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="text-white hover:bg-oxford-blue/50 p-1 md:p-2" data-testid="user-menu">
+                  <Button variant="ghost" className="text-white hover:bg-white/20 p-1 md:p-2" data-testid="user-menu">
                     <div className="flex items-center space-x-2">
                       <div className="w-8 h-8 md:w-9 md:h-9 bg-gradient-to-br from-picton-blue to-safety-orange rounded-full flex items-center justify-center ring-2 ring-white/20">
                         <span className="text-white font-bold text-sm">{getInitials(user?.agency_name)}</span>
                       </div>
-                      <span className="hidden sm:inline text-sm font-medium">{user?.agency_name}</span>
                     </div>
                   </Button>
                 </DropdownMenuTrigger>
