@@ -410,6 +410,13 @@ export const translations = {
       selectCountry: 'Select country',
       nationalPassport: 'National passport or ID card',
       internationalPassport: 'International passport'
+    suppliers: {
+      title: 'Suppliers',
+      add: 'Add Supplier',
+      name: 'Name',
+      enterName: 'Enter supplier name'
+    },
+
     },
 
     settings: {
