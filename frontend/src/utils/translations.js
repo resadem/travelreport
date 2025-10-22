@@ -380,6 +380,31 @@ export const translations = {
       totalExpenses: 'Total Expenses',
       myExpenses: 'My Expenses'
     },
+    tourists: {
+      title: 'Tourists',
+      add: 'Add Tourist',
+      edit: 'Edit Tourist',
+      firstName: 'First Name',
+      lastName: 'Last Name',
+      dateOfBirth: 'Date of Birth',
+      gender: 'Gender',
+      male: 'Male',
+      female: 'Female',
+      citizenship: 'Citizenship',
+      documentType: 'Document Type',
+      documentNumber: 'Document Number',
+      documentExpiration: 'Expiration Date',
+      phone: 'Phone',
+      email: 'Email',
+      personalInfo: 'Personal Information',
+      documentInfo: 'Document Information',
+      contactInfo: 'Contact Information',
+      selectGender: 'Select gender',
+      selectCountry: 'Select country',
+      nationalPassport: 'National passport or ID card',
+      internationalPassport: 'International passport'
+    },
+
     settings: {
       title: 'Settings',
       thresholdDays: 'Warning Threshold (days)',
