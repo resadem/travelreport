@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Implement new features: Top-ups page, custom button-style selector, dashboard 'this month' statistics, and profile menu balance display"
+user_problem_statement: "Implement new features and fixes: Top-ups page, custom button-style selector, dashboard 'this month' statistics, profile menu balance display, logo after login, UI improvements, translation fixes, and filter enhancements"
 
 backend:
   - task: "Top-ups History Backend"
