@@ -72,6 +72,7 @@ const Dashboard = () => {
     fetchStatistics();
     fetchSettings();
     fetchTotalExpenses();
+    fetchThisMonthStats();
     if (user?.role === 'admin') {
       fetchAgencies();
       fetchSuppliers();
