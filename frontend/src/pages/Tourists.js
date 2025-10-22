@@ -122,7 +122,7 @@ const Tourists = () => {
     <Layout>
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-          <h1 className="text-3xl font-bold text-oxford-blue">Туристы</h1>
+          <h1 className="text-3xl font-bold text-oxford-blue">{t('tourists.title')}</h1>
           <Dialog open={showDialog} onOpenChange={setShowDialog}>
             <DialogTrigger asChild>
               <Button className="bg-safety-orange hover:bg-safety-orange/90 w-full sm:w-auto" data-testid="add-tourist-button">
