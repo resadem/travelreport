@@ -351,6 +351,15 @@ const SubAgencies = () => {
                 placeholder="0"
               />
             </div>
+            <ButtonSelector
+              label={t('topUps.type')}
+              options={[
+                { value: 'cash', label: t.locale === 'ru' ? 'Наличные' : 'Cash' },
+                { value: 'other', label: t.locale === 'ru' ? 'Другое' : 'Other' }
+              ]}
+              value={topUpType}
+              onChange={setTopUpType}
+            />
             <div className="flex justify-end gap-2">
               <Button type="button" variant="outline" onClick={() => setShowTopUpDialog(false)}>
                 {t('common.cancel')}
