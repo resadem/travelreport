@@ -110,7 +110,21 @@ export const translations = {
       topUp: 'Пополнить',
       topUpBalance: 'Пополнить баланс',
       amount: 'Сумма',
-      topUpAmount: 'Сумма пополнения'
+      topUpAmount: 'Сумма пополнения',
+      type: 'Тип',
+      cash: 'Наличные',
+      card: 'Карта'
+    },
+    topUps: {
+      title: 'Пополнения',
+      allTopUps: 'Все пополнения',
+      agency: 'Агентство',
+      amount: 'Сумма',
+      type: 'Тип',
+      date: 'Дата',
+      edit: 'Редактировать',
+      editTopUp: 'Редактировать пополнение',
+      thisMonth: 'За этот месяц'
     },
     expenses: {
       title: 'Расходы',
