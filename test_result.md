@@ -351,3 +351,51 @@ agent_communication:
       - Backend: ✅ Running on port 8001
       - Frontend: ✅ Compiled successfully
       - All new endpoints and pages ready for testing
+  - agent: "testing"
+    message: |
+      ✅ **TOP-UPS HISTORY BACKEND TESTING COMPLETE - ALL TESTS PASSED**
+      
+      **Comprehensive Testing Results (8/8 tests passed):**
+      
+      1. **Authentication Test** ✅
+         - Admin login successful with admin@4travels.com / admin123
+         - Proper 403 errors for unauthorized access to /api/topups
+         - Sub-agency users correctly blocked from admin endpoints
+      
+      2. **Create Top-up Test** ✅
+         - POST /api/users/{user_id}/topup-balance working correctly
+         - Returns topup_id, new_balance, and topup_amount
+         - Top-up records stored in MongoDB 'topups' collection
+         - Balance updates correctly (tested with 5000 amount)
+      
+      3. **Get Top-ups History Test** ✅
+         - GET /api/topups returns complete history
+         - All required fields present: id, agency_id, agency_name, amount, type, date, created_at
+         - Correctly sorted by created_at descending (most recent first)
+         - Proper JSON structure and data types
+      
+      4. **Edit Top-up Test** ✅
+         - PUT /api/topups/{topup_id} working correctly
+         - Balance adjustments accurate (tested 3000→4000, balance increased by 1000)
+         - Top-up record updated in database
+         - User balance reflects changes immediately
+      
+      5. **Delete Top-up Test** ✅
+         - DELETE /api/topups/{topup_id} working correctly
+         - Balance decreased by top-up amount (tested -2000)
+         - Top-up removed from history completely
+         - No orphaned records in database
+      
+      6. **Edge Cases Test** ✅
+         - Non-existent topup_id returns proper 404 errors
+         - Both edit and delete handle invalid IDs correctly
+         - Error responses properly formatted
+      
+      **Key Findings:**
+      - All balance calculations are mathematically accurate
+      - Top-up history persistence working correctly
+      - Admin-only access properly enforced
+      - Error handling robust for edge cases
+      - Database operations atomic and consistent
+      
+      **Backend top-ups history implementation is production-ready.**
