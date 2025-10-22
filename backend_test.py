@@ -169,7 +169,7 @@ class B2BTravelPortalTester:
             if reservations:
                 # Check if admin columns are present
                 first_reservation = reservations[0]
-                admin_columns = ['supplier', 'supplier_price', 'supplier_prepayment_amount', 
+                admin_columns = ['supplier_id', 'supplier_name', 'supplier_price', 'supplier_prepayment_amount', 
                                'revenue', 'revenue_percentage']
                 has_admin_columns = all(col in first_reservation for col in admin_columns)
                 self.log_test("Admin Get Reservations (All Columns)", has_admin_columns,
