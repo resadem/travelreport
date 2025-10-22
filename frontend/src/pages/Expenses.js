@@ -10,7 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Trash2 } from 'lucide-react';
-import { toast } from '../hooks/use-toast';
+import { toast } from 'sonner';
 import { formatDate, formatPrice } from '../utils/helpers';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
