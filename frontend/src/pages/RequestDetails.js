@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { useI18n } from '../contexts/I18nContext';
+import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
@@ -20,13 +21,13 @@ const RequestDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useI18n();
+  const { user } = useAuth();
   const [request, setRequest] = useState(null);
   const [comments, setComments] = useState([]);
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [newComment, setNewComment] = useState('');
   const [file, setFile] = useState(null);
-  const user = JSON.parse(localStorage.getItem('user'));
   
   const [statusUpdate, setStatusUpdate] = useState({
     reservation_status: '',
