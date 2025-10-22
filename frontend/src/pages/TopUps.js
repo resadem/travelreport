@@ -257,7 +257,8 @@ const TopUps = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </div>
+      </div>
+    </Layout>
   );
 };
 
