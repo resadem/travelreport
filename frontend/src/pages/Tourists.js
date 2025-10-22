@@ -16,7 +16,7 @@ import { COUNTRIES, formatDate } from '../utils/helpers';
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const Tourists = () => {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [tourists, setTourists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showDialog, setShowDialog] = useState(false);
