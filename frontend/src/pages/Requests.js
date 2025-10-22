@@ -420,6 +420,7 @@ const Requests = () => {
           </div>
         </div>
       </div>
+      )}
     </Layout>
   );
 };
