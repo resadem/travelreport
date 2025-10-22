@@ -62,6 +62,28 @@ const Requests = () => {
     }
   }, [user]);
 
+  useEffect(() => {
+    applyFilters();
+  }, [requests, filterCountry, filterReservationStatus, filterPaymentStatus]);
+
+  const applyFilters = () => {
+    let filtered = [...requests];
+
+    if (filterCountry !== 'all') {
+      filtered = filtered.filter(req => req.country === filterCountry);
+    }
+
+    if (filterReservationStatus !== 'all') {
+      filtered = filtered.filter(req => req.reservation_status === filterReservationStatus);
+    }
+
+    if (filterPaymentStatus !== 'all') {
+      filtered = filtered.filter(req => req.payment_status === filterPaymentStatus);
+    }
+
+    setFilteredRequests(filtered);
+  };
+
   const fetchRequests = async () => {
     try {
       const response = await axios.get(`${API}/requests`);
