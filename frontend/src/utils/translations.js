@@ -247,7 +247,9 @@ export const translations = {
       totalRevenue: 'Total Revenue',
       balance: 'Balance',
       lastTopUp: 'Last Top Up',
-      totalExpenses: 'Total Expenses'
+      totalExpenses: 'Total Expenses',
+      thisMonth: 'This Month',
+      total: 'Total'
     },
     columns: {
       id: 'ID',
