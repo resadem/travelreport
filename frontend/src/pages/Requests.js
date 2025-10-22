@@ -28,8 +28,14 @@ const Requests = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [requests, setRequests] = useState([]);
+  const [filteredRequests, setFilteredRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showDialog, setShowDialog] = useState(false);
+  
+  // Filters
+  const [filterCountry, setFilterCountry] = useState('all');
+  const [filterReservationStatus, setFilterReservationStatus] = useState('all');
+  const [filterPaymentStatus, setFilterPaymentStatus] = useState('all');
   
   const [formData, setFormData] = useState({
     check_in: '',
