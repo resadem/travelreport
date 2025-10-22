@@ -462,12 +462,12 @@ class B2BTravelPortalTester:
 
     def test_topup_authentication(self):
         """Test top-up endpoints require admin authentication"""
-        # Test accessing top-ups history without token
+        # Test accessing top-ups history without token (should get 403 due to missing Bearer token)
         success, response = self.make_request(
             'GET', 'topups',
-            expected_status=401
+            expected_status=403
         )
-        self.log_test("Top-ups History Requires Auth", success, "Got expected 401 status")
+        self.log_test("Top-ups History Requires Auth", success, "Got expected 403 status")
         
         # Test accessing with sub-agency token (should fail)
         if self.sub_agency_token:
