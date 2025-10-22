@@ -527,6 +527,62 @@ async def topup_balance(user_id: str, topup: BalanceTopUp, admin: dict = Depends
         "topup_id": topup_record["id"]
     }
 
+
+@api_router.get("/topups", response_model=List[TopUpResponse])
+async def get_topups(admin: dict = Depends(require_admin)):
+    topups = await db.topups.find({}, {"_id": 0}).sort("created_at", -1).to_list(length=None)
+    return [TopUpResponse(**topup) for topup in topups]
+
+@api_router.put("/topups/{topup_id}")
+async def update_topup(topup_id: str, topup_update: TopUpUpdate, admin: dict = Depends(require_admin)):
+    topup = await db.topups.find_one({"id": topup_id}, {"_id": 0})
+    if not topup:
+        raise HTTPException(status_code=404, detail="Top-up not found")
+    
+    # Calculate difference to adjust user balance
+    old_amount = topup.get("amount", 0.0)
+    difference = topup_update.amount - old_amount
+    
+    # Update user's balance
+    user = await db.users.find_one({"id": topup["agency_id"]}, {"_id": 0})
+    if user:
+        new_balance = user.get("balance", 0.0) + difference
+        await db.users.update_one(
+            {"id": topup["agency_id"]},
+            {"$set": {"balance": new_balance}}
+        )
+    
+    # Update top-up record
+    await db.topups.update_one(
+        {"id": topup_id},
+        {"$set": {
+            "amount": topup_update.amount,
+            "type": topup_update.type
+        }}
+    )
+    
+    return {"message": "Top-up updated successfully"}
+
+@api_router.delete("/topups/{topup_id}")
+async def delete_topup(topup_id: str, admin: dict = Depends(require_admin)):
+    topup = await db.topups.find_one({"id": topup_id}, {"_id": 0})
+    if not topup:
+        raise HTTPException(status_code=404, detail="Top-up not found")
+    
+    # Adjust user's balance by subtracting the top-up amount
+    user = await db.users.find_one({"id": topup["agency_id"]}, {"_id": 0})
+    if user:
+        new_balance = user.get("balance", 0.0) - topup.get("amount", 0.0)
+        await db.users.update_one(
+            {"id": topup["agency_id"]},
+            {"$set": {"balance": new_balance}}
+        )
+    
+    # Delete top-up record
+    await db.topups.delete_one({"id": topup_id})
+    
+    return {"message": "Top-up deleted successfully"}
+
 # Supplier routes
 @api_router.post("/suppliers", response_model=SupplierResponse)
 async def create_supplier(supplier: SupplierCreate, admin: dict = Depends(require_admin)):
