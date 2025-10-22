@@ -150,15 +150,18 @@ frontend:
 
   - task: "Dashboard 'This Month' Statistics"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/pages/Dashboard.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Added fetchThisMonthStats function that calculates current month statistics. Updated all dashboard cards to show 'this month' data below total: Total Reservations, Total Price, Total Prepayment, Total Rest. For sub-agencies: also shows 'this month' Total Expenses."
+      - working: true
+        agent: "testing"
+        comment: "✅ Dashboard 'This Month' statistics test PASSED: Dashboard cards show 'За месяц' (this month) statistics below main totals. Found dashboard cards for 'Всего бронирований', 'Общая цена', 'Общая предоплата', 'Общий остаток'. Last Top Up card not visible for admin user (expected behavior). All 'this month' calculations displaying correctly."
 
   - task: "Profile Menu Balance Display"
     implemented: true
