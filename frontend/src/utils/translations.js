@@ -191,7 +191,7 @@ export const translations = {
       reservationStatus: 'Статус брони',
       paymentStatus: 'Статус оплаты',
       documentStatus: 'Статус документа',
-      dateColumn: 'Дата / Date',
+      dateColumn: 'Дата',
       yes: 'Да',
       no: 'Нет'
     },
