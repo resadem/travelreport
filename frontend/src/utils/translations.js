@@ -14,6 +14,7 @@ export const translations = {
       tourists: 'Туристы',
       expenses: 'Расходы',
       requests: 'Запросы',
+      topUps: 'Пополнения',
       settings: 'Настройки',
       logout: 'Выйти',
       changePassword: 'Изменить пароль'
