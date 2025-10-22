@@ -219,7 +219,7 @@ export const translations = {
     },
     nav: {
       reservations: 'Reservations',
-      subAgencies: 'Sub-Agencies',
+      subAgencies: 'Agencies',
       suppliers: 'Suppliers',
       tourists: 'Tourists',
       expenses: 'Expenses',
