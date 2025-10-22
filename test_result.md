@@ -123,15 +123,18 @@ backend:
 frontend:
   - task: "Top-ups Page (Admin)"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/pages/TopUps.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Created TopUps.js admin page with full CRUD functionality. Displays all top-up transactions with agency name, amount, type (Cash/Other), and date. Includes edit and delete capabilities. Shows 'this month' total at the top. Added route in App.js and navigation in Layout.js."
+      - working: true
+        agent: "testing"
+        comment: "✅ TopUps page layout test PASSED: Page has proper Layout wrapper with header, logo, navigation, and main content. Page displays correctly with 'Пополнения' title and shows top-up history table with 'За этот месяц' summary (27000 ₽). Navigation to TopUps page works correctly. Layout matches other admin pages like Expenses and Requests."
 
   - task: "Custom Button-Style Selector Component"
     implemented: true
