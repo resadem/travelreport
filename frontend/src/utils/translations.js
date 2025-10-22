@@ -166,6 +166,13 @@ export const translations = {
       nationalPassport: 'Национальный паспорт или ID',
       internationalPassport: 'Международный паспорт'
     },
+    suppliers: {
+      title: 'Поставщики',
+      add: 'Добавить поставщика',
+      name: 'Название',
+      enterName: 'Введите название поставщика'
+    },
+
 
     settings: {
       title: 'Настройки',
