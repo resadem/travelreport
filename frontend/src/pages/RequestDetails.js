@@ -336,8 +336,10 @@ const RequestDetails = () => {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="not_confirmed">{t('requests.notConfirmed')}</SelectItem>
+                          <SelectItem value="in_progress">{t('requests.inProgress')}</SelectItem>
+                          <SelectItem value="booked">{t('requests.booked')}</SelectItem>
                           <SelectItem value="confirmed">{t('requests.confirmed')}</SelectItem>
+                          <SelectItem value="cancelled">{t('requests.cancelled')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -352,26 +354,24 @@ const RequestDetails = () => {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="not_paid">{t('requests.notPaid')}</SelectItem>
+                          <SelectItem value="awaiting_payment">{t('requests.awaitingPayment')}</SelectItem>
                           <SelectItem value="paid">{t('requests.paid')}</SelectItem>
+                          <SelectItem value="partially_paid">{t('requests.partiallyPaid')}</SelectItem>
+                          <SelectItem value="not_paid">{t('requests.notPaid')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div>
                       <Label>{t('requests.documentStatus')}</Label>
-                      <Select
-                        value={statusUpdate.document_status}
-                        onValueChange={(value) => setStatusUpdate({...statusUpdate, document_status: value})}
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="not_ready">{t('requests.notReady')}</SelectItem>
-                          <SelectItem value="ready">{t('requests.ready')}</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <div className="mt-2 text-sm text-gray-600 p-3 bg-gray-50 rounded-md">
+                        {request.document_status === 'documents_ready' ? (
+                          <span className="text-green-600 font-semibold">✓ {t('requests.documentsReady')}</span>
+                        ) : (
+                          <span className="text-gray-500">{t('requests.documentsNotReady')}</span>
+                        )}
+                        <div className="text-xs mt-1">Автоматически обновляется при загрузке документов</div>
+                      </div>
                     </div>
 
                     <Button
