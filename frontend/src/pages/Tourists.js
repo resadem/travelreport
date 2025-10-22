@@ -179,13 +179,13 @@ const Tourists = () => {
 
                 {/* Document Information */}
                 <div>
-                  <h3 className="text-lg font-semibold text-oxford-blue mb-4">Паспортные данные</h3>
+                  <h3 className="text-lg font-semibold text-oxford-blue mb-4">{t('tourists.documentInfo')}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label>Гражданство</Label>
+                      <Label>{t('tourists.citizenship')}</Label>
                       <Select value={formData.citizenship || ''} onValueChange={(value) => setFormData({...formData, citizenship: value})}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Выберите страну" />
+                          <SelectValue placeholder={t('tourists.selectCountry')} />
                         </SelectTrigger>
                         <SelectContent>
                           {COUNTRIES.map(country => (
@@ -195,19 +195,19 @@ const Tourists = () => {
                       </Select>
                     </div>
                     <div>
-                      <Label>Тип документа</Label>
+                      <Label>{t('tourists.documentType')}</Label>
                       <Select value={formData.document_type || ''} onValueChange={(value) => setFormData({...formData, document_type: value})}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Тип документа" />
+                          <SelectValue placeholder={t('tourists.documentType')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="passport">National passport or ID card</SelectItem>
-                          <SelectItem value="international">International passport</SelectItem>
+                          <SelectItem value="passport">{t('tourists.nationalPassport')}</SelectItem>
+                          <SelectItem value="international">{t('tourists.internationalPassport')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <Label>Номер документа</Label>
+                      <Label>{t('tourists.documentNumber')}</Label>
                       <Input
                         value={formData.document_number}
                         onChange={(e) => setFormData({...formData, document_number: e.target.value})}
@@ -215,7 +215,7 @@ const Tourists = () => {
                       />
                     </div>
                     <div>
-                      <Label>Срок действия</Label>
+                      <Label>{t('tourists.documentExpiration')}</Label>
                       <Input
                         type="date"
                         value={formData.document_expiration}
@@ -227,10 +227,10 @@ const Tourists = () => {
 
                 {/* Contact Information */}
                 <div>
-                  <h3 className="text-lg font-semibold text-oxford-blue mb-4">Контактная информация</h3>
+                  <h3 className="text-lg font-semibold text-oxford-blue mb-4">{t('tourists.contactInfo')}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label>Телефон</Label>
+                      <Label>{t('tourists.phone')}</Label>
                       <Input
                         type="tel"
                         value={formData.phone}
@@ -239,7 +239,7 @@ const Tourists = () => {
                       />
                     </div>
                     <div>
-                      <Label>Email</Label>
+                      <Label>{t('tourists.email')}</Label>
                       <Input
                         type="email"
                         value={formData.email}
