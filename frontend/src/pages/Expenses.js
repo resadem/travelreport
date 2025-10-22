@@ -228,6 +228,7 @@ const Expenses = () => {
           </div>
         </div>
       </div>
+      )}
     </Layout>
   );
 };
