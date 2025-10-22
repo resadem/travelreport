@@ -97,7 +97,7 @@ export const translations = {
       back: 'Назад'
     },
     subAgencies: {
-      title: 'Суб-агентства',
+      title: 'Агентства',
       add: 'Добавить агентство',
       name: 'Название',
       email: 'Email',
