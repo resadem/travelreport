@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Complete mobile and PC responsiveness for the B2B Travel Portal"
+user_problem_statement: "Implement new features: Top-ups page, custom button-style selector, dashboard 'this month' statistics, and profile menu balance display"
 
 frontend:
   - task: "Mobile Hamburger Menu"
