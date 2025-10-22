@@ -159,7 +159,7 @@ const TopUps = () => {
                     {topup.agency_name}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {formatCurrency(topup.amount)}
+                    {formatPrice(topup.amount)} ₽
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                     {topup.type === 'cash' 
