@@ -285,15 +285,18 @@ frontend:
 
   - task: "Tourists Gender Field - ButtonSelector"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/pages/Tourists.js"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Replaced Gender select dropdown with ButtonSelector component showing Male/Female as button-style options with colored indicator when selected."
+      - working: true
+        agent: "testing"
+        comment: "✅ Gender ButtonSelector test PASSED: In English mode, Gender field shows 'Male' and 'Female' buttons. In Russian mode, Gender field shows 'Мужской' and 'Женский' buttons. ButtonSelector component working correctly with proper button-style layout and colored bottom border indicator when selected."
 
   - task: "Mobile Hamburger Menu"
     implemented: true
