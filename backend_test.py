@@ -265,6 +265,221 @@ class B2BTravelPortalTester:
         
         self.log_test("Update Settings", success, f"Response: {response}")
 
+    def test_topup_balance(self):
+        """Test creating a top-up (existing endpoint, but now stores in history)"""
+        if not self.sub_agency_id:
+            self.log_test("Create Top-up", False, "No sub-agency ID available")
+            return None
+            
+        topup_data = {
+            "amount": 5000.0,
+            "type": "cash"
+        }
+        
+        success, response = self.make_request(
+            'POST', f'users/{self.sub_agency_id}/topup-balance',
+            data=topup_data,
+            token=self.admin_token
+        )
+        
+        if success and 'topup_id' in response and 'new_balance' in response:
+            topup_id = response['topup_id']
+            self.log_test("Create Top-up", True, 
+                         f"ID: {topup_id}, New Balance: {response['new_balance']}")
+            return topup_id
+        else:
+            self.log_test("Create Top-up", False, f"Response: {response}")
+            return None
+
+    def test_get_topups_history(self):
+        """Test getting top-ups history"""
+        success, response = self.make_request('GET', 'topups', token=self.admin_token)
+        
+        if success and isinstance(response, list):
+            # Check if response contains expected fields
+            if response:
+                first_topup = response[0]
+                required_fields = ['id', 'agency_id', 'agency_name', 'amount', 'type', 'date', 'created_at']
+                has_required_fields = all(field in first_topup for field in required_fields)
+                
+                # Check if sorted by created_at descending (most recent first)
+                is_sorted = True
+                if len(response) > 1:
+                    for i in range(len(response) - 1):
+                        if response[i]['created_at'] < response[i + 1]['created_at']:
+                            is_sorted = False
+                            break
+                
+                self.log_test("Get Top-ups History", has_required_fields and is_sorted,
+                             f"Found {len(response)} top-ups, Required fields: {has_required_fields}, Sorted: {is_sorted}")
+            else:
+                self.log_test("Get Top-ups History", True, "No top-ups found (empty list)")
+        else:
+            self.log_test("Get Top-ups History", False, f"Response: {response}")
+
+    def test_edit_topup(self):
+        """Test editing a top-up"""
+        # First create a top-up to edit
+        if not self.sub_agency_id:
+            self.log_test("Edit Top-up", False, "No sub-agency ID available")
+            return
+            
+        # Create initial top-up
+        topup_data = {
+            "amount": 3000.0,
+            "type": "other"
+        }
+        
+        success, response = self.make_request(
+            'POST', f'users/{self.sub_agency_id}/topup-balance',
+            data=topup_data,
+            token=self.admin_token
+        )
+        
+        if not success or 'topup_id' not in response:
+            self.log_test("Edit Top-up (Create Initial)", False, f"Failed to create initial top-up: {response}")
+            return
+            
+        topup_id = response['topup_id']
+        initial_balance = response['new_balance']
+        
+        # Now edit the top-up
+        edit_data = {
+            "amount": 4000.0,
+            "type": "cash"
+        }
+        
+        success, response = self.make_request(
+            'PUT', f'topups/{topup_id}',
+            data=edit_data,
+            token=self.admin_token
+        )
+        
+        if success:
+            # Verify balance was adjusted correctly (should increase by 1000)
+            user_success, user_response = self.make_request(
+                'GET', f'users/{self.sub_agency_id}',
+                token=self.admin_token
+            )
+            
+            if user_success:
+                new_balance = user_response.get('balance', 0)
+                expected_balance = initial_balance + 1000  # 4000 - 3000 = 1000 increase
+                balance_correct = abs(new_balance - expected_balance) < 0.01  # Allow for floating point precision
+                
+                self.log_test("Edit Top-up", balance_correct,
+                             f"Balance adjusted correctly: {new_balance} (expected: {expected_balance})")
+            else:
+                self.log_test("Edit Top-up", False, f"Failed to verify balance: {user_response}")
+        else:
+            self.log_test("Edit Top-up", False, f"Response: {response}")
+
+    def test_delete_topup(self):
+        """Test deleting a top-up"""
+        if not self.sub_agency_id:
+            self.log_test("Delete Top-up", False, "No sub-agency ID available")
+            return
+            
+        # First create a top-up to delete
+        topup_data = {
+            "amount": 2000.0,
+            "type": "cash"
+        }
+        
+        success, response = self.make_request(
+            'POST', f'users/{self.sub_agency_id}/topup-balance',
+            data=topup_data,
+            token=self.admin_token
+        )
+        
+        if not success or 'topup_id' not in response:
+            self.log_test("Delete Top-up (Create Initial)", False, f"Failed to create initial top-up: {response}")
+            return
+            
+        topup_id = response['topup_id']
+        
+        # Get current balance before deletion
+        user_success, user_response = self.make_request(
+            'GET', f'users/{self.sub_agency_id}',
+            token=self.admin_token
+        )
+        
+        if not user_success:
+            self.log_test("Delete Top-up", False, f"Failed to get user balance: {user_response}")
+            return
+            
+        balance_before_delete = user_response.get('balance', 0)
+        
+        # Now delete the top-up
+        success, response = self.make_request(
+            'DELETE', f'topups/{topup_id}',
+            token=self.admin_token
+        )
+        
+        if success:
+            # Verify balance was adjusted correctly (should decrease by 2000)
+            user_success, user_response = self.make_request(
+                'GET', f'users/{self.sub_agency_id}',
+                token=self.admin_token
+            )
+            
+            if user_success:
+                new_balance = user_response.get('balance', 0)
+                expected_balance = balance_before_delete - 2000.0
+                balance_correct = abs(new_balance - expected_balance) < 0.01
+                
+                # Verify top-up was removed from history
+                history_success, history_response = self.make_request('GET', 'topups', token=self.admin_token)
+                topup_removed = True
+                if history_success and isinstance(history_response, list):
+                    topup_removed = not any(topup.get('id') == topup_id for topup in history_response)
+                
+                self.log_test("Delete Top-up", balance_correct and topup_removed,
+                             f"Balance adjusted: {balance_correct}, Removed from history: {topup_removed}")
+            else:
+                self.log_test("Delete Top-up", False, f"Failed to verify balance: {user_response}")
+        else:
+            self.log_test("Delete Top-up", False, f"Response: {response}")
+
+    def test_topup_edge_cases(self):
+        """Test edge cases for top-up operations"""
+        # Test editing non-existent topup
+        success, response = self.make_request(
+            'PUT', 'topups/fake-id',
+            data={"amount": 1000.0, "type": "cash"},
+            token=self.admin_token,
+            expected_status=404
+        )
+        self.log_test("Edit Non-existent Top-up (404)", success, "Got expected 404 status")
+        
+        # Test deleting non-existent topup
+        success, response = self.make_request(
+            'DELETE', 'topups/fake-id',
+            token=self.admin_token,
+            expected_status=404
+        )
+        self.log_test("Delete Non-existent Top-up (404)", success, "Got expected 404 status")
+
+    def test_topup_authentication(self):
+        """Test top-up endpoints require admin authentication"""
+        # Test accessing top-ups history without token
+        success, response = self.make_request(
+            'GET', 'topups',
+            expected_status=401
+        )
+        self.log_test("Top-ups History Requires Auth", success, "Got expected 401 status")
+        
+        # Test accessing with sub-agency token (should fail)
+        if self.sub_agency_token:
+            success, response = self.make_request(
+                'GET', 'topups',
+                token=self.sub_agency_token,
+                expected_status=403
+            )
+            self.log_test("Top-ups History Admin Only", success, "Got expected 403 status")
+        else:
+            self.log_test("Top-ups History Admin Only", False, "No sub-agency token to test with")
+
     def test_get_users(self):
         """Test getting users list (admin only)"""
         success, response = self.make_request('GET', 'users', token=self.admin_token)
