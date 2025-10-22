@@ -174,6 +174,14 @@ const Layout = ({ children }) => {
                   <div className="px-2 py-2 border-b">
                     <p className="text-sm font-medium">{user?.agency_name}</p>
                     <p className="text-xs text-gray-500">{user?.email}</p>
+                    {user?.role === 'sub_agency' && (
+                      <div className="mt-2 pt-2 border-t border-gray-100">
+                        <p className="text-xs text-gray-600">{t('dashboard.balance')}</p>
+                        <p className="text-lg font-bold text-green-600">
+                          {new Intl.NumberFormat('ru-RU').format(Math.round(user?.balance || 0))} ₽
+                        </p>
+                      </div>
+                    )}
                   </div>
                   <DropdownMenuItem onClick={() => setShowPasswordDialog(true)} data-testid="change-password-menu" className="md:flex hidden">
                     <Key className="mr-2 h-4 w-4" />
