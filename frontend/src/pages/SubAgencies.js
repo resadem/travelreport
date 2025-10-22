@@ -23,6 +23,7 @@ const SubAgencies = () => {
   const [showTopUpDialog, setShowTopUpDialog] = useState(false);
   const [topUpUser, setTopUpUser] = useState(null);
   const [topUpAmount, setTopUpAmount] = useState('');
+  const [topUpType, setTopUpType] = useState('cash');
   const [formData, setFormData] = useState({
     agency_name: '',
     email: '',
