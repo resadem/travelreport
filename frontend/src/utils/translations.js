@@ -241,7 +241,9 @@ export const translations = {
       success: 'Успешно',
       error: 'Ошибка',
       loading: 'Загрузка...',
-      noData: 'Нет данных'
+      noData: 'Нет данных',
+      createdAt: 'Дата создания',
+      actions: 'Действия'
     }
   },
   en: {
