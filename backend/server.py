@@ -69,6 +69,20 @@ class PasswordChange(BaseModel):
 
 class BalanceTopUp(BaseModel):
     amount: float
+    type: str = "cash"  # cash or card
+
+class TopUpResponse(BaseModel):
+    id: str
+    agency_id: str
+    agency_name: str
+    amount: float
+    type: str
+    date: str
+    created_at: str
+
+class TopUpUpdate(BaseModel):
+    amount: float
+    type: str
 
 class SupplierCreate(BaseModel):
     name: str
