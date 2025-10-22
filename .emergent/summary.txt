@@ -1,68 +1,93 @@
 <analysis>
-The AI engineer successfully developed a full-stack B2B travel portal based on FastAPI, React, and MongoDB, progressively implementing and refining features as per user feedback. The process was highly iterative, starting from clarifying core requirements, integrating a custom color palette and branding, and building the initial page structure. A significant portion of the work involved extensive frontend debugging, particularly addressing compilation errors,  and  issues in Shadcn UI's  components, and ensuring correct data formatting (dates, prices) and display (striped tables, payment badges). Backend enhancements supported new data models for suppliers and tourists and refined payment logic. The agent demonstrated resilience in fixing bugs, often through multiple attempts and targeted file manipulations (e.g.,  commands for bulk replacements), and is currently focused on optimizing the application for mobile responsiveness.
+The AI engineer's work trajectory outlines an iterative development process for a full-stack B2B travel portal. Initially, the focus was on implementing core features and ensuring mobile responsiveness, which involved extensive frontend CSS modifications and debugging login issues related to environment variables and database configuration. Subsequent phases addressed user-reported bugs, such as translation inconsistencies and  component  errors, implementing recommended Shadcn UI patterns. A significant portion of the work then shifted to new feature development, including a balance top-up system for sub-agencies, a comprehensive deployment guide for a self-hosted VPS, and a major multi-faceted request encompassing Expenses and Requests pages, conversation threads, document uploads, and dynamic status icons. The AI navigated complex backend (FastAPI, MongoDB) and frontend (React, Shadcn UI) changes, including critical balance deduction logic and extensive internationalization updates, often debugging and refining in response to user feedback and console errors. The trajectory concludes with the AI actively working on the latest user requests, including further translations, backend model updates for top-ups, and a custom button-style selector.
 </analysis>
 
 <product_requirements>
-The user requested a bilingual (RU default, EN optional) B2B portal for a travel wholesaler (Admin) and sub-agencies (clients).
-**Purpose:** Sub-agencies view their reservations, payments, and outstanding balances. Admin manages sub-agencies and reservations.
-**Roles & Access:** Admin has full CRUD, seeing all columns. Sub-agencies have read-only access to their reservations, *excluding* 5 admin-only columns (supplier, supplier price, prepayment to supplier, revenue, revenue percentage), enforced at API level.
-**Auth:** Email + password. Admin can create/disable sub-agency accounts.
-**Pages:** Login, Reservations (Dashboard with filters, sort, pagination, export), Reservation Details (read-only for sub-agency, edit for admin), Sub-Agencies (CRUD users), Settings (upcoming due threshold).
-**Payment UX:** Computed , badges (, , , ), and — for empty dates.
-**Data Model:** User, Reservation, Supplier, Tourist.
-**Current Build State:** The core portal is functional. Features implemented include a login page, a dashboard displaying reservations with filtering/pagination, detailed reservation view (with Mark as Paid for admin), sub-agency management (with phone number and editable email), supplier and tourist management pages (with detailed tourist form including country selection). The UI adheres to custom color palettes, displays prices without decimals in Rubles, and formats dates as dd.mm.yyyy. Table rows are striped, and select box errors have been resolved. Export to XLSX is functional.
+The goal is a bilingual (RU default, EN optional) B2B travel portal for an Admin (travel wholesaler) and Sub-agencies (clients). Sub-agencies view reservations, payments, balances, and manage travel requests. Admin has full CRUD access, managing sub-agencies, reservations, suppliers, tourists, and expenses.
+
+**Implemented features:**
+- User authentication (email + password) with RBAC (Admin/Sub-agency roles).
+- Reservations Dashboard: filters, sort, pagination, XLSX export, payment statuses, display without admin-only columns for sub-agencies.
+- Reservation Details: view details (read-only for sub-agency, edit/mark paid for admin).
+- Sub-Agencies: CRUD management (phone, editable email).
+- Settings: Configure upcoming due threshold.
+- Supplier and Tourist management pages (Admin).
+- Custom color palette, Ruble currency (no decimals), dd.mm.yyyy date format, striped tables.
+- Mobile responsiveness (hamburger menu, bottom navigation, adaptive layouts, horizontal table scroll).
+- Translation support for Поставщики/Туристы menu items.
+- Fixed Shadcn UI  component  issues using  and , and global .
+- **Balance System**:
+    - Admin can add balance to sub-agencies (with Type: Cash/Other).
+    - Sub-agencies see their balance and last top-up in Dashboard.
+    - Reservations and Expenses deduct from agency balance (can go negative).
+    - Top-ups history page for Admin.
+- **Expenses Page**: Admin adds expenses (agency, amount, date, description); agencies view their own expenses. Total expenses displayed in Dashboard.
+- **Service Types**: Added MICE, Event, Other, excursion, insurance.
+- **Requests Page**:
+    - Agencies create travel requests (check-in/out, Pax, Flight class, Transfer, Country, Location, Hotel, Category, Meal, Description, Target Price).
+    - Agencies view their requests.
+    - Admin views all requests (list with filters, striped table).
+    - Request details page for Admin/Agency with conversation thread (comments).
+    - Document upload (Admin) and download (Agency); document status automatically Documents ready on upload.
+- **Status Icons**: Reservation, Payment, and Document statuses displayed as icons with tooltips.
+- Improved striped row visibility.
+- Deployment support for Ubuntu 22.04 VPS with Docker, Nginx, PM2 (Dockerfiles, compose, Nginx configs, deploy scripts, deployment guide).
 </product_requirements>
 
 <key_technical_concepts>
--   **FastAPI**: Python backend for API development.
--   **React**: JavaScript library for building user interfaces.
--   **MongoDB**: NoSQL database for data persistence.
--   **Shadcn UI**: Modern component library for React.
--   **Tailwind CSS**: Utility-first framework for styling.
--   **Internationalization (i18n)**: Support for Russian (default) and English.
--   **Role-Based Access Control (RBAC)**: Differentiating Admin and Sub-Agency roles.
--   **JWT Authentication**: Token-based security for API access.
--   **Custom Formatting**: Utilities for date (dd.mm.yyyy) and currency (Ruble, no decimals) presentation.
+- **FastAPI**: Python backend for robust API development.
+- **React**: JavaScript library for dynamic user interfaces.
+- **MongoDB**: NoSQL database for flexible data storage.
+- **Shadcn UI**: Component library leveraging Radix UI for accessible and customizable components.
+- **Tailwind CSS**: Utility-first CSS framework for rapid styling.
+- **Internationalization (i18n)**: Bilingual support (Russian, English) via  and .
+- **Role-Based Access Control (RBAC)**: Differentiating Admin and Sub-Agency roles at the API level.
+- **JWT Authentication**: Token-based security for secure API communication.
+- **Custom Data Formatting**: Utilities for date (dd.mm.yyyy) and currency (Ruble, no decimals).
+- **Docker/Docker Compose**: Containerization for consistent deployment.
+- **Nginx**: Reverse proxy and static file serving for production.
 </key_technical_concepts>
 
 <code_architecture>
 
--   : Main FastAPI app defining API for Auth, Users, Reservations, Suppliers, Tourists, Settings. It includes MongoDB models (User, Reservation, Supplier, Tourist), CRUD operations, RBAC, payment status calculation, and data serialization. Recent changes involve adding  and  models, updating  model with a  field, and refining  logic to correctly adjust amounts and dates.
--   : Environment variables for database URL, name, CORS, and .
--   : Configures React routing, integrating new pages (, ) and the  component for notifications.
--    and : Define global styles and integrate a custom color palette, ensuring consistent branding.
--   : Entry point for the frontend; updated with 4Travels B2B Portal title and favicon link.
--   : Contains various logo assets (, , ) and  for branding.
--   : Provides the application's overall structure, including a header with a logo, language switcher, user menu, and main navigation. It has been updated to include new menu items and to begin implementing mobile responsiveness features.
--   : Handles user authentication and displays the login form with branding.
--   : The central reservations list. It supports filtering, sorting, pagination, displays payment statuses, and exports data to XLSX. Significant updates include correcting  errors, implementing currency (Ruble) and date (dd.mm.yyyy) formatting, enabling striped table rows, and fixing general select box issues.
--   : Displays detailed reservation information. Admin can edit details, update agencies/suppliers via select boxes, and mark reservations as fully paid. UI was enhanced with a card-based design, and all numeric/date formats were standardized. Select box errors were fixed.
--   : Admin page for managing sub-agency accounts (CRUD). Updated to include phone number, correct title, and editable email. Select box issues were resolved.
--   : Admin page to configure upcoming due threshold.
--   : New page for Admin to manage supplier data.
--   : New page for Admin to manage tourist profiles, featuring a detailed form for personal, passport, and contact information with a country select box. Select box issues were resolved.
--    and : Manage internationalization, providing translations for UI elements.
--   : Contains utility functions, notably  and , to ensure consistent data presentation across the application.
+-   : Main FastAPI app. Defines API for Auth, Users, Reservations, Suppliers, Tourists, Settings, **Expenses**, and **Requests**. Contains MongoDB models (User, Reservation, Supplier, Tourist, **Expense, Request, RequestComment, Document**), CRUD operations, RBAC, payment/document status calculation, data serialization, and **balance deduction/restoration logic for reservations and expenses**. Critical imports were moved to the top.
+-   : Environment variables for database URL/name, CORS, JWT_SECRET_KEY.  was updated to .
+-   : Configures React routing, integrating new pages (, , , ).
+-   : Global styles. Added  to  to stabilize scrollbars.
+-   : Application layout. Updated for mobile responsiveness (hamburger menu, bottom navigation), and included  and  in navigation.
+-   : Central reservations list. Updated for mobile responsiveness, currency/date formatting, striped rows, and displays new **Total Expenses** and **Balance/Last Top-up** cards.  constant was expanded.
+-   : Displays detailed reservation info. Updated for mobile responsiveness, fixed select box issues.
+-   : Admin page for managing sub-agencies. Updated for mobile responsiveness, added **Balance column, Top-up button and dialog**.
+-   , : Admin pages, updated for mobile responsiveness and fixed select box issues.
+-   : **New page for Admin/Agencies**. Admin adds expenses; agencies view their own.
+-   : **New page for Admin/Agencies**. Agencies create and view requests; admin views all requests, includes filters, and dynamic status display.
+-   : **New page for Admin/Agencies**. Displays detailed request info, supports **conversation threads (comments)**, **document upload/download**, and dynamic status updates.
+-   : Manages internationalization. Expanded significantly for new pages, features, and detailed status messages.
+-   : **New component** for displaying reservation, payment, and document statuses as icons with tooltips, supporting both horizontal and vertical layouts.
+-   , : Shadcn UI components.  was modified for  and collision avoidance to fix reflow issues.
+-   **Deployment Files**: Multiple new Docker, docker-compose, Nginx, and shell scripts (, , , , , , , , , , , , ) were created at the root level for VPS deployment.
 </code_architecture>
 
 <pending_tasks>
--   **Admin: Assign Reservations**: Implement the functionality for administrators to assign existing reservations to specific sub-agencies.
--   **Admin: CSV/Excel Import**: Develop the feature for administrators to import reservations via CSV/Excel files.
+-   **Admin: Assign Reservations**: Implement functionality for administrators to assign existing reservations to specific sub-agencies.
+-   **Admin: CSV/Excel Import**: Develop feature for administrators to import reservations via CSV/Excel files.
 -   **Admin: Add New Supplier Inline**: Implement the + button functionality near the supplier selectbox to allow admins to add new suppliers directly from the Add Reservation form.
 -   **Admin: Tourist Name Autocompletion**: Implement autocompletion for tourist names when adding new reservations.
+-   **Top ups page**: Create an Admin page to see and edit all top-up transactions.
+-   **Dashboard cards for this month**: Add this month numbers to all existing dashboard statistics cards.
+-   **Agency balance in profile menu**: Display the agency's current balance in the profile menu.
+-   **Custom button-style selector**: Change select boxes with fewer than 6 elements to a button-style selector with colored lines when selected.
 </pending_tasks>
 
 <current_work>
-The AI engineer is currently addressing the user's request to enhance the application's mobile responsiveness. This involves:
-1.  **Hamburger Menu**: Implementing a top-level hamburger menu for mobile navigation.
-2.  **Profile Avatar**: Adding a profile avatar within the profile menu.
-3.  **Bottom Navigation**: Displaying all main menu items as icons in a bottom navigation bar for mobile.
-4.  **Mobile Page Views**: Ensuring all existing pages render and function correctly on mobile devices.
-
-The AI engineer has begun by modifying , which is the central component for the application's layout and navigation. The next step identified is checking for the  component in  UI, indicating an intention to use this component to create the mobile-friendly navigation drawer.
+The AI engineer is currently addressing the user's latest set of requests. This includes:
+1.  **Fixing status translations**: Reconfirming and separating appropriate status translations for Russian and English. The AI observed that some of these changes were already applied.
+2.  **Adding translations for Top-ups page**: Updating the  file to include necessary terms for the upcoming Top-ups feature.
+3.  **Updating SubAgencies translations**: Further refining translations related to sub-agencies.
+4.  **Backend updates for Top-ups history**: The AI is preparing to modify the backend to include a  field (Cash/Other) in the  model, which will support tracking different types of balance top-ups for the new Top ups page. This indicates a focus on laying the backend foundation for the new  feature.
+5.  **Implementing custom button-style selector**: The user explicitly requested to change select boxes with fewer than 6 elements to a button-style selector, and the AI has accepted this task.
 </current_work>
 
 <optional_next_step>
-Implement the hamburger menu using the  component, profile avatar, and bottom navigation with icons within  to ensure mobile responsiveness across all pages, then test.
+Continue implementing the backend updates to the  model by adding the  field.
 </optional_next_step>
-
