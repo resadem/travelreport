@@ -97,6 +97,48 @@ const Dashboard = () => {
     }
   };
 
+  const fetchThisMonthStats = async () => {
+    try {
+      // Get current month and year
+      const now = new Date();
+      const currentMonth = now.getMonth();
+      const currentYear = now.getFullYear();
+
+      // Fetch all reservations for this month (without pagination)
+      const response = await axios.get(`${API}/reservations`, { 
+        params: { limit: 10000 } // Large limit to get all
+      });
+      
+      const thisMonthReservations = response.data.reservations.filter(r => {
+        const issueDate = new Date(r.date_of_issue);
+        return issueDate.getMonth() === currentMonth && issueDate.getFullYear() === currentYear;
+      });
+
+      // Calculate statistics
+      const stats = {
+        reservations: thisMonthReservations.length,
+        price: thisMonthReservations.reduce((sum, r) => sum + (r.price || 0), 0),
+        prepayment: thisMonthReservations.reduce((sum, r) => sum + (r.prepayment_amount || 0), 0),
+        rest: thisMonthReservations.reduce((sum, r) => sum + (r.rest_amount_of_payment || 0), 0)
+      };
+
+      // Fetch this month's expenses
+      if (user?.role === 'sub_agency') {
+        const expensesResponse = await axios.get(`${API}/expenses`);
+        const thisMonthExpenses = expensesResponse.data.filter(e => {
+          const expenseDate = new Date(e.date);
+          return expenseDate.getMonth() === currentMonth && expenseDate.getFullYear() === currentYear;
+        });
+        stats.expenses = thisMonthExpenses.reduce((sum, e) => sum + (e.amount || 0), 0);
+      }
+
+      setThisMonthStats(stats);
+    } catch (error) {
+      console.error('Failed to fetch this month stats:', error);
+    }
+  };
+
+
   const fetchAgencies = async () => {
     try {
       const response = await axios.get(`${API}/users`);
