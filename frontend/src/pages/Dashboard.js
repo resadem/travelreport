@@ -406,6 +406,9 @@ const Dashboard = () => {
               <div className="bg-white rounded-xl p-6 shadow-sm border border-blue-100">
                 <div className="text-sm text-gray-600 mb-1">{t('dashboard.lastTopUp')}</div>
                 <div className="text-3xl font-bold text-blue-600">{formatPrice(user.last_balance_topup || 0)} ₽</div>
+                <div className="text-xs text-gray-500 mt-2">
+                  {t('dashboard.thisMonth')}: {formatPrice(thisMonthStats.topups)} ₽
+                </div>
               </div>
               <div className="bg-white rounded-xl p-6 shadow-sm border border-red-100">
                 <div className="text-sm text-gray-600 mb-1">{t('dashboard.totalExpenses')}</div>
