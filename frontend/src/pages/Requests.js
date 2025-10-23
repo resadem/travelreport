@@ -55,6 +55,8 @@ const Requests = () => {
     description: '',
     target_price: ''
   });
+  
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   useEffect(() => {
     if (user) {
