@@ -1113,6 +1113,54 @@ async def add_comment(request_id: str, comment: CommentCreate, current_user: dic
     await db.comments.insert_one(comment_dict)
     return CommentResponse(**comment_dict)
 
+
+@api_router.post("/requests/{request_id}/comments-with-file")
+async def add_comment_with_file(
+    request_id: str, 
+    text: str = Form(...),
+    file: Optional[UploadFile] = File(None),
+    current_user: dict = Depends(get_current_user)
+):
+    # Check if request exists and user has access
+    request = await db.requests.find_one({"id": request_id}, {"_id": 0})
+    if not request:
+        raise HTTPException(status_code=404, detail="Request not found")
+    
+    if current_user["role"] == "sub_agency" and request["agency_id"] != current_user["id"]:
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    attachment_id = None
+    attachment_filename = None
+    
+    # Handle file upload if present
+    if file:
+        file_id = str(uuid.uuid4())
+        file_extension = Path(file.filename).suffix
+        file_name = f"{file_id}{file_extension}"
+        file_path = UPLOAD_DIR / file_name
+        
+        with file_path.open("wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        
+        attachment_id = file_id
+        attachment_filename = file.filename
+    
+    comment_dict = {
+        "id": str(uuid.uuid4()),
+        "request_id": request_id,
+        "user_id": current_user["id"],
+        "user_name": current_user["agency_name"],
+        "user_role": current_user["role"],
+        "text": text,
+        "attachment_id": attachment_id,
+        "attachment_filename": attachment_filename,
+        "created_at": datetime.now(timezone.utc).isoformat()
+    }
+    
+    await db.comments.insert_one(comment_dict)
+    return CommentResponse(**comment_dict)
+
+
 @api_router.get("/requests/{request_id}/comments", response_model=List[CommentResponse])
 async def get_comments(request_id: str, current_user: dict = Depends(get_current_user)):
     # Check if request exists and user has access
