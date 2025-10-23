@@ -100,12 +100,27 @@ const Requests = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${API}/requests`, {
+      const response = await axios.post(`${API}/requests`, {
         ...formData,
         target_price: formData.target_price ? parseFloat(formData.target_price) : null
       });
+      
+      const requestId = response.data.id;
+      
+      // Upload files if any
+      if (selectedFiles.length > 0) {
+        for (const file of selectedFiles) {
+          const formData = new FormData();
+          formData.append('file', file);
+          await axios.post(`${API}/requests/${requestId}/documents`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+          });
+        }
+      }
+      
       toast.success(t('common.success'));
       setShowDialog(false);
+      setSelectedFiles([]);
       setFormData({
         check_in: '',
         check_out: '',
