@@ -393,6 +393,21 @@ const Requests = () => {
                   />
                 </div>
 
+                <div>
+                  <Label>{t('requests.attachFiles')}</Label>
+                  <Input
+                    type="file"
+                    multiple
+                    onChange={(e) => setSelectedFiles(Array.from(e.target.files))}
+                    accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png"
+                  />
+                  {selectedFiles.length > 0 && (
+                    <p className="text-sm text-gray-600 mt-2">
+                      {selectedFiles.length} {t('requests.filesSelected')}
+                    </p>
+                  )}
+                </div>
+
                 <div className="flex justify-end gap-2 pt-4">
                   <Button type="button" variant="outline" onClick={() => setShowDialog(false)}>
                     {t('common.cancel')}
