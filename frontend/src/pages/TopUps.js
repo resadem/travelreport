@@ -8,6 +8,9 @@ import { ButtonSelector } from '../components/ui/button-selector';
 import { Pencil, Trash2 } from 'lucide-react';
 import { formatPrice, formatDate } from '../utils/helpers';
 import Layout from '../components/Layout';
+import axios from 'axios';
+
+const API = process.env.REACT_APP_BACKEND_URL + '/api';
 
 const TopUps = () => {
   const { t, locale } = useI18n();
