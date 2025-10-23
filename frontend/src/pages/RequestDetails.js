@@ -297,23 +297,55 @@ const RequestDetails = () => {
                           <div className="text-xs text-gray-500">{formatDate(comment.created_at)}</div>
                         </div>
                         <div className="text-gray-700">{comment.text}</div>
+                        {comment.attachment_filename && (
+                          <div className="mt-2">
+                            <a 
+                              href={`${API}/comments/${comment.id}/attachment`}
+                              download={comment.attachment_filename}
+                              className="text-sm text-blue-600 hover:underline flex items-center gap-1"
+                            >
+                              <Paperclip className="h-4 w-4" />
+                              {comment.attachment_filename}
+                            </a>
+                          </div>
+                        )}
                       </div>
                     ))
                   )}
                 </div>
 
                 {/* Add Comment Form */}
-                <form onSubmit={handleAddComment} className="flex gap-2">
-                  <Textarea
-                    value={newComment}
-                    onChange={(e) => setNewComment(e.target.value)}
-                    placeholder={t('requests.addComment')}
-                    rows={2}
-                    className="flex-1"
-                  />
-                  <Button type="submit" size="icon" className="bg-safety-orange hover:bg-safety-orange/90">
-                    <Send className="h-4 w-4" />
-                  </Button>
+                <form onSubmit={handleAddComment} className="space-y-2">
+                  <div className="flex gap-2">
+                    <Textarea
+                      value={newComment}
+                      onChange={(e) => setNewComment(e.target.value)}
+                      placeholder={t('requests.addComment')}
+                      rows={2}
+                      className="flex-1"
+                    />
+                    <Button type="submit" size="icon" className="bg-safety-orange hover:bg-safety-orange/90">
+                      <Send className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      type="file"
+                      onChange={(e) => setFile(e.target.files[0])}
+                      accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png"
+                      className="text-sm"
+                    />
+                    {file && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setFile(null)}
+                      >
+                        {t('common.cancel')}
+                      </Button>
+                    )}
+                  </div>
                 </form>
               </CardContent>
             </Card>
