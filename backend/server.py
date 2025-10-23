@@ -1248,6 +1248,38 @@ async def download_document(document_id: str, current_user: dict = Depends(get_c
         media_type='application/octet-stream'
     )
 
+
+@api_router.get("/comments/{comment_id}/attachment")
+async def download_comment_attachment(comment_id: str, current_user: dict = Depends(get_current_user)):
+    comment = await db.comments.find_one({"id": comment_id}, {"_id": 0})
+    if not comment or not comment.get("attachment_id"):
+        raise HTTPException(status_code=404, detail="Attachment not found")
+    
+    # Check access
+    request = await db.requests.find_one({"id": comment["request_id"]}, {"_id": 0})
+    if current_user["role"] == "sub_agency" and request["agency_id"] != current_user["id"]:
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    file_id = comment["attachment_id"]
+    filename = comment["attachment_filename"]
+    
+    # Find file in upload directory
+    file_path = None
+    for file in UPLOAD_DIR.iterdir():
+        if file.stem == file_id:
+            file_path = file
+            break
+    
+    if not file_path or not file_path.exists():
+        raise HTTPException(status_code=404, detail="File not found")
+    
+    return FileResponse(
+        path=file_path,
+        filename=filename,
+        media_type='application/octet-stream'
+    )
+
+
 app.include_router(api_router)
 
 app.add_middleware(
