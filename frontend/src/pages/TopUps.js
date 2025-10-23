@@ -54,23 +54,12 @@ const TopUps = () => {
 
   const submitEdit = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${backendUrl}/api/topups/${selectedTopup.id}`, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          amount: parseFloat(editForm.amount),
-          type: editForm.type
-        })
+      await axios.put(`${API}/topups/${selectedTopup.id}`, {
+        amount: parseFloat(editForm.amount),
+        type: editForm.type
       });
-      
-      if (response.ok) {
-        setEditDialog(false);
-        fetchTopups();
-      }
+      setEditDialog(false);
+      fetchTopups();
     } catch (error) {
       console.error('Error updating topup:', error);
     }
@@ -78,16 +67,9 @@ const TopUps = () => {
 
   const submitDelete = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${backendUrl}/api/topups/${selectedTopup.id}`, {
-        method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      
-      if (response.ok) {
-        setDeleteDialog(false);
-        fetchTopups();
-      }
+      await axios.delete(`${API}/topups/${selectedTopup.id}`);
+      setDeleteDialog(false);
+      fetchTopups();
     } catch (error) {
       console.error('Error deleting topup:', error);
     }
