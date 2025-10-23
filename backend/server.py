@@ -256,6 +256,8 @@ class CommentResponse(BaseModel):
     user_name: str
     user_role: str
     text: str
+    attachment_id: Optional[str] = None
+    attachment_filename: Optional[str] = None
     created_at: str
 
 class DocumentResponse(BaseModel):
