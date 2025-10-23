@@ -1129,7 +1129,7 @@ UPLOAD_DIR = Path("/app/uploads")
 UPLOAD_DIR.mkdir(exist_ok=True)
 
 @api_router.post("/requests/{request_id}/documents")
-async def upload_document(request_id: str, file: UploadFile = File(...), admin: dict = Depends(require_admin)):
+async def upload_document(request_id: str, file: UploadFile = File(...), user: dict = Depends(get_current_user)):
     # Check if request exists
     request = await db.requests.find_one({"id": request_id}, {"_id": 0})
     if not request:
