@@ -1150,7 +1150,7 @@ async def upload_document(request_id: str, file: UploadFile = File(...), user: d
         "request_id": request_id,
         "filename": file.filename,
         "file_path": str(file_path),
-        "uploaded_by": admin["agency_name"],
+        "uploaded_by": user["agency_name"],
         "uploaded_at": datetime.now(timezone.utc).isoformat()
     }
     
