@@ -83,8 +83,20 @@ const RequestDetails = () => {
     if (!newComment.trim()) return;
     
     try {
-      await axios.post(`${API}/requests/${id}/comments`, { text: newComment });
+      if (file) {
+        // Use multipart form data if file is attached
+        const formData = new FormData();
+        formData.append('text', newComment);
+        formData.append('file', file);
+        await axios.post(`${API}/requests/${id}/comments-with-file`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        });
+      } else {
+        // Use JSON if no file
+        await axios.post(`${API}/requests/${id}/comments`, { text: newComment });
+      }
       setNewComment('');
+      setFile(null);
       fetchComments();
       toast.success(t('common.success'));
     } catch (error) {
