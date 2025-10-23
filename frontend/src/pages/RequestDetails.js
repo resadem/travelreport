@@ -10,7 +10,7 @@ import { Label } from '../components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Textarea } from '../components/ui/textarea';
-import { ArrowLeft, Send, Upload, Download, FileText } from 'lucide-react';
+import { ArrowLeft, Send, Upload, Download, FileText, Paperclip } from 'lucide-react';
 import { toast } from 'sonner';
 import { formatDate, formatPrice } from '../utils/helpers';
 import StatusIcons from '../components/StatusIcons';
