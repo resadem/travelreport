@@ -21,8 +21,6 @@ const TopUps = () => {
   const [selectedTopup, setSelectedTopup] = useState(null);
   const [editForm, setEditForm] = useState({ amount: '', type: 'cash' });
 
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
-
   const typeOptions = [
     { value: 'cash', label: locale === 'ru' ? 'Наличные' : 'Cash' },
     { value: 'other', label: locale === 'ru' ? 'Другое' : 'Other' }
@@ -30,14 +28,8 @@ const TopUps = () => {
 
   const fetchTopups = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${backendUrl}/api/topups`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setTopups(data);
-      }
+      const response = await axios.get(`${API}/topups`);
+      setTopups(response.data);
     } catch (error) {
       console.error('Error fetching topups:', error);
     } finally {
